@@ -127,7 +127,7 @@
 
     if (hits.length === 0) {
       searchResults.innerHTML =
-        '<button id="search-close" class="sr-close" aria-label="Cerrar búsqueda">✕ cerrar</button>' +
+        '<button id="search-close" class="sr-close" aria-label="Cerrar búsqueda">cerrar</button>' +
         '<p class="sr-empty">No se encontraron resultados para "<strong>' +
         escapeHTML(query) + '</strong>".</p>';
     } else {
@@ -139,7 +139,7 @@
         </a>`;
       }).join('');
       searchResults.innerHTML =
-        '<button id="search-close" class="sr-close" aria-label="Cerrar búsqueda">✕ cerrar</button>' +
+        '<button id="search-close" class="sr-close" aria-label="Cerrar búsqueda">cerrar</button>' +
         items;
     }
 
@@ -205,7 +205,7 @@
   surveyForm && surveyForm.addEventListener('submit', e => {
     e.preventDefault();
     const btn = surveyForm.querySelector('button[type=submit]');
-    btn.textContent = '✓ Respuestas enviadas. ¡Gracias!';
+    btn.textContent = 'Respuestas enviadas. Gracias.';
     btn.disabled = true;
     btn.style.background = '#2472c8';
   });
@@ -215,7 +215,7 @@
   claimForm && claimForm.addEventListener('submit', e => {
     e.preventDefault();
     const btn = claimForm.querySelector('button[type=submit]');
-    btn.textContent = '✓ Reclamación registrada. Le responderemos en un plazo máximo de 10 días hábiles.';
+    btn.textContent = 'Reclamación registrada. Le responderemos en un plazo máximo de 10 días hábiles.';
     btn.disabled = true;
     btn.style.background = '#2472c8';
     btn.style.whiteSpace = 'normal';
