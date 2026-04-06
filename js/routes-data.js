@@ -501,7 +501,7 @@ function addNewRoute(routeConfig) {
 function getNextRouteId() {
     const existingIds = Object.keys(ROUTES_DATA).map(id => parseInt(id));
     if (existingIds.length === 0) {
-        return 1; // Start with ID 1 if no routes exist
+        return 1; // Comenzar con ID 1 si no existen rutas
     }
     return Math.max(...existingIds) + 1;
 }
