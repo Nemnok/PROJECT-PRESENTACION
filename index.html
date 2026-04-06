@@ -7,7 +7,6 @@
   <meta name="theme-color" content="#1b2d6b" />
   <title>Transporte Ecológico Compás — Carnaval de Tenerife</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 </head>
 <body>
 
@@ -52,7 +51,7 @@
 
 <!-- ── Search results overlay ── -->
 <div id="search-results" role="listbox" aria-label="Resultados de búsqueda">
-  <button id="search-close" class="sr-close" aria-label="Cerrar búsqueda">cerrar</button>
+  <button id="search-close" class="sr-close" aria-label="Cerrar búsqueda">✕ cerrar</button>
 </div>
 
 <!-- ── Sidebar overlay (mobile) ── -->
@@ -75,43 +74,42 @@
     </div>
     <nav aria-label="Índice de contenidos">
       <ul>
-        <li><a href="#concepto">Concepto del proyecto<span class="nav-num">1</span></a></li>
-        <li><a href="#reservas">Reservas y gestión<span class="nav-num">2</span></a></li>
-        <li><a href="#operativa">Operativa Carnaval<span class="nav-num">3</span></a></li>
+        <li><a href="#concepto"><span class="nav-icon" aria-hidden="true">💡</span>Concepto del proyecto<span class="nav-num">1</span></a></li>
+        <li><a href="#reservas"><span class="nav-icon" aria-hidden="true">📱</span>Reservas y gestión<span class="nav-num">2</span></a></li>
+        <li><a href="#operativa"><span class="nav-icon" aria-hidden="true">🗓</span>Operativa Carnaval<span class="nav-num">3</span></a></li>
         <li class="has-sub">
-          <a href="#rutas">Rutas<span class="nav-num">4</span></a>
+          <a href="#rutas"><span class="nav-icon" aria-hidden="true">🗺</span>Rutas<span class="nav-num">4</span></a>
           <ul>
-            <li><a href="#mapa-interactivo">Mapa interactivo</a></li>
             <li><a href="#ruta-norte">Ruta Norte</a></li>
             <li><a href="#ruta-sur">Ruta Sur</a></li>
             <li><a href="#ruta-metro">Ruta Metropolitana</a></li>
             <li><a href="#bajo-demanda">Bajo demanda / PMR</a></li>
           </ul>
         </li>
-        <li><a href="#flota">Flota y sostenibilidad<span class="nav-num">5</span></a></li>
-        <li><a href="#beneficios">Beneficios<span class="nav-num">6</span></a></li>
-        <li><a href="#encuesta">Encuesta<span class="nav-num">7</span></a></li>
-        <li><a href="#carta">Carta de Servicios<span class="nav-num">8</span></a></li>
-        <li><a href="#garantias">Garantías<span class="nav-num">9</span></a></li>
+        <li><a href="#flota"><span class="nav-icon" aria-hidden="true">🌱</span>Flota y sostenibilidad<span class="nav-num">5</span></a></li>
+        <li><a href="#beneficios"><span class="nav-icon" aria-hidden="true">⭐</span>Beneficios<span class="nav-num">6</span></a></li>
+        <li><a href="#encuesta"><span class="nav-icon" aria-hidden="true">📋</span>Encuesta<span class="nav-num">7</span></a></li>
+        <li><a href="#carta"><span class="nav-icon" aria-hidden="true">📄</span>Carta de Servicios<span class="nav-num">8</span></a></li>
+        <li><a href="#garantias"><span class="nav-icon" aria-hidden="true">🛡</span>Garantías<span class="nav-num">9</span></a></li>
         <li class="has-sub">
-          <a href="#reclamaciones">Reclamaciones<span class="nav-num">10</span></a>
+          <a href="#reclamaciones"><span class="nav-icon" aria-hidden="true">📬</span>Reclamaciones<span class="nav-num">10</span></a>
           <ul>
             <li><a href="#protocolo">Protocolo</a></li>
             <li><a href="#hoja-reclamacion">Hoja de reclamación</a></li>
           </ul>
         </li>
-        <li><a href="#presupuesto">Presupuesto<span class="nav-num">11</span></a></li>
+        <li><a href="#presupuesto"><span class="nav-icon" aria-hidden="true">💶</span>Presupuesto<span class="nav-num">11</span></a></li>
         <li class="has-sub">
-          <a href="#mercado">Mercado / DAFO<span class="nav-num">12</span></a>
+          <a href="#mercado"><span class="nav-icon" aria-hidden="true">📊</span>Mercado / DAFO<span class="nav-num">12</span></a>
           <ul>
             <li><a href="#dafo">Análisis DAFO</a></li>
             <li><a href="#lean">Lean Canvas</a></li>
           </ul>
         </li>
-        <li><a href="#plan-operativo">Plan Operativo<span class="nav-num">13</span></a></li>
-        <li><a href="#sostenibilidad">Plan de Sostenibilidad<span class="nav-num">14</span></a></li>
-        <li><a href="#aleman">Sección en alemán<span class="nav-num">15</span></a></li>
-        <li><a href="#libro-sostenibilidad">Memoria de Sostenibilidad<span class="nav-num">16</span></a></li>
+        <li><a href="#plan-operativo"><span class="nav-icon" aria-hidden="true">⚙️</span>Plan Operativo<span class="nav-num">13</span></a></li>
+        <li><a href="#sostenibilidad"><span class="nav-icon" aria-hidden="true">♻️</span>Plan de Sostenibilidad<span class="nav-num">14</span></a></li>
+        <li><a href="#aleman"><span class="nav-icon" aria-hidden="true">🇩🇪</span>Sección en alemán<span class="nav-num">15</span></a></li>
+        <li><a href="#libro-sostenibilidad"><span class="nav-icon" aria-hidden="true">📗</span>Memoria de Sostenibilidad<span class="nav-num">16</span></a></li>
       </ul>
     </nav>
   </aside>
@@ -134,13 +132,13 @@
         <div class="hero-text">
           <h1>Transporte Ecológico Compás</h1>
           <p class="subtitle">Servicio de movilidad sostenible, accesible e inclusivo</p>
-          <span class="event-tag">Carnaval de Santa Cruz de Tenerife</span>
+          <span class="event-tag">🎭 Carnaval de Santa Cruz de Tenerife</span>
           <div class="badges" aria-label="Características principales">
-            <span class="badge">Sostenible</span>
-            <span class="badge">Accesible</span>
-            <span class="badge">Multilingüe</span>
-            <span class="badge">Reserva digital</span>
-            <span class="badge">Flota eléctrica e híbrida</span>
+            <span class="badge">🌿 Sostenible</span>
+            <span class="badge">♿ Accesible</span>
+            <span class="badge">🌍 Multilingüe</span>
+            <span class="badge">📱 Reserva digital</span>
+            <span class="badge">🔋 Flota eléctrica e híbrida</span>
           </div>
         </div>
       </div>
@@ -148,7 +146,7 @@
 
     <!-- ===== 1. CONCEPTO ===== -->
     <section class="doc-section" id="concepto" aria-labelledby="h-concepto">
-      <h2 id="h-concepto">1. Concepto del proyecto</h2>
+      <h2 id="h-concepto"><span class="sec-icon" aria-hidden="true">💡</span>1. Concepto del proyecto</h2>
 
       <p>El proyecto consiste en la creación de un servicio de transporte sostenible, accesible e inclusivo, vinculado directamente a la oferta hotelera y turística de la isla, que operará durante los días principales del Carnaval de Santa Cruz de Tenerife.</p>
 
@@ -163,7 +161,7 @@
 
     <!-- ===== 2. RESERVAS ===== -->
     <section class="doc-section" id="reservas" aria-labelledby="h-reservas">
-      <h2 id="h-reservas">2. Sistema de reservas y gestión</h2>
+      <h2 id="h-reservas"><span class="sec-icon" aria-hidden="true">📱</span>2. Sistema de reservas y gestión</h2>
 
       <p>El servicio estará coordinado con hoteles, aeropuertos y puntos turísticos estratégicos del norte, sur y área metropolitana. Los usuarios podrán realizar la reserva de su plaza mediante:</p>
       <ul>
@@ -197,7 +195,7 @@
 
     <!-- ===== 3. OPERATIVA ===== -->
     <section class="doc-section" id="operativa" aria-labelledby="h-operativa">
-      <h2 id="h-operativa">3. Operativa durante el Carnaval</h2>
+      <h2 id="h-operativa"><span class="sec-icon" aria-hidden="true">🗓</span>3. Operativa durante el Carnaval</h2>
 
       <p>El servicio funcionará exclusivamente durante los actos de mayor relevancia y afluencia del Carnaval, como:</p>
       <ul>
@@ -212,8 +210,8 @@
           <tr><th>Sentido</th><th>Horario</th><th>Descripción</th></tr>
         </thead>
         <tbody>
-          <tr><td>Ida (→ Santa Cruz)</td><td>10:00 – 14:00</td><td>Actividades de mañana y primeras horas de tarde</td></tr>
-          <tr><td>Regreso (→ hoteles)</td><td>17:00 – 23:30</td><td>Finalización de actos principales</td></tr>
+          <tr><td>⬆️ Ida (→ Santa Cruz)</td><td>10:00 – 14:00</td><td>Actividades de mañana y primeras horas de tarde</td></tr>
+          <tr><td>⬇️ Regreso (→ hoteles)</td><td>17:00 – 23:30</td><td>Finalización de actos principales</td></tr>
         </tbody>
       </table>
 
@@ -222,23 +220,7 @@
 
     <!-- ===== 4. RUTAS ===== -->
     <section class="doc-section" id="rutas" aria-labelledby="h-rutas">
-      <h2 id="h-rutas">4. Rutas principales y puntos de recogida</h2>
-
-      <!-- ── Mapa interactivo (fuente: Nemnok/transporte_la_esperanza) ── -->
-      <div id="mapa-interactivo">
-        <p>El mapa muestra las 8 líneas de transporte que operan durante el Carnaval. Todas convergen en el Intercambiador de Santa Cruz. Utilice los controles para mostrar u ocultar líneas individualmente.</p>
-        <div class="map-controls">
-          <button class="btn-primary" onclick="showAllRoutes()">Mostrar todas</button>
-          <button class="btn-primary" onclick="hideAllRoutes()">Ocultar todas</button>
-          <button class="btn-primary" onclick="centerMap()">Centrar mapa</button>
-          <span id="loading-status" class="loading-status">Cargando rutas...</span>
-        </div>
-        <div id="tenerife-map"></div>
-        <div class="route-legend">
-          <h3>Líneas de Transporte — Carnaval de Tenerife</h3>
-          <div class="route-toggles" id="route-toggles-container"></div>
-        </div>
-      </div>
+      <h2 id="h-rutas"><span class="sec-icon" aria-hidden="true">🗺</span>4. Rutas principales y puntos de recogida</h2>
 
       <!-- 4.1 Norte -->
       <h3 id="ruta-norte">4.1. Ruta Norte</h3>
@@ -359,7 +341,7 @@
 
     <!-- ===== 5. FLOTA ===== -->
     <section class="doc-section" id="flota" aria-labelledby="h-flota">
-      <h2 id="h-flota">5. Flota y sostenibilidad</h2>
+      <h2 id="h-flota"><span class="sec-icon" aria-hidden="true">🌱</span>5. Flota y sostenibilidad</h2>
 
       <p>La flota estará compuesta por:</p>
       <ul>
@@ -386,7 +368,7 @@
 
     <!-- ===== 6. BENEFICIOS ===== -->
     <section class="doc-section" id="beneficios" aria-labelledby="h-beneficios">
-      <h2 id="h-beneficios">6. Capacidad estimada y beneficios</h2>
+      <h2 id="h-beneficios"><span class="sec-icon" aria-hidden="true">⭐</span>6. Capacidad estimada y beneficios</h2>
 
       <div class="kpi-row" aria-label="Indicadores clave">
         <div class="kpi-badge">
@@ -420,7 +402,7 @@
 
     <!-- ===== 7. ENCUESTA ===== -->
     <section class="doc-section" id="encuesta" aria-labelledby="h-encuesta">
-      <h2 id="h-encuesta">7. Encuesta de satisfacción</h2>
+      <h2 id="h-encuesta"><span class="sec-icon" aria-hidden="true">📋</span>7. Encuesta de satisfacción</h2>
 
       <p>La encuesta de satisfacción es una herramienta fundamental para evaluar la calidad del servicio y detectar áreas de mejora. Se realizará al finalizar cada trayecto mediante:</p>
       <ul>
@@ -488,18 +470,18 @@
         <div class="survey-question">
           <label for="sq-repeat">6. ¿Volvería a utilizar este servicio?</label>
           <div class="rating-group" role="group" aria-label="¿Repetiría?">
-            <input type="radio" name="repite" id="r1" value="si"><label for="r1">Sí</label>
-            <input type="radio" name="repite" id="r2" value="no"><label for="r2">No</label>
-            <input type="radio" name="repite" id="r3" value="talvez"><label for="r3">Tal vez</label>
+            <input type="radio" name="repite" id="r1" value="si"><label for="r1">✅ Sí</label>
+            <input type="radio" name="repite" id="r2" value="no"><label for="r2">❌ No</label>
+            <input type="radio" name="repite" id="r3" value="talvez"><label for="r3">🤔 Tal vez</label>
           </div>
         </div>
 
         <div class="survey-question">
           <label for="sq-rec">7. ¿Recomendaría este servicio a otras personas?</label>
           <div class="rating-group" role="group" aria-label="¿Recomendaría?">
-            <input type="radio" name="recomienda" id="rc1" value="si"><label for="rc1">Sí</label>
-            <input type="radio" name="recomienda" id="rc2" value="no"><label for="rc2">No</label>
-            <input type="radio" name="recomienda" id="rc3" value="talvez"><label for="rc3">Tal vez</label>
+            <input type="radio" name="recomienda" id="rc1" value="si"><label for="rc1">✅ Sí</label>
+            <input type="radio" name="recomienda" id="rc2" value="no"><label for="rc2">❌ No</label>
+            <input type="radio" name="recomienda" id="rc3" value="talvez"><label for="rc3">🤔 Tal vez</label>
           </div>
         </div>
 
@@ -531,7 +513,7 @@
 
     <!-- ===== 8. CARTA DE SERVICIOS ===== -->
     <section class="doc-section" id="carta" aria-labelledby="h-carta">
-      <h2 id="h-carta">8. Carta de Servicios</h2>
+      <h2 id="h-carta"><span class="sec-icon" aria-hidden="true">📄</span>8. Carta de Servicios</h2>
 
       <h3>Presentación</h3>
       <p>Transporte Ecológico Compás es un servicio de transporte sostenible, accesible e inclusivo, creado especialmente para el Carnaval de Santa Cruz de Tenerife. Nuestro compromiso es ofrecer una experiencia de movilidad segura, cómoda y respetuosa con el medio ambiente, contribuyendo a un modelo de turismo más responsable.</p>
@@ -630,7 +612,7 @@
 
     <!-- ===== 9. GARANTÍAS ===== -->
     <section class="doc-section" id="garantias" aria-labelledby="h-garantias">
-      <h2 id="h-garantias">9. Garantías del servicio</h2>
+      <h2 id="h-garantias"><span class="sec-icon" aria-hidden="true">🛡</span>9. Garantías del servicio</h2>
 
       <h3>9.1. Garantía de puntualidad</h3>
       <div class="info-box">
@@ -668,7 +650,7 @@
 
     <!-- ===== 10. RECLAMACIONES ===== -->
     <section class="doc-section" id="reclamaciones" aria-labelledby="h-reclamaciones">
-      <h2 id="h-reclamaciones">10. Reclamaciones y sugerencias</h2>
+      <h2 id="h-reclamaciones"><span class="sec-icon" aria-hidden="true">📬</span>10. Reclamaciones y sugerencias</h2>
 
       <h3 id="protocolo">10.1. Protocolo de gestión de reclamaciones</h3>
       <p>El operador dispone de un protocolo formal para la gestión de reclamaciones y sugerencias, garantizando una respuesta eficaz y transparente.</p>
@@ -726,10 +708,10 @@
         <div class="field">
           <label>Tipo de comunicación</label>
           <div class="rating-group" role="group" aria-label="Tipo de comunicación" style="margin-top:.3rem">
-            <input type="radio" name="tipo" id="tp1" value="reclamacion"><label for="tp1">Reclamación</label>
-            <input type="radio" name="tipo" id="tp2" value="sugerencia"><label for="tp2">Sugerencia</label>
-            <input type="radio" name="tipo" id="tp3" value="felicitacion"><label for="tp3">Felicitación</label>
-            <input type="radio" name="tipo" id="tp4" value="consulta"><label for="tp4">Consulta</label>
+            <input type="radio" name="tipo" id="tp1" value="reclamacion"><label for="tp1">📋 Reclamación</label>
+            <input type="radio" name="tipo" id="tp2" value="sugerencia"><label for="tp2">💡 Sugerencia</label>
+            <input type="radio" name="tipo" id="tp3" value="felicitacion"><label for="tp3">👏 Felicitación</label>
+            <input type="radio" name="tipo" id="tp4" value="consulta"><label for="tp4">❓ Consulta</label>
           </div>
         </div>
 
@@ -822,7 +804,7 @@
 
     <!-- ===== 11. PRESUPUESTO ===== -->
     <section class="doc-section" id="presupuesto" aria-labelledby="h-presupuesto">
-      <h2 id="h-presupuesto">11. Presupuesto estimado</h2>
+      <h2 id="h-presupuesto"><span class="sec-icon" aria-hidden="true">💶</span>11. Presupuesto estimado</h2>
 
       <h3>11.1. Costes de operación</h3>
 
@@ -874,7 +856,7 @@
 
     <!-- ===== 12. MERCADO / DAFO / LEAN ===== -->
     <section class="doc-section" id="mercado" aria-labelledby="h-mercado">
-      <h2 id="h-mercado">12. Análisis de mercado, DAFO y Lean Canvas</h2>
+      <h2 id="h-mercado"><span class="sec-icon" aria-hidden="true">📊</span>12. Análisis de mercado, DAFO y Lean Canvas</h2>
 
       <h3>12.1. Análisis de mercado</h3>
       <p>El Carnaval de Santa Cruz de Tenerife es uno de los eventos festivos más importantes de España y del mundo, con una afluencia de visitantes que supera los <strong>250.000 asistentes</strong> en los días principales. Esta concentración masiva genera una demanda de movilidad sostenible que el transporte público convencional no cubre de forma óptima durante el evento.</p>
@@ -891,7 +873,7 @@
       <h3 id="dafo">12.2. Análisis DAFO</h3>
       <div class="dafo-grid" role="region" aria-label="Análisis DAFO">
         <div class="dafo-cell dafo-f">
-          <h4>Fortalezas</h4>
+          <h4>💪 Fortalezas</h4>
           <ul>
             <li>Servicio especializado para un evento concreto y de alta demanda.</li>
             <li>Flota ecológica (menor impacto ambiental, imagen positiva).</li>
@@ -901,7 +883,7 @@
           </ul>
         </div>
         <div class="dafo-cell dafo-d">
-          <h4>Debilidades</h4>
+          <h4>⚠️ Debilidades</h4>
           <ul>
             <li>Estacionalidad: servicio limitado al período del Carnaval.</li>
             <li>Inversión inicial elevada (flota, tecnología, infraestructura).</li>
@@ -910,7 +892,7 @@
           </ul>
         </div>
         <div class="dafo-cell dafo-o">
-          <h4>Oportunidades</h4>
+          <h4>🚀 Oportunidades</h4>
           <ul>
             <li>Creciente demanda de turismo sostenible y responsable.</li>
             <li>Apoyo institucional y fondos europeos para movilidad verde.</li>
@@ -920,7 +902,7 @@
           </ul>
         </div>
         <div class="dafo-cell dafo-a">
-          <h4>Amenazas</h4>
+          <h4>🔺 Amenazas</h4>
           <ul>
             <li>Competencia de taxis, VTC y servicios de transporte informal.</li>
             <li>Cambios en la normativa de transporte de viajeros.</li>
@@ -994,7 +976,7 @@
 
     <!-- ===== 13. PLAN OPERATIVO ===== -->
     <section class="doc-section" id="plan-operativo" aria-labelledby="h-plan-operativo">
-      <h2 id="h-plan-operativo">13. Plan operativo</h2>
+      <h2 id="h-plan-operativo"><span class="sec-icon" aria-hidden="true">⚙️</span>13. Plan operativo</h2>
 
       <h3>13.1. Fases del proyecto</h3>
 
@@ -1058,7 +1040,7 @@
 
     <!-- ===== 14. PLAN DE SOSTENIBILIDAD ===== -->
     <section class="doc-section" id="sostenibilidad" aria-labelledby="h-sostenibilidad">
-      <h2 id="h-sostenibilidad">14. Plan de sostenibilidad</h2>
+      <h2 id="h-sostenibilidad"><span class="sec-icon" aria-hidden="true">♻️</span>14. Plan de sostenibilidad</h2>
 
       <h3>14.1. Compromisos medioambientales</h3>
       <ul>
@@ -1111,7 +1093,7 @@
 
     <!-- ===== 15. ALEMÁN ===== -->
     <section class="doc-section" id="aleman" aria-labelledby="h-aleman" lang="de">
-      <h2 id="h-aleman">15. Ökologischer Transport Compás</h2>
+      <h2 id="h-aleman"><span class="sec-icon" aria-hidden="true">🇩🇪</span>15. Ökologischer Transport Compás</h2>
       <p lang="es" style="font-size:.85rem;color:var(--color-muted);margin-bottom:1rem">(Abschnitt für deutschsprachige Besucher / Sección para visitantes de habla alemana)</p>
 
       <div class="lang-de">
@@ -1192,7 +1174,7 @@
 
     <!-- ===== 16. LIBRO DE SOSTENIBILIDAD ===== -->
     <section class="doc-section" id="libro-sostenibilidad" aria-labelledby="h-libro">
-      <h2 id="h-libro">16. Memoria de Sostenibilidad</h2>
+      <h2 id="h-libro"><span class="sec-icon" aria-hidden="true">📗</span>16. Memoria de Sostenibilidad</h2>
       <p style="color:var(--color-muted);font-size:.88rem">Carnaval de Santa Cruz de Tenerife — Primera Edición</p>
 
       <h3>Introducción</h3>
@@ -1280,263 +1262,13 @@
 </div><!-- /layout -->
 
 <!-- ── Back to top ── -->
-<button id="back-to-top" aria-label="Volver al inicio" title="Volver al inicio">Arriba</button>
+<button id="back-to-top" aria-label="Volver al inicio" title="Volver al inicio">↑</button>
 
 <!-- ── Footer ── -->
 <footer id="site-footer" role="contentinfo">
   <p>Transporte Ecológico Compás · Carnaval de Santa Cruz de Tenerife · Documento de presentación del proyecto</p>
 </footer>
 
-<script src="js/routes-data.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script>
-/* ============================================================
-   Mapa interactivo de rutas — Transporte Ecológico Compás
-   Código reutilizado de Nemnok/transporte_la_esperanza (mapa-isla.html)
-   ============================================================ */
-(function () {
-  'use strict';
-
-  var mapContainer = document.getElementById('tenerife-map');
-  if (!mapContainer) return;
-
-  var OSRM_SERVER = 'https://router.project-osrm.org';
-  var MIN_STOPS_FOR_OSRM = 2;
-  var STATUS_HIDE_DELAY = 2000;
-
-  var mapConfig    = getMapConfig();
-  var specialPoints = getSpecialPoints();
-  var routesData   = getRoutesData();
-  var routeColors  = ROUTE_COLORS;
-
-  var routesLoaded = 0;
-  var totalRoutes  = Object.keys(routesData).length;
-
-  var map = new maplibregl.Map({
-    container: 'tenerife-map',
-    style: {
-      version: 8,
-      sources: {
-        osm: {
-          type: 'raster',
-          tiles: [
-            'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          ],
-          tileSize: 256,
-          attribution: '© OpenStreetMap contributors | Routing © OSRM'
-        }
-      },
-      layers: [{ id: 'osm-tiles', type: 'raster', source: 'osm', minzoom: 0, maxzoom: 19 }]
-    },
-    center: [mapConfig.center[1], mapConfig.center[0]],
-    zoom: mapConfig.defaultZoom,
-    maxZoom: mapConfig.maxZoom
-  });
-
-  map.addControl(new maplibregl.NavigationControl(), 'top-right');
-
-  var routeLayers  = {};
-  var routeMarkers = {};
-
-  function getOSRMRoute(coords, routeId) {
-    var waypointsStr = coords.map(function (c) { return c[1] + ',' + c[0]; }).join(';');
-    var url = OSRM_SERVER + '/route/v1/driving/' + waypointsStr + '?overview=full&geometries=geojson';
-    return fetch(url)
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-          return data.routes[0].geometry.coordinates;
-        }
-        console.warn('OSRM: no route for line ' + routeId + ', using straight lines');
-        return null;
-      })
-      .catch(function (err) {
-        console.error('OSRM error for line ' + routeId + ':', err);
-        return null;
-      });
-  }
-
-  function straightLineCoords(stops) {
-    return stops.map(function (s) { return [s.coords[1], s.coords[0]]; });
-  }
-
-  function makeStopMarker(color) {
-    var el = document.createElement('div');
-    el.style.cssText = 'width:14px;height:14px;border-radius:50%;background:' + color +
-      ';border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)';
-    return el;
-  }
-
-  function makeSantaCruzMarker() {
-    var el = document.createElement('div');
-    el.style.cssText = 'width:24px;height:24px;border-radius:50%;background:#ff5722;' +
-      'border:4px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.4);' +
-      'display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;';
-    el.textContent = 'SC';
-    return el;
-  }
-
-  function makeCompasMarker() {
-    var el = document.createElement('div');
-    el.style.cssText = 'width:20px;height:20px;border-radius:50%;background:#4caf50;' +
-      'border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3);' +
-      'display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;';
-    el.textContent = 'C';
-    return el;
-  }
-
-  function setLoadingStatus(msg) {
-    var el = document.getElementById('loading-status');
-    if (el) el.textContent = msg;
-  }
-
-  map.on('load', function () {
-    new maplibregl.Marker({ element: makeSantaCruzMarker() })
-      .setLngLat([specialPoints.santaCruzIntercambiador.coords[1], specialPoints.santaCruzIntercambiador.coords[0]])
-      .setPopup(new maplibregl.Popup({ offset: 25 }).setHTML(
-        '<div class="popup-stop-name">' + specialPoints.santaCruzIntercambiador.name + '</div>' +
-        '<div class="popup-route-info">Punto de llegada de todas las líneas</div>'
-      ))
-      .addTo(map);
-
-    new maplibregl.Marker({ element: makeCompasMarker() })
-      .setLngLat([specialPoints.compas.coords[1], specialPoints.compas.coords[0]])
-      .setPopup(new maplibregl.Popup({ offset: 25 }).setHTML(
-        '<div class="popup-stop-name">' + specialPoints.compas.name + '</div>' +
-        '<div class="popup-route-info">Base de Compás — destino final rutas de vuelta</div>'
-      ))
-      .addTo(map);
-
-    initAllRoutesOSRM();
-  });
-
-  function initAllRoutesOSRM() {
-    setLoadingStatus('Cargando rutas...');
-    var routeIds = Object.keys(routesData);
-    var idx = 0;
-
-    function next() {
-      if (idx >= routeIds.length) {
-        setLoadingStatus('Rutas cargadas');
-        setTimeout(function () {
-          var el = document.getElementById('loading-status');
-          if (el) el.style.display = 'none';
-        }, STATUS_HIDE_DELAY);
-        return;
-      }
-      var id = routeIds[idx++];
-      initSingleRoute(id, routesData[id]).then(function () {
-        routesLoaded++;
-        setLoadingStatus('Cargando rutas... (' + routesLoaded + '/' + totalRoutes + ')');
-        next();
-      });
-    }
-    next();
-  }
-
-  function initSingleRoute(routeId, routeData) {
-    var color = getRouteColor(routeId);
-    var stops = getStopsWithIntercambiador(routeId);
-    var stopCoords = stops.map(function (s) { return s.coords; });
-
-    var routePromise;
-    if (routeData.isExpress || stops.length < MIN_STOPS_FOR_OSRM) {
-      routePromise = Promise.resolve(straightLineCoords(stops));
-    } else {
-      routePromise = getOSRMRoute(stopCoords, routeId).then(function (osrmCoords) {
-        return osrmCoords || straightLineCoords(stops);
-      });
-    }
-
-    return routePromise.then(function (coords) {
-      map.addSource('route-' + routeId, {
-        type: 'geojson',
-        data: { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: coords } }
-      });
-
-      var lineLayer = {
-        id: 'route-line-' + routeId,
-        type: 'line',
-        source: 'route-' + routeId,
-        layout: { 'line-join': 'round', 'line-cap': 'round' },
-        paint: { 'line-color': color, 'line-width': 4, 'line-opacity': 0.8 }
-      };
-      if (routeData.isExpress) { lineLayer.paint['line-dasharray'] = [2, 2]; }
-      map.addLayer(lineLayer);
-      routeLayers[routeId] = 'route-line-' + routeId;
-
-      var markers = [];
-      stops.forEach(function (stop) {
-        if (stop.name.includes('Intercambiador')) return;
-        var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
-          '<div class="popup-stop-name">' + stop.name + '</div>' +
-          '<div class="popup-route-info">' + routeData.name + '</div>' +
-          '<div class="popup-route-info">' + (routeData.busIcon || '') + ' ' + routeData.buses + '</div>'
-        );
-        var marker = new maplibregl.Marker({ element: makeStopMarker(color) })
-          .setLngLat([stop.coords[1], stop.coords[0]])
-          .setPopup(popup)
-          .addTo(map);
-        markers.push(marker);
-      });
-      routeMarkers[routeId] = markers;
-    });
-  }
-
-  window.toggleRoute = function (routeId, visible) {
-    var layerId = routeLayers[routeId];
-    var markers = routeMarkers[routeId] || [];
-    var toggleEl = document.querySelector('[data-route="' + routeId + '"]');
-    if (layerId) map.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none');
-    markers.forEach(function (m) { visible ? m.addTo(map) : m.remove(); });
-    if (toggleEl) toggleEl.classList.toggle('active', visible);
-  };
-
-  window.showAllRoutes = function () {
-    document.querySelectorAll('.route-toggle input[type="checkbox"]').forEach(function (cb) {
-      cb.checked = true;
-      toggleRoute(cb.closest('.route-toggle').dataset.route, true);
-    });
-  };
-
-  window.hideAllRoutes = function () {
-    document.querySelectorAll('.route-toggle input[type="checkbox"]').forEach(function (cb) {
-      cb.checked = false;
-      toggleRoute(cb.closest('.route-toggle').dataset.route, false);
-    });
-  };
-
-  window.centerMap = function () {
-    map.flyTo({ center: [mapConfig.center[1], mapConfig.center[0]], zoom: mapConfig.defaultZoom, essential: true });
-  };
-
-  function generateRouteToggles() {
-    var container = document.getElementById('route-toggles-container');
-    if (!container) return;
-    container.innerHTML = '';
-    Object.keys(routesData).sort(function (a, b) { return +a - +b; }).forEach(function (routeId) {
-      var rd = routesData[routeId];
-      var color = getRouteColor(routeId);
-      var label = document.createElement('label');
-      label.className = 'route-toggle active';
-      label.dataset.route = routeId;
-      label.innerHTML =
-        '<input type="checkbox" checked onchange="toggleRoute(' + routeId + ', this.checked)">' +
-        '<span class="route-color" style="background:' + color + '"></span>' +
-        '<span class="route-info">' +
-          '<strong>' + rd.name + '</strong>' +
-          '<small>' + rd.description + '</small>' +
-          '<span class="buses-info">' + rd.buses + '</span>' +
-        '</span>';
-      container.appendChild(label);
-    });
-  }
-
-  generateRouteToggles();
-}());
-</script>
 <script src="js/main.js"></script>
 </body>
 </html>
