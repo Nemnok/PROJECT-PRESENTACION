@@ -557,6 +557,111 @@ hr.section-divider { border: none; border-top: 1px solid var(--color-border); ma
   #site-footer { color: rgba(255,255,255,.4); }
 }
 
+/* ── TOC (Índice) ── */
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: .3rem 1.5rem;
+  margin: .75rem 0;
+}
+.toc-grid a {
+  color: var(--color-navy);
+  text-decoration: none;
+  font-size: .87rem;
+  padding: .18rem 0;
+  border-bottom: 1px dotted var(--color-border);
+  transition: color .12s;
+}
+.toc-grid a:hover { color: var(--color-blue); }
+.toc-item-main { font-weight: 600; }
+.toc-item-sub  { padding-left: 1.2em; color: var(--color-muted); font-size: .83rem; }
+.toc-item-sub2 { padding-left: 2.4em; color: var(--color-muted); font-size: .8rem; }
+
+/* ── Interactive map (§3.3) ── */
+#tenerife-map {
+  width: 100%;
+  height: 520px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  margin: 1rem 0;
+}
+.map-controls {
+  display: flex;
+  gap: .65rem;
+  margin-bottom: .85rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.map-controls button {
+  padding: .38rem .95rem;
+  border: none;
+  border-radius: 20px;
+  background: var(--color-navy);
+  color: #fff;
+  cursor: pointer;
+  font-size: .85rem;
+  font-weight: 600;
+  transition: background .15s, transform .1s;
+}
+.map-controls button:hover { background: var(--color-blue); transform: translateY(-1px); }
+.map-loading-status {
+  background: var(--color-hl-yellow);
+  color: #856404;
+  padding: .3rem .8rem;
+  border-radius: 20px;
+  font-size: .8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+.route-legend {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  margin-top: 1rem;
+  box-shadow: var(--shadow);
+}
+.route-legend h3 { margin: 0 0 .75rem; color: var(--color-navy); font-size: .97rem; }
+.route-toggles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: .55rem;
+}
+.route-toggle {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .55rem .75rem;
+  background: var(--color-bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.route-toggle.active {
+  border-color: var(--color-blue);
+  background: var(--color-hl-blue);
+}
+.route-toggle input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
+.route-color { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; }
+.route-info { flex: 1; min-width: 0; }
+.route-info strong { display: block; font-size: .88rem; color: var(--color-text); }
+.route-info small { color: var(--color-muted); font-size: .78rem; }
+.maplibregl-popup-content {
+  font-family: var(--font-body);
+  padding: .75rem 1rem;
+  border-radius: var(--radius);
+}
+.popup-stop-name { font-weight: 700; font-size: 1rem; color: var(--color-navy); margin-bottom: .3rem; }
+.popup-route-info { font-size: .85rem; color: var(--color-muted); }
+.buses-info { font-size: .8rem; color: var(--color-muted); margin-top: .15rem; }
+@media (max-width: 768px) {
+  #tenerife-map { height: 380px; }
+  .route-toggles { grid-template-columns: 1fr; }
+  .toc-grid { grid-template-columns: 1fr; }
+}
+
 /* ── Print ── */
 @media print {
   #site-header, #sidebar, #search-results, #nav-toggle,
