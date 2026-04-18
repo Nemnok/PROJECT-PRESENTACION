@@ -171,13 +171,65 @@
     var opt = {
       margin: [12, 12, 12, 12],
       filename: filename,
-      image: { type: "jpeg", quality: 0.95 },
-      html2canvas: { scale: 2, useCORS: true, logging: false },
+      image: { type: "jpeg", quality: 1 },
+      html2canvas: { scale: 3, useCORS: true, logging: false },
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       pagebreak: { mode: ["avoid-all", "css", "legacy"] }
     };
 
     return html2pdf().set(opt).from(element).save();
+  }
+
+  function createBackToIndiceLink() {
+    var backLink = document.createElement("a");
+    backLink.href = "#indice";
+    backLink.textContent = "Volver al Indice";
+    backLink.style.position = "absolute";
+    backLink.style.top = "8px";
+    backLink.style.right = "8px";
+    backLink.style.fontSize = "11px";
+    backLink.style.fontWeight = "600";
+    backLink.style.color = "#1b2d6b";
+    backLink.style.background = "rgba(255,255,255,0.9)";
+    backLink.style.padding = "2px 8px";
+    backLink.style.borderRadius = "999px";
+    backLink.style.textDecoration = "none";
+    backLink.style.zIndex = "1";
+    return backLink;
+  }
+
+  function waitForRenderReadiness(root) {
+    var tasks = [];
+
+    if (document.fonts && document.fonts.ready) {
+      tasks.push(document.fonts.ready.catch(function () {}));
+    }
+
+    var images = root.querySelectorAll("img");
+    for (var i = 0; i < images.length; i++) {
+      (function (img) {
+        tasks.push(
+          new Promise(function (resolve) {
+            function done() {
+              if (typeof img.decode === "function") {
+                img.decode().catch(function () {}).then(resolve);
+              } else {
+                resolve();
+              }
+            }
+
+            if (img.complete) {
+              done();
+            } else {
+              img.addEventListener("load", done, { once: true });
+              img.addEventListener("error", resolve, { once: true });
+            }
+          })
+        );
+      })(images[i]);
+    }
+
+    return Promise.all(tasks);
   }
 
   /* Section PDF buttons */
@@ -223,18 +275,24 @@
       function onAllLoaded() {
         /* Build a combined element */
         var wrapper = document.createElement("div");
+        wrapper.style.width = "210mm";
+        wrapper.style.maxWidth = "210mm";
+        wrapper.style.background = "#ffffff";
         wrapper.style.fontFamily = "Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif";
         wrapper.style.color = "#2c3040";
         wrapper.style.lineHeight = "1.65";
+        wrapper.style.position = "relative";
 
         /* Cover */
         var cover = document.createElement("div");
         cover.style.textAlign = "center";
+        cover.style.position = "relative";
         cover.style.padding = "60px 20px";
         cover.innerHTML =
           '<h1 style="color:#1b2d6b;font-size:28px;margin-bottom:12px;">Transporte Ecologico Compas</h1>' +
           '<p style="font-size:16px;color:#5a6170;">Proyecto de transporte sostenible para el Carnaval de Santa Cruz de Tenerife</p>' +
           '<p style="font-size:14px;color:#5a6170;margin-top:8px;">Transporte Ecologico Compas S.A. | C. Pi y Margall, 23, Santa Cruz de Tenerife</p>';
+        cover.appendChild(createBackToIndiceLink());
         wrapper.appendChild(cover);
 
         /* Each section */
@@ -246,20 +304,39 @@
           sectionClone.style.display = "block";
           sectionClone.style.pageBreakBefore = "always";
           sectionClone.style.paddingTop = "16px";
+          sectionClone.style.position = "relative";
           /* Remove PDF buttons from clone */
           var btns = sectionClone.querySelectorAll(".btn-pdf");
           for (var b = 0; b < btns.length; b++) {
             btns[b].parentNode.removeChild(btns[b]);
           }
+          sectionClone.appendChild(createBackToIndiceLink());
           wrapper.appendChild(sectionClone);
         }
 
-        generatePdf(wrapper, "Transporte_Ecologico_Compas_Proyecto_Completo.pdf")
+        var staging = document.createElement("div");
+        staging.id = "pdf-staging";
+        staging.style.position = "fixed";
+        staging.style.left = "-100000px";
+        staging.style.top = "0";
+        staging.style.width = "210mm";
+        staging.style.background = "#ffffff";
+        staging.style.pointerEvents = "none";
+        staging.style.opacity = "0";
+        staging.style.zIndex = "-1";
+
+        staging.appendChild(wrapper);
+        document.body.appendChild(staging);
+
+        waitForRenderReadiness(wrapper)
           .then(function () {
-            btnPdfCompleto.disabled = false;
-            btnPdfCompleto.textContent = "Descargar proyecto completo en PDF";
+            return generatePdf(wrapper, "Transporte_Ecologico_Compas_Proyecto_Completo.pdf");
           })
-          .catch(function () {
+          .catch(function () {})
+          .finally(function () {
+            if (staging.parentNode) {
+              staging.parentNode.removeChild(staging);
+            }
             btnPdfCompleto.disabled = false;
             btnPdfCompleto.textContent = "Descargar proyecto completo en PDF";
           });
