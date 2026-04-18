@@ -1,0 +1,24 @@
+{
+  "name": "project-presentacion",
+  "version": "1.0.0",
+  "description": "Sitio web estático para la presentación del proyecto **Transporte Ecológico Compás**, servicio de movilidad sostenible, accesible e inclusivo para el **Carnaval de Santa Cruz de Tenerife**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nemnok/PROJECT-PRESENTACION.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Nemnok/PROJECT-PRESENTACION/issues"
+  },
+  "homepage": "https://github.com/Nemnok/PROJECT-PRESENTACION#readme",
+  "dependencies": {
+    "puppeteer": "^24.41.0"
+  }
+}
