@@ -165,7 +165,7 @@
   function generatePdf(element, filename) {
     if (typeof html2pdf === "undefined") {
       alert("La libreria de PDF no se ha cargado. Intente de nuevo en unos segundos.");
-      return;
+      return Promise.reject(new Error("html2pdf not loaded"));
     }
 
     var opt = {
@@ -177,7 +177,7 @@
       pagebreak: { mode: ["avoid-all", "css", "legacy"] }
     };
 
-    html2pdf().set(opt).from(element).save();
+    return html2pdf().set(opt).from(element).save();
   }
 
   /* Section PDF buttons */
@@ -192,12 +192,22 @@
 
     loadSection(sectionKey, function () {
       var panel = document.getElementById("panel-" + sectionKey);
-      if (!panel) return;
+      if (!panel) {
+        btn.disabled = false;
+        btn.textContent = "Descargar PDF";
+        return;
+      }
       var title = sectionTitles[sectionKey] || "Seccion " + sectionKey;
       var filename = "TEC_" + sectionKey + "_" + title.replace(/[^a-zA-Z0-9]/g, "_") + ".pdf";
-      generatePdf(panel, filename);
-      btn.disabled = false;
-      btn.textContent = "Descargar PDF";
+      generatePdf(panel, filename)
+        .then(function () {
+          btn.disabled = false;
+          btn.textContent = "Descargar PDF";
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = "Descargar PDF";
+        });
     });
   });
 
@@ -233,6 +243,7 @@
           var panel = document.getElementById("panel-" + key);
           if (!panel) continue;
           var sectionClone = panel.cloneNode(true);
+          sectionClone.style.display = "block";
           sectionClone.style.pageBreakBefore = "always";
           sectionClone.style.paddingTop = "16px";
           /* Remove PDF buttons from clone */
@@ -243,9 +254,15 @@
           wrapper.appendChild(sectionClone);
         }
 
-        generatePdf(wrapper, "Transporte_Ecologico_Compas_Proyecto_Completo.pdf");
-        btnPdfCompleto.disabled = false;
-        btnPdfCompleto.textContent = "Descargar proyecto completo en PDF";
+        generatePdf(wrapper, "Transporte_Ecologico_Compas_Proyecto_Completo.pdf")
+          .then(function () {
+            btnPdfCompleto.disabled = false;
+            btnPdfCompleto.textContent = "Descargar proyecto completo en PDF";
+          })
+          .catch(function () {
+            btnPdfCompleto.disabled = false;
+            btnPdfCompleto.textContent = "Descargar proyecto completo en PDF";
+          });
       }
 
       keys.forEach(function (key) {
