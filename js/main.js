@@ -12,7 +12,6 @@
   /* ---------- State ---------- */
   var loadedSections = {};
   var PDF_A4_WIDTH = "210mm";
-  var PDF_STAGING_LEFT = "-9999px";
 
   /* ---------- Section meta ---------- */
   var sectionFiles = {
@@ -173,33 +172,65 @@
     var opt = {
       margin: [12, 12, 12, 12],
       filename: filename,
-      image: { type: "jpeg", quality: 1 },
-      html2canvas: { scale: 3, useCORS: true, logging: false },
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        letterRendering: true,
+        allowTaint: false
+      },
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      pagebreak: { mode: ["avoid-all", "css", "legacy"] }
+      pagebreak: { mode: ["css", "legacy"] }
     };
 
     return html2pdf().set(opt).from(element).save();
   }
 
-  function createBackToIndiceLink() {
-    var backLink = document.createElement("a");
-    backLink.href = "#indice";
-    backLink.textContent = "Volver al Índice";
-    backLink.setAttribute("aria-label", "Volver al Índice");
-    backLink.style.position = "absolute";
-    backLink.style.top = "8px";
-    backLink.style.right = "8px";
-    backLink.style.fontSize = "11px";
-    backLink.style.fontWeight = "600";
-    backLink.style.color = "#1b2d6b";
-    backLink.style.background = "rgba(255,255,255,0.9)";
-    backLink.style.padding = "2px 8px";
-    backLink.style.borderRadius = "999px";
-    backLink.style.textDecoration = "none";
-    backLink.style.zIndex = "1";
-    return backLink;
+  function generateFullProjectPdf(sectionElements, filename) {
+    if (typeof html2pdf === "undefined") {
+      alert("La libreria de PDF no se ha cargado. Intente de nuevo en unos segundos.");
+      return Promise.reject(new Error("html2pdf not loaded"));
+    }
+    var opt = {
+      margin: [12, 12, 12, 12],
+      image: { type: "jpeg", quality: 0.95 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        letterRendering: true,
+        allowTaint: false
+      },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: { mode: ["css", "legacy"] }
+    };
+
+    var worker = html2pdf().set(opt)
+      .from(sectionElements[0])
+      .toContainer()
+      .toCanvas()
+      .toImg()
+      .toPdf();
+
+    for (var i = 1; i < sectionElements.length; i++) {
+      (function (el) {
+        worker = worker
+          .get("pdf")
+          .then(function (pdf) {
+            pdf.addPage();
+          })
+          .from(el)
+          .toContainer()
+          .toCanvas()
+          .toImg()
+          .toPdf();
+      })(sectionElements[i]);
+    }
+
+    return worker.save(filename);
   }
+
 
   function waitForRenderReadiness(root) {
     var tasks = [];
@@ -282,27 +313,33 @@
       var pending = keys.length;
 
       function onAllLoaded() {
-        /* Build a combined element */
-        var wrapper = document.createElement("div");
-        wrapper.style.width = PDF_A4_WIDTH;
-        wrapper.style.maxWidth = PDF_A4_WIDTH;
-        wrapper.style.background = "#ffffff";
-        wrapper.style.fontFamily = "Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif";
-        wrapper.style.color = "#2c3040";
-        wrapper.style.lineHeight = "1.65";
-        wrapper.style.position = "relative";
+        /* Build individual section elements for separate rendering */
+        var staging = document.createElement("div");
+        staging.id = "pdf-staging";
+        staging.style.position = "absolute";
+        staging.style.left = "0";
+        staging.style.top = "0";
+        staging.style.width = PDF_A4_WIDTH;
+        staging.style.maxWidth = PDF_A4_WIDTH;
+        staging.style.background = "#ffffff";
+        staging.style.fontFamily = "Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif";
+        staging.style.color = "#2c3040";
+        staging.style.lineHeight = "1.65";
+
+        var sectionElements = [];
 
         /* Cover */
         var cover = document.createElement("div");
         cover.style.textAlign = "center";
         cover.style.position = "relative";
         cover.style.padding = "60px 20px";
+        cover.style.background = "#ffffff";
         cover.innerHTML =
           '<h1 style="color:#1b2d6b;font-size:28px;margin-bottom:12px;">Transporte Ecologico Compas</h1>' +
           '<p style="font-size:16px;color:#5a6170;">Proyecto de transporte sostenible para el Carnaval de Santa Cruz de Tenerife</p>' +
           '<p style="font-size:14px;color:#5a6170;margin-top:8px;">Transporte Ecologico Compas S.A. | C. Pi y Margall, 23, Santa Cruz de Tenerife</p>';
-        cover.appendChild(createBackToIndiceLink());
-        wrapper.appendChild(cover);
+        staging.appendChild(cover);
+        sectionElements.push(cover);
 
         /* Each section */
         for (var i = 0; i < keys.length; i++) {
@@ -310,35 +347,28 @@
           var panel = document.getElementById("panel-" + key);
           if (!panel) continue;
           var sectionClone = panel.cloneNode(true);
+          sectionClone.removeAttribute("id");
+          sectionClone.className = "";
           sectionClone.style.display = "block";
-          sectionClone.style.pageBreakBefore = "always";
+          sectionClone.style.visibility = "visible";
+          sectionClone.style.opacity = "1";
           sectionClone.style.paddingTop = "16px";
           sectionClone.style.position = "relative";
+          sectionClone.style.background = "#ffffff";
           /* Remove PDF buttons from clone */
           var btns = sectionClone.querySelectorAll(".btn-pdf");
           for (var b = 0; b < btns.length; b++) {
             btns[b].parentNode.removeChild(btns[b]);
           }
-          sectionClone.appendChild(createBackToIndiceLink());
-          wrapper.appendChild(sectionClone);
+          staging.appendChild(sectionClone);
+          sectionElements.push(sectionClone);
         }
 
-        var staging = document.createElement("div");
-        staging.id = "pdf-staging";
-        staging.style.position = "fixed";
-        staging.style.left = PDF_STAGING_LEFT;
-        staging.style.top = "0";
-        staging.style.width = PDF_A4_WIDTH;
-        staging.style.background = "#ffffff";
-        staging.style.visibility = "hidden";
-        staging.style.pointerEvents = "none";
-
-        staging.appendChild(wrapper);
         document.body.appendChild(staging);
 
-        waitForRenderReadiness(wrapper)
+        waitForRenderReadiness(staging)
           .then(function () {
-            return generatePdf(wrapper, "Transporte_Ecologico_Compas_Proyecto_Completo.pdf");
+            return generateFullProjectPdf(sectionElements, "Transporte_Ecologico_Compas_Proyecto_Completo.pdf");
           })
           .catch(function (err) {
             console.error("Error al generar PDF completo:", err);
