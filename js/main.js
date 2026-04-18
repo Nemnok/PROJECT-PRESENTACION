@@ -1,231 +1,264 @@
-/* ============================================================
-   Transporte Ecológico Compás — main.js
-   Client-side: navigation, active-section tracking, search
-   ============================================================ */
+/* ================================================
+   Transporte Ecologico Compas - Main Script
+   ================================================ */
 (function () {
-  'use strict';
+  "use strict";
 
-  /* ── Sidebar toggle (mobile) ─────────────────────────── */
-  const sidebar   = document.getElementById('sidebar');
-  const navToggle = document.getElementById('nav-toggle');
-  const overlay   = document.getElementById('sidebar-overlay');
+  /* ---------- DOM refs ---------- */
+  var tabBar = document.getElementById("tabBar");
+  var contentArea = document.getElementById("contentArea");
+  var btnPdfCompleto = document.getElementById("btnPdfCompleto");
 
-  function openSidebar() {
-    sidebar.classList.add('open');
-    sidebar.removeAttribute('aria-hidden');
-    navToggle.setAttribute('aria-expanded', 'true');
-    overlay && overlay.classList.add('active');
-  }
-  function closeSidebar() {
-    sidebar.classList.remove('open');
-    sidebar.setAttribute('aria-hidden', 'true');
-    navToggle.setAttribute('aria-expanded', 'false');
-    overlay && overlay.classList.remove('active');
-  }
+  /* ---------- State ---------- */
+  var loadedSections = {};
 
-  navToggle && navToggle.addEventListener('click', () => {
-    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
-  });
-  overlay && overlay.addEventListener('click', closeSidebar);
+  /* ---------- Section meta ---------- */
+  var sectionFiles = {
+    "01": "sections/01-introduccion.html",
+    "02": "sections/02-marco-conceptual.html",
+    "03": "sections/03-descripcion-proyecto.html",
+    "04": "sections/04-estudio-mercado.html",
+    "05": "sections/05-analisis-entorno.html",
+    "06": "sections/06-analisis-estrategico.html",
+    "07": "sections/07-organizacion-empresarial.html",
+    "08": "sections/08-plan-operativo.html",
+    "09": "sections/09-flota-logistica.html",
+    "10": "sections/10-experiencia-usuario.html",
+    "11": "sections/11-carta-servicios.html",
+    "12": "sections/12-gestion-calidad.html",
+    "13": "sections/13-plan-sostenibilidad.html",
+    "14": "sections/14-plan-marketing.html",
+    "15": "sections/15-plan-economico.html",
+    "16": "sections/16-indicadores-kpi.html",
+    "17": "sections/17-riesgos-contingencia.html",
+    "18": "sections/18-libro-sostenibilidad.html",
+    "19": "sections/19-conclusiones.html",
+    "20": "sections/20-anexos.html"
+  };
 
-  /* Close sidebar on nav-link click (mobile) */
-  sidebar && sidebar.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', () => {
-      if (window.innerWidth < 769) closeSidebar();
-    });
-  });
+  var sectionTitles = {
+    "01": "1. Introduccion",
+    "02": "2. Marco conceptual y contextual",
+    "03": "3. Descripcion del proyecto",
+    "04": "4. Estudio de mercado",
+    "05": "5. Analisis del entorno",
+    "06": "6. Analisis estrategico",
+    "07": "7. Organizacion empresarial",
+    "08": "8. Plan operativo del servicio",
+    "09": "9. Flota y logistica",
+    "10": "10. Experiencia del usuario",
+    "11": "11. Carta de servicios",
+    "12": "12. Gestion de calidad y satisfaccion",
+    "13": "13. Plan de sostenibilidad",
+    "14": "14. Plan de marketing y comunicacion",
+    "15": "15. Plan economico-financiero",
+    "16": "16. Indicadores de rendimiento (KPI)",
+    "17": "17. Riesgos y planes de contingencia",
+    "18": "18. Libro de sostenibilidad",
+    "19": "19. Conclusiones",
+    "20": "20. Anexos"
+  };
 
-  /* ── Collapsible sub-menus ──────────────────────────── */
-  document.querySelectorAll('#sidebar .has-sub > a').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const li = a.closest('li');
-      li.classList.toggle('open');
-    });
-  });
+  /* ---------- Helpers ---------- */
 
-  /* ── Active section via IntersectionObserver ─────────── */
-  const navLinks = Array.from(document.querySelectorAll('#sidebar nav a[href^="#"]'))
-    .filter(a => !a.closest('.has-sub') || a.parentElement.tagName === 'LI');
-  const allNavLinks = Array.from(document.querySelectorAll('#sidebar nav a[href^="#"]'));
+  /** Load section HTML into its .section-body container */
+  function loadSection(key, callback) {
+    if (loadedSections[key]) {
+      if (callback) callback();
+      return;
+    }
+    var panel = document.getElementById("panel-" + key);
+    if (!panel) return;
+    var body = panel.querySelector(".section-body");
+    if (!body) return;
+    var src = body.getAttribute("data-src");
+    if (!src) return;
 
-  function setActive(id) {
-    allNavLinks.forEach(l => l.classList.remove('active'));
-    const target = document.querySelector(`#sidebar a[href="#${id}"]`);
-    if (!target) return;
-    target.classList.add('active');
-    // Open parent sub-menu if collapsed
-    const parentLi = target.closest('ul')?.closest('li.has-sub');
-    if (parentLi) parentLi.classList.add('open');
-  }
+    body.innerHTML = '<p class="loading-msg">Cargando contenido...</p>';
 
-  const sections = Array.from(document.querySelectorAll('.doc-section[id]'));
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        if (en.isIntersecting) setActive(en.target.id);
+    fetch(src)
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.text();
+      })
+      .then(function (html) {
+        body.innerHTML = html;
+        loadedSections[key] = true;
+        if (callback) callback();
+      })
+      .catch(function () {
+        body.innerHTML = '<p class="loading-msg">No se pudo cargar el contenido de esta seccion.</p>';
+        if (callback) callback();
       });
-    }, { rootMargin: '-20% 0px -70% 0px' });
-    sections.forEach(s => io.observe(s));
   }
 
-  /* ── Build search index from DOM ────────────────────── */
-  const searchIndex = [];
-  sections.forEach(sec => {
-    const title = sec.querySelector('h2')?.textContent.trim() || '';
-    const id    = sec.id;
-    // Index each paragraph / list item individually for snippet accuracy
-    sec.querySelectorAll('p, li, h3, h4, td, th').forEach(el => {
-      const text = el.textContent.trim();
-      if (text.length > 10) {
-        searchIndex.push({ id, title, text });
+  /* ---------- Tab switching ---------- */
+
+  function activateTab(tabKey) {
+    /* Update buttons */
+    var btns = tabBar.querySelectorAll(".tab-btn");
+    for (var i = 0; i < btns.length; i++) {
+      var btn = btns[i];
+      var isActive = btn.getAttribute("data-tab") === tabKey;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      if (isActive) {
+        btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
       }
-    });
+    }
+
+    /* Update panels */
+    var panels = contentArea.querySelectorAll(".tab-panel");
+    for (var j = 0; j < panels.length; j++) {
+      panels[j].classList.remove("active");
+    }
+    var target = document.getElementById("panel-" + tabKey);
+    if (target) {
+      target.classList.add("active");
+    }
+
+    /* Lazy-load section content */
+    if (tabKey !== "indice" && sectionFiles[tabKey]) {
+      loadSection(tabKey);
+    }
+
+    /* Scroll to top of content */
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ---------- Tab click handler ---------- */
+  tabBar.addEventListener("click", function (e) {
+    var btn = e.target.closest(".tab-btn");
+    if (!btn) return;
+    var tabKey = btn.getAttribute("data-tab");
+    if (!tabKey) return;
+    history.pushState(null, "", "#" + tabKey);
+    activateTab(tabKey);
   });
 
-  /* ── Search UI ───────────────────────────────────────── */
-  const searchInput   = document.getElementById('search-input');
-  const searchResults = document.getElementById('search-results');
-  const searchClose   = document.getElementById('search-close');
+  /* ---------- Indice card click ---------- */
+  contentArea.addEventListener("click", function (e) {
+    var card = e.target.closest(".indice-card");
+    if (!card) return;
+    e.preventDefault();
+    var gotoKey = card.getAttribute("data-goto");
+    if (!gotoKey) return;
+    history.pushState(null, "", "#" + gotoKey);
+    activateTab(gotoKey);
+  });
 
-  function escapeRE(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  /* ---------- Hash navigation ---------- */
+  function handleHash() {
+    var hash = location.hash.replace("#", "");
+    if (hash && (hash === "indice" || sectionFiles[hash])) {
+      activateTab(hash);
+    } else {
+      activateTab("indice");
+    }
   }
 
-  function highlight(text, query) {
-    const re = new RegExp(`(${escapeRE(query)})`, 'gi');
-    return text.replace(re, '<em>$1</em>');
-  }
+  window.addEventListener("hashchange", handleHash);
+  window.addEventListener("popstate", handleHash);
 
-  function truncate(text, query, radius) {
-    const idx = text.toLowerCase().indexOf(query.toLowerCase());
-    if (idx === -1) return text.slice(0, 120) + '…';
-    const start = Math.max(0, idx - radius);
-    const end   = Math.min(text.length, idx + query.length + radius);
-    return (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
-  }
+  /* ---------- PDF generation ---------- */
 
-  function doSearch(query) {
-    query = query.trim();
-    if (query.length < 2) {
-      searchResults.classList.remove('visible');
+  function generatePdf(element, filename) {
+    if (typeof html2pdf === "undefined") {
+      alert("La libreria de PDF no se ha cargado. Intente de nuevo en unos segundos.");
       return;
     }
 
-    const seen   = new Set();
-    const hits   = [];
+    var opt = {
+      margin: [12, 12, 12, 12],
+      filename: filename,
+      image: { type: "jpeg", quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true, logging: false },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: { mode: ["avoid-all", "css", "legacy"] }
+    };
 
-    searchIndex.forEach(item => {
-      if (item.text.toLowerCase().includes(query.toLowerCase())) {
-        const key = item.id + '|' + item.text.slice(0, 40);
-        if (!seen.has(key) && hits.length < 8) {
-          seen.add(key);
-          hits.push(item);
-        }
-      }
+    html2pdf().set(opt).from(element).save();
+  }
+
+  /* Section PDF buttons */
+  contentArea.addEventListener("click", function (e) {
+    var btn = e.target.closest(".btn-pdf-section");
+    if (!btn) return;
+    var sectionKey = btn.getAttribute("data-section");
+    if (!sectionKey) return;
+
+    btn.disabled = true;
+    btn.textContent = "Generando PDF...";
+
+    loadSection(sectionKey, function () {
+      var panel = document.getElementById("panel-" + sectionKey);
+      if (!panel) return;
+      var title = sectionTitles[sectionKey] || "Seccion " + sectionKey;
+      var filename = "TEC_" + sectionKey + "_" + title.replace(/[^a-zA-Z0-9]/g, "_") + ".pdf";
+      generatePdf(panel, filename);
+      btn.disabled = false;
+      btn.textContent = "Descargar PDF";
     });
+  });
 
-    if (hits.length === 0) {
-      searchResults.innerHTML =
-        '<button id="search-close" class="sr-close" aria-label="Cerrar búsqueda">✕ cerrar</button>' +
-        '<p class="sr-empty">No se encontraron resultados para "<strong>' +
-        escapeHTML(query) + '</strong>".</p>';
-    } else {
-      const items = hits.map(h => {
-        const snippet = truncate(h.text, query, 60);
-        return `<a class="sr-item" href="#${h.id}">
-          <strong>${escapeHTML(h.title)}</strong>
-          <span>${highlight(escapeHTML(snippet), query)}</span>
-        </a>`;
-      }).join('');
-      searchResults.innerHTML =
-        '<button id="search-close" class="sr-close" aria-label="Cerrar búsqueda">✕ cerrar</button>' +
-        items;
-    }
+  /* Full project PDF */
+  if (btnPdfCompleto) {
+    btnPdfCompleto.addEventListener("click", function () {
+      btnPdfCompleto.disabled = true;
+      btnPdfCompleto.textContent = "Preparando PDF completo...";
 
-    searchResults.classList.add('visible');
-    // Re-attach close handler (innerHTML replaced the button)
-    const closeBtn = searchResults.querySelector('#search-close');
-    closeBtn && closeBtn.addEventListener('click', clearSearch);
+      var keys = Object.keys(sectionFiles);
+      var pending = keys.length;
 
-    // Close sidebar when result clicked (mobile)
-    searchResults.querySelectorAll('.sr-item').forEach(a => {
-      a.addEventListener('click', () => {
-        clearSearch();
-        if (window.innerWidth < 769) closeSidebar();
+      function onAllLoaded() {
+        /* Build a combined element */
+        var wrapper = document.createElement("div");
+        wrapper.style.fontFamily = "Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif";
+        wrapper.style.color = "#2c3040";
+        wrapper.style.lineHeight = "1.65";
+
+        /* Cover */
+        var cover = document.createElement("div");
+        cover.style.textAlign = "center";
+        cover.style.padding = "60px 20px";
+        cover.innerHTML =
+          '<h1 style="color:#1b2d6b;font-size:28px;margin-bottom:12px;">Transporte Ecologico Compas</h1>' +
+          '<p style="font-size:16px;color:#5a6170;">Proyecto de transporte sostenible para el Carnaval de Santa Cruz de Tenerife</p>' +
+          '<p style="font-size:14px;color:#5a6170;margin-top:8px;">Transporte Ecologico Compas S.A. | C. Pi y Margall, 23, Santa Cruz de Tenerife</p>';
+        wrapper.appendChild(cover);
+
+        /* Each section */
+        for (var i = 0; i < keys.length; i++) {
+          var key = keys[i];
+          var panel = document.getElementById("panel-" + key);
+          if (!panel) continue;
+          var sectionClone = panel.cloneNode(true);
+          sectionClone.style.pageBreakBefore = "always";
+          sectionClone.style.paddingTop = "16px";
+          /* Remove PDF buttons from clone */
+          var btns = sectionClone.querySelectorAll(".btn-pdf");
+          for (var b = 0; b < btns.length; b++) {
+            btns[b].parentNode.removeChild(btns[b]);
+          }
+          wrapper.appendChild(sectionClone);
+        }
+
+        generatePdf(wrapper, "Transporte_Ecologico_Compas_Proyecto_Completo.pdf");
+        btnPdfCompleto.disabled = false;
+        btnPdfCompleto.textContent = "Descargar proyecto completo en PDF";
+      }
+
+      keys.forEach(function (key) {
+        loadSection(key, function () {
+          pending--;
+          if (pending <= 0) {
+            onAllLoaded();
+          }
+        });
       });
     });
   }
 
-  function clearSearch() {
-    searchInput.value = '';
-    searchResults.classList.remove('visible');
-  }
-
-  function escapeHTML(str) {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  }
-
-  searchInput && searchInput.addEventListener('input', e => doSearch(e.target.value));
-  searchInput && searchInput.addEventListener('keydown', e => {
-    if (e.key === 'Escape') clearSearch();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') clearSearch();
-    // Ctrl/Cmd+K: focus search
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-      e.preventDefault();
-      searchInput && searchInput.focus();
-    }
-  });
-
-  // Close on click outside
-  document.addEventListener('click', e => {
-    if (!searchResults.contains(e.target) && e.target !== searchInput) {
-      searchResults.classList.remove('visible');
-    }
-  });
-
-  /* ── Smooth-scroll polyfill for anchor links ─────────── */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id  = a.getAttribute('href').slice(1);
-      const el  = document.getElementById(id);
-      if (!el) return;
-      e.preventDefault();
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Update URL hash without jumping
-      history.pushState(null, '', '#' + id);
-    });
-  });
-
-  /* ── Survey interactivity (demo — prints to console) ─── */
-  const surveyForm = document.getElementById('survey-form');
-  surveyForm && surveyForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = surveyForm.querySelector('button[type=submit]');
-    btn.textContent = '✓ Respuestas enviadas. ¡Gracias!';
-    btn.disabled = true;
-    btn.style.background = '#2472c8';
-  });
-
-  /* ── Claim form (demo) ─────────────────────────────── */
-  const claimForm = document.getElementById('claim-form');
-  claimForm && claimForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = claimForm.querySelector('button[type=submit]');
-    btn.textContent = '✓ Reclamación registrada. Le responderemos en un plazo máximo de 10 días hábiles.';
-    btn.disabled = true;
-    btn.style.background = '#2472c8';
-    btn.style.whiteSpace = 'normal';
-  });
-
-  /* ── Back-to-top button ──────────────────────────────── */
-  const btt = document.getElementById('back-to-top');
-  btt && window.addEventListener('scroll', () => {
-    btt.style.display = window.scrollY > 400 ? 'flex' : 'none';
-  });
-  btt && btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
+  /* ---------- Init ---------- */
+  handleHash();
 })();

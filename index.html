@@ -1,1274 +1,255 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Transporte Ecológico Compás — Servicio de transporte sostenible, accesible e inclusivo para el Carnaval de Santa Cruz de Tenerife." />
-  <meta name="theme-color" content="#1b2d6b" />
-  <title>Transporte Ecológico Compás — Carnaval de Tenerife</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transporte Ecologico Compas - Proyecto de Presentacion</title>
+  <meta name="description" content="Proyecto de transporte ecologico para el Carnaval de Santa Cruz de Tenerife. Transporte Ecologico Compas S.A.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb" crossorigin="anonymous" defer></script>
 </head>
 <body>
 
-<!-- ── Skip link (accesibilidad) ── -->
-<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
-
-<!-- ── Header ── -->
-<header id="site-header" role="banner">
-  <button id="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="sidebar">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-      <line x1="3" y1="6"  x2="21" y2="6"/>
-      <line x1="3" y1="12" x2="21" y2="12"/>
-      <line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </button>
-
-  <div class="header-logo-wrap">
-    <img
-      src="https://github.com/user-attachments/assets/8689e5c6-91f1-4379-814c-582bf1c24546"
-      alt="Compás Transporte Ecológico"
-      class="header-logo"
-      width="130"
-      height="44"
-      onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
-    />
-    <span class="brand-text" style="display:none">Compás<br/>Transporte Ecológico</span>
-  </div>
-
-  <div id="search-wrap" role="search">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
-      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-    </svg>
-    <input
-      type="search"
-      id="search-input"
-      placeholder="Buscar en el documento… (Ctrl+K)"
-      aria-label="Buscar en el documento"
-      autocomplete="off"
-    />
-  </div>
-</header>
-
-<!-- ── Search results overlay ── -->
-<div id="search-results" role="listbox" aria-label="Resultados de búsqueda">
-  <button id="search-close" class="sr-close" aria-label="Cerrar búsqueda">✕ cerrar</button>
-</div>
-
-<!-- ── Sidebar overlay (mobile) ── -->
-<div id="sidebar-overlay" aria-hidden="true"></div>
-
-<!-- ── Layout ── -->
-<div id="layout">
-
-  <!-- ── Sidebar navigation ── -->
-  <aside id="sidebar" aria-label="Navegación del documento">
-    <!-- Logo panel at top of sidebar -->
-    <div class="sidebar-logo-panel">
-      <img
-        src="https://github.com/user-attachments/assets/8689e5c6-91f1-4379-814c-582bf1c24546"
-        alt="Compás Transporte Ecológico"
-        width="180"
-        onerror="this.style.display='none'"
-      />
-      <p class="tagline">Por un Carnaval accesible y sostenible</p>
-    </div>
-    <nav aria-label="Índice de contenidos">
-      <ul>
-        <li><a href="#concepto"><span class="nav-icon" aria-hidden="true">💡</span>Concepto del proyecto<span class="nav-num">1</span></a></li>
-        <li><a href="#reservas"><span class="nav-icon" aria-hidden="true">📱</span>Reservas y gestión<span class="nav-num">2</span></a></li>
-        <li><a href="#operativa"><span class="nav-icon" aria-hidden="true">🗓</span>Operativa Carnaval<span class="nav-num">3</span></a></li>
-        <li class="has-sub">
-          <a href="#rutas"><span class="nav-icon" aria-hidden="true">🗺</span>Rutas<span class="nav-num">4</span></a>
-          <ul>
-            <li><a href="#ruta-norte">Ruta Norte</a></li>
-            <li><a href="#ruta-sur">Ruta Sur</a></li>
-            <li><a href="#ruta-metro">Ruta Metropolitana</a></li>
-            <li><a href="#bajo-demanda">Bajo demanda / PMR</a></li>
-          </ul>
-        </li>
-        <li><a href="#flota"><span class="nav-icon" aria-hidden="true">🌱</span>Flota y sostenibilidad<span class="nav-num">5</span></a></li>
-        <li><a href="#beneficios"><span class="nav-icon" aria-hidden="true">⭐</span>Beneficios<span class="nav-num">6</span></a></li>
-        <li><a href="#encuesta"><span class="nav-icon" aria-hidden="true">📋</span>Encuesta<span class="nav-num">7</span></a></li>
-        <li><a href="#carta"><span class="nav-icon" aria-hidden="true">📄</span>Carta de Servicios<span class="nav-num">8</span></a></li>
-        <li><a href="#garantias"><span class="nav-icon" aria-hidden="true">🛡</span>Garantías<span class="nav-num">9</span></a></li>
-        <li class="has-sub">
-          <a href="#reclamaciones"><span class="nav-icon" aria-hidden="true">📬</span>Reclamaciones<span class="nav-num">10</span></a>
-          <ul>
-            <li><a href="#protocolo">Protocolo</a></li>
-            <li><a href="#hoja-reclamacion">Hoja de reclamación</a></li>
-          </ul>
-        </li>
-        <li><a href="#presupuesto"><span class="nav-icon" aria-hidden="true">💶</span>Presupuesto<span class="nav-num">11</span></a></li>
-        <li class="has-sub">
-          <a href="#mercado"><span class="nav-icon" aria-hidden="true">📊</span>Mercado / DAFO<span class="nav-num">12</span></a>
-          <ul>
-            <li><a href="#dafo">Análisis DAFO</a></li>
-            <li><a href="#lean">Lean Canvas</a></li>
-          </ul>
-        </li>
-        <li><a href="#plan-operativo"><span class="nav-icon" aria-hidden="true">⚙️</span>Plan Operativo<span class="nav-num">13</span></a></li>
-        <li><a href="#sostenibilidad"><span class="nav-icon" aria-hidden="true">♻️</span>Plan de Sostenibilidad<span class="nav-num">14</span></a></li>
-        <li><a href="#aleman"><span class="nav-icon" aria-hidden="true">🇩🇪</span>Sección en alemán<span class="nav-num">15</span></a></li>
-        <li><a href="#libro-sostenibilidad"><span class="nav-icon" aria-hidden="true">📗</span>Memoria de Sostenibilidad<span class="nav-num">16</span></a></li>
-      </ul>
-    </nav>
-  </aside>
-
-  <!-- ── Main content ── -->
-  <main id="main-content" tabindex="-1">
-
-    <!-- Hero banner -->
-    <div id="hero" role="banner">
-      <div class="hero-inner">
-        <div class="hero-logo-wrap">
-          <img
-            src="https://github.com/user-attachments/assets/8689e5c6-91f1-4379-814c-582bf1c24546"
-            alt="Compás Transporte Ecológico — logotipo"
-            width="220"
-            height="72"
-            onerror="this.parentElement.style.display='none'"
-          />
-        </div>
-        <div class="hero-text">
-          <h1>Transporte Ecológico Compás</h1>
-          <p class="subtitle">Servicio de movilidad sostenible, accesible e inclusivo</p>
-          <span class="event-tag">🎭 Carnaval de Santa Cruz de Tenerife</span>
-          <div class="badges" aria-label="Características principales">
-            <span class="badge">🌿 Sostenible</span>
-            <span class="badge">♿ Accesible</span>
-            <span class="badge">🌍 Multilingüe</span>
-            <span class="badge">📱 Reserva digital</span>
-            <span class="badge">🔋 Flota eléctrica e híbrida</span>
-          </div>
-        </div>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <img src="https://github.com/user-attachments/assets/8689e5c6-91f1-4379-814c-582bf1c24546" alt="Logo Transporte Ecologico Compas" class="header-logo">
+      <div class="header-text">
+        <h1>Transporte Ecologico Compas</h1>
+        <p class="header-subtitle">Servicio de transporte sostenible para el Carnaval de Santa Cruz de Tenerife</p>
       </div>
     </div>
+  </header>
 
-    <!-- ===== 1. CONCEPTO ===== -->
-    <section class="doc-section" id="concepto" aria-labelledby="h-concepto">
-      <h2 id="h-concepto"><span class="sec-icon" aria-hidden="true">💡</span>1. Concepto del proyecto</h2>
+  <!-- TAB BAR -->
+  <nav class="tab-bar" id="tabBar" role="tablist" aria-label="Secciones del proyecto">
+    <button class="tab-btn active" data-tab="indice" role="tab" aria-selected="true" aria-controls="panel-indice" id="tab-indice">Indice</button>
+    <button class="tab-btn" data-tab="01" role="tab" aria-selected="false" aria-controls="panel-01" id="tab-01">1. Introduccion</button>
+    <button class="tab-btn" data-tab="02" role="tab" aria-selected="false" aria-controls="panel-02" id="tab-02">2. Marco conceptual</button>
+    <button class="tab-btn" data-tab="03" role="tab" aria-selected="false" aria-controls="panel-03" id="tab-03">3. Descripcion</button>
+    <button class="tab-btn" data-tab="04" role="tab" aria-selected="false" aria-controls="panel-04" id="tab-04">4. Estudio de mercado</button>
+    <button class="tab-btn" data-tab="05" role="tab" aria-selected="false" aria-controls="panel-05" id="tab-05">5. Analisis entorno</button>
+    <button class="tab-btn" data-tab="06" role="tab" aria-selected="false" aria-controls="panel-06" id="tab-06">6. Analisis estrategico</button>
+    <button class="tab-btn" data-tab="07" role="tab" aria-selected="false" aria-controls="panel-07" id="tab-07">7. Organizacion</button>
+    <button class="tab-btn" data-tab="08" role="tab" aria-selected="false" aria-controls="panel-08" id="tab-08">8. Plan operativo</button>
+    <button class="tab-btn" data-tab="09" role="tab" aria-selected="false" aria-controls="panel-09" id="tab-09">9. Flota y logistica</button>
+    <button class="tab-btn" data-tab="10" role="tab" aria-selected="false" aria-controls="panel-10" id="tab-10">10. Experiencia usuario</button>
+    <button class="tab-btn" data-tab="11" role="tab" aria-selected="false" aria-controls="panel-11" id="tab-11">11. Carta de servicios</button>
+    <button class="tab-btn" data-tab="12" role="tab" aria-selected="false" aria-controls="panel-12" id="tab-12">12. Gestion calidad</button>
+    <button class="tab-btn" data-tab="13" role="tab" aria-selected="false" aria-controls="panel-13" id="tab-13">13. Sostenibilidad</button>
+    <button class="tab-btn" data-tab="14" role="tab" aria-selected="false" aria-controls="panel-14" id="tab-14">14. Marketing</button>
+    <button class="tab-btn" data-tab="15" role="tab" aria-selected="false" aria-controls="panel-15" id="tab-15">15. Plan economico</button>
+    <button class="tab-btn" data-tab="16" role="tab" aria-selected="false" aria-controls="panel-16" id="tab-16">16. KPI</button>
+    <button class="tab-btn" data-tab="17" role="tab" aria-selected="false" aria-controls="panel-17" id="tab-17">17. Riesgos</button>
+    <button class="tab-btn" data-tab="18" role="tab" aria-selected="false" aria-controls="panel-18" id="tab-18">18. Libro sostenibilidad</button>
+    <button class="tab-btn" data-tab="19" role="tab" aria-selected="false" aria-controls="panel-19" id="tab-19">19. Conclusiones</button>
+    <button class="tab-btn" data-tab="20" role="tab" aria-selected="false" aria-controls="panel-20" id="tab-20">20. Anexos</button>
+  </nav>
 
-      <p>El proyecto consiste en la creación de un servicio de transporte sostenible, accesible e inclusivo, vinculado directamente a la oferta hotelera y turística de la isla, que operará durante los días principales del Carnaval de Santa Cruz de Tenerife.</p>
+  <!-- CONTENT AREA -->
+  <main class="content-area" id="contentArea">
 
-      <p>Su finalidad es facilitar el desplazamiento de visitantes y residentes hacia el centro de Santa Cruz, especialmente durante los actos de mayor afluencia, ofreciendo una alternativa organizada al vehículo privado y contribuyendo a la reducción de la congestión urbana.</p>
-
-      <p>El servicio se concibe como una extensión de la experiencia turística, integrando comodidad, información y seguridad en cada trayecto. No solo responde a una necesidad de movilidad puntual, sino que refuerza el compromiso con un modelo de turismo más responsable, sostenible y adaptado a las exigencias actuales del destino.</p>
-
-      <div class="info-box">
-        <strong>Misión:</strong> Transformar el desplazamiento al Carnaval en parte de la experiencia turística, con cero emisiones, plena accesibilidad y atención multilingüe.
+    <!-- INDICE PANEL -->
+    <section class="tab-panel active" id="panel-indice" role="tabpanel" aria-labelledby="tab-indice">
+      <h2>Indice del Proyecto</h2>
+      <p class="indice-intro">Transporte Ecologico Compas S.A. -- Proyecto de transporte sostenible para el Carnaval de Santa Cruz de Tenerife. Seleccione una seccion para consultar su contenido.</p>
+      <div class="btn-bar">
+        <button class="btn-pdf" id="btnPdfCompleto" type="button">Descargar proyecto completo en PDF</button>
+      </div>
+      <div class="indice-grid">
+        <a href="#01" class="indice-card" data-goto="01">
+          <span class="indice-num">1</span>
+          <span class="indice-title">Introduccion</span>
+          <span class="indice-subs">1.1 Presentacion -- 1.2 Contexto del Carnaval -- 1.3 Justificacion -- 1.4 Objetivos -- 1.5 Metodologia -- 1.6 Alcance y limitaciones</span>
+        </a>
+        <a href="#02" class="indice-card" data-goto="02">
+          <span class="indice-num">2</span>
+          <span class="indice-title">Marco conceptual y contextual</span>
+          <span class="indice-subs">2.1 Movilidad sostenible -- 2.2 Transporte en turismo urbano -- 2.3 Eventos de gran afluencia -- 2.4 Referencias internacionales</span>
+        </a>
+        <a href="#03" class="indice-card" data-goto="03">
+          <span class="indice-num">3</span>
+          <span class="indice-title">Descripcion del proyecto</span>
+          <span class="indice-subs">3.1 Concepto del servicio -- 3.2 Propuesta de valor -- 3.3 Finalidad -- 3.4 Beneficios para la ciudad -- 3.5 Impacto en el visitante</span>
+        </a>
+        <a href="#04" class="indice-card" data-goto="04">
+          <span class="indice-num">4</span>
+          <span class="indice-title">Estudio de mercado</span>
+          <span class="indice-subs">4.1 Definicion del producto-servicio -- 4.2 Mercado objetivo -- 4.3 Segmentacion -- 4.4 Ambito geografico</span>
+        </a>
+        <a href="#05" class="indice-card" data-goto="05">
+          <span class="indice-num">5</span>
+          <span class="indice-title">Analisis del entorno</span>
+          <span class="indice-subs">5.1 Macroentorno PESTEL -- 5.2 Microentorno -- 5.3 Ventaja competitiva</span>
+        </a>
+        <a href="#06" class="indice-card" data-goto="06">
+          <span class="indice-num">6</span>
+          <span class="indice-title">Analisis estrategico</span>
+          <span class="indice-subs">6.1 DAFO -- 6.2 Estrategia competitiva -- 6.3 Lean Canvas -- 6.4 Propuesta de valor diferenciadora</span>
+        </a>
+        <a href="#07" class="indice-card" data-goto="07">
+          <span class="indice-num">7</span>
+          <span class="indice-title">Organizacion empresarial</span>
+          <span class="indice-subs">7.1 Forma juridica -- 7.2 Estructura organizativa -- 7.3 Organigrama -- 7.4 Funciones departamentos -- 7.5 Recursos humanos</span>
+        </a>
+        <a href="#08" class="indice-card" data-goto="08">
+          <span class="indice-num">8</span>
+          <span class="indice-title">Plan operativo del servicio</span>
+          <span class="indice-subs">8.1 Sistema de reservas -- 8.2 Operativa Carnaval -- 8.3 Planificacion rutas -- 8.4 Puntos recogida -- 8.5 Horarios -- 8.6 Frecuencia -- 8.7 Centro de control</span>
+        </a>
+        <a href="#09" class="indice-card" data-goto="09">
+          <span class="indice-num">9</span>
+          <span class="indice-title">Flota y logistica</span>
+          <span class="indice-subs">9.1 Tipos vehiculos -- 9.2 Capacidad -- 9.3 Infraestructura recarga -- 9.4 Mantenimiento -- 9.5 Senalizacion</span>
+        </a>
+        <a href="#10" class="indice-card" data-goto="10">
+          <span class="indice-num">10</span>
+          <span class="indice-title">Experiencia del usuario</span>
+          <span class="indice-subs">10.1 Accesibilidad -- 10.2 Atencion multilingue -- 10.3 Informacion al usuario -- 10.4 Seguridad -- 10.5 Calidad del servicio</span>
+        </a>
+        <a href="#11" class="indice-card" data-goto="11">
+          <span class="indice-num">11</span>
+          <span class="indice-title">Carta de servicios</span>
+          <span class="indice-subs">11.1 Objetivos -- 11.2 Servicios prestados -- 11.3 Derechos y obligaciones -- 11.4 Normativa -- 11.5 Compromisos calidad -- 11.6 Seguridad -- 11.7 Comunicacion</span>
+        </a>
+        <a href="#12" class="indice-card" data-goto="12">
+          <span class="indice-num">12</span>
+          <span class="indice-title">Gestion de calidad y satisfaccion</span>
+          <span class="indice-subs">12.1 Encuesta satisfaccion -- 12.2 Sistema reclamaciones -- 12.3 Gestion sugerencias -- 12.4 Mejora continua</span>
+        </a>
+        <a href="#13" class="indice-card" data-goto="13">
+          <span class="indice-num">13</span>
+          <span class="indice-title">Plan de sostenibilidad</span>
+          <span class="indice-subs">13.1 Ambiental -- 13.2 Social -- 13.3 Economica -- 13.4 Reduccion emisiones -- 13.5 ODS</span>
+        </a>
+        <a href="#14" class="indice-card" data-goto="14">
+          <span class="indice-num">14</span>
+          <span class="indice-title">Plan de marketing y comunicacion</span>
+          <span class="indice-subs">14.1 Estrategia comunicacion -- 14.2 Promocion -- 14.3 Colaboracion hoteles -- 14.4 Estrategia digital -- 14.5 Identidad visual</span>
+        </a>
+        <a href="#15" class="indice-card" data-goto="15">
+          <span class="indice-num">15</span>
+          <span class="indice-title">Plan economico-financiero</span>
+          <span class="indice-subs">15.1 Presupuesto -- 15.2 Tipos presupuestos -- 15.3 Elaboracion -- 15.4 Ingresos -- 15.5 Gastos -- 15.6 Ejemplo practico -- 15.7 Viabilidad</span>
+        </a>
+        <a href="#16" class="indice-card" data-goto="16">
+          <span class="indice-num">16</span>
+          <span class="indice-title">Indicadores de rendimiento (KPI)</span>
+          <span class="indice-subs">16.1 Pasajeros -- 16.2 Ocupacion -- 16.3 Puntualidad -- 16.4 Satisfaccion -- 16.5 Reduccion emisiones</span>
+        </a>
+        <a href="#17" class="indice-card" data-goto="17">
+          <span class="indice-num">17</span>
+          <span class="indice-title">Riesgos y planes de contingencia</span>
+          <span class="indice-subs">17.1 Congestion trafico -- 17.2 Fallos tecnicos -- 17.3 Variaciones demanda -- 17.4 Problemas administrativos</span>
+        </a>
+        <a href="#18" class="indice-card" data-goto="18">
+          <span class="indice-num">18</span>
+          <span class="indice-title">Libro de sostenibilidad</span>
+          <span class="indice-subs">18.1 Identidad corporativa -- 18.2 Politica ambiental -- 18.3 Politica social -- 18.4 Etica y transparencia -- 18.5 Evaluacion del impacto</span>
+        </a>
+        <a href="#19" class="indice-card" data-goto="19">
+          <span class="indice-num">19</span>
+          <span class="indice-title">Conclusiones</span>
+          <span class="indice-subs">Sintesis del proyecto, valoracion final y perspectivas de futuro</span>
+        </a>
+        <a href="#20" class="indice-card" data-goto="20">
+          <span class="indice-num">20</span>
+          <span class="indice-title">Anexos</span>
+          <span class="indice-subs">20.1 Encuesta -- 20.2 Modelos reclamaciones -- 20.3 Mapas rutas -- 20.4 Presupuesto detallado -- 20.5 Material informativo</span>
+        </a>
       </div>
     </section>
 
-    <!-- ===== 2. RESERVAS ===== -->
-    <section class="doc-section" id="reservas" aria-labelledby="h-reservas">
-      <h2 id="h-reservas"><span class="sec-icon" aria-hidden="true">📱</span>2. Sistema de reservas y gestión</h2>
-
-      <p>El servicio estará coordinado con hoteles, aeropuertos y puntos turísticos estratégicos del norte, sur y área metropolitana. Los usuarios podrán realizar la reserva de su plaza mediante:</p>
-      <ul>
-        <li>Aplicación móvil específica.</li>
-        <li>Página web oficial del servicio.</li>
-        <li>Recepción de los hoteles colaboradores.</li>
-      </ul>
-
-      <p>Esta integración permitirá planificar los desplazamientos con antelación y optimizar la asignación de vehículos en función de la demanda prevista.</p>
-
-      <h3>El sistema ofrecerá:</h3>
-      <ul>
-        <li>Confirmación digital del trayecto.</li>
-        <li>Información detallada sobre horarios y puntos de recogida.</li>
-        <li>Notificaciones en tiempo real ante posibles ajustes operativos.</li>
-      </ul>
-
-      <h3>Información física complementaria</h3>
-      <p>De manera complementaria, se distribuirá información física mediante panfletos y carteles en hoteles, aeropuertos y paradas principales, incluyendo:</p>
-      <ul>
-        <li>Mapas de rutas.</li>
-        <li>Normas de seguridad.</li>
-        <li>Indicaciones de accesibilidad.</li>
-        <li>Recomendaciones de movilidad sostenible.</li>
-      </ul>
-
-      <div class="info-box accent">
-        La coordinación general se realizará desde un <strong>centro de control operativo</strong> que supervisará las rutas en tiempo real, gestionará la frecuencia de salida de los vehículos y mantendrá comunicación directa con Policía Local y Protección Civil para garantizar seguridad, fluidez y puntualidad durante los días de mayor concentración de público.
-      </div>
+    <!-- SECTION PANELS -->
+    <section class="tab-panel" id="panel-01" role="tabpanel" aria-labelledby="tab-01">
+      <div class="section-header"><h2>1. Introduccion</h2><button class="btn-pdf btn-pdf-section" data-section="01" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/01-introduccion.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-02" role="tabpanel" aria-labelledby="tab-02">
+      <div class="section-header"><h2>2. Marco conceptual y contextual</h2><button class="btn-pdf btn-pdf-section" data-section="02" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/02-marco-conceptual.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-03" role="tabpanel" aria-labelledby="tab-03">
+      <div class="section-header"><h2>3. Descripcion del proyecto</h2><button class="btn-pdf btn-pdf-section" data-section="03" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/03-descripcion-proyecto.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-04" role="tabpanel" aria-labelledby="tab-04">
+      <div class="section-header"><h2>4. Estudio de mercado</h2><button class="btn-pdf btn-pdf-section" data-section="04" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/04-estudio-mercado.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-05" role="tabpanel" aria-labelledby="tab-05">
+      <div class="section-header"><h2>5. Analisis del entorno</h2><button class="btn-pdf btn-pdf-section" data-section="05" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/05-analisis-entorno.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-06" role="tabpanel" aria-labelledby="tab-06">
+      <div class="section-header"><h2>6. Analisis estrategico</h2><button class="btn-pdf btn-pdf-section" data-section="06" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/06-analisis-estrategico.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-07" role="tabpanel" aria-labelledby="tab-07">
+      <div class="section-header"><h2>7. Organizacion empresarial</h2><button class="btn-pdf btn-pdf-section" data-section="07" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/07-organizacion-empresarial.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-08" role="tabpanel" aria-labelledby="tab-08">
+      <div class="section-header"><h2>8. Plan operativo del servicio</h2><button class="btn-pdf btn-pdf-section" data-section="08" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/08-plan-operativo.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-09" role="tabpanel" aria-labelledby="tab-09">
+      <div class="section-header"><h2>9. Flota y logistica</h2><button class="btn-pdf btn-pdf-section" data-section="09" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/09-flota-logistica.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-10" role="tabpanel" aria-labelledby="tab-10">
+      <div class="section-header"><h2>10. Experiencia del usuario</h2><button class="btn-pdf btn-pdf-section" data-section="10" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/10-experiencia-usuario.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-11" role="tabpanel" aria-labelledby="tab-11">
+      <div class="section-header"><h2>11. Carta de servicios</h2><button class="btn-pdf btn-pdf-section" data-section="11" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/11-carta-servicios.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-12" role="tabpanel" aria-labelledby="tab-12">
+      <div class="section-header"><h2>12. Gestion de calidad y satisfaccion</h2><button class="btn-pdf btn-pdf-section" data-section="12" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/12-gestion-calidad.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-13" role="tabpanel" aria-labelledby="tab-13">
+      <div class="section-header"><h2>13. Plan de sostenibilidad</h2><button class="btn-pdf btn-pdf-section" data-section="13" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/13-plan-sostenibilidad.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-14" role="tabpanel" aria-labelledby="tab-14">
+      <div class="section-header"><h2>14. Plan de marketing y comunicacion</h2><button class="btn-pdf btn-pdf-section" data-section="14" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/14-plan-marketing.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-15" role="tabpanel" aria-labelledby="tab-15">
+      <div class="section-header"><h2>15. Plan economico-financiero</h2><button class="btn-pdf btn-pdf-section" data-section="15" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/15-plan-economico.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-16" role="tabpanel" aria-labelledby="tab-16">
+      <div class="section-header"><h2>16. Indicadores de rendimiento (KPI)</h2><button class="btn-pdf btn-pdf-section" data-section="16" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/16-indicadores-kpi.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-17" role="tabpanel" aria-labelledby="tab-17">
+      <div class="section-header"><h2>17. Riesgos y planes de contingencia</h2><button class="btn-pdf btn-pdf-section" data-section="17" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/17-riesgos-contingencia.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-18" role="tabpanel" aria-labelledby="tab-18">
+      <div class="section-header"><h2>18. Libro de sostenibilidad</h2><button class="btn-pdf btn-pdf-section" data-section="18" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/18-libro-sostenibilidad.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-19" role="tabpanel" aria-labelledby="tab-19">
+      <div class="section-header"><h2>19. Conclusiones</h2><button class="btn-pdf btn-pdf-section" data-section="19" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/19-conclusiones.html"></div>
+    </section>
+    <section class="tab-panel" id="panel-20" role="tabpanel" aria-labelledby="tab-20">
+      <div class="section-header"><h2>20. Anexos</h2><button class="btn-pdf btn-pdf-section" data-section="20" type="button">Descargar PDF</button></div>
+      <div class="section-body" data-src="sections/20-anexos.html"></div>
     </section>
 
-    <!-- ===== 3. OPERATIVA ===== -->
-    <section class="doc-section" id="operativa" aria-labelledby="h-operativa">
-      <h2 id="h-operativa"><span class="sec-icon" aria-hidden="true">🗓</span>3. Operativa durante el Carnaval</h2>
-
-      <p>El servicio funcionará exclusivamente durante los actos de mayor relevancia y afluencia del Carnaval, como:</p>
-      <ul>
-        <li>Cabalgata Anunciadora.</li>
-        <li>Carnaval de Día.</li>
-        <li>Coso Apoteosis.</li>
-        <li>Entierro de la Sardina.</li>
-      </ul>
-
-      <table class="doc-table" aria-label="Horarios de operación">
-        <thead>
-          <tr><th>Sentido</th><th>Horario</th><th>Descripción</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>⬆️ Ida (→ Santa Cruz)</td><td>10:00 – 14:00</td><td>Actividades de mañana y primeras horas de tarde</td></tr>
-          <tr><td>⬇️ Regreso (→ hoteles)</td><td>17:00 – 23:30</td><td>Finalización de actos principales</td></tr>
-        </tbody>
-      </table>
-
-      <p>Esta planificación permite optimizar recursos y garantizar un flujo ordenado de pasajeros, sin necesidad de operar durante la madrugada.</p>
-    </section>
-
-    <!-- ===== 4. RUTAS ===== -->
-    <section class="doc-section" id="rutas" aria-labelledby="h-rutas">
-      <h2 id="h-rutas"><span class="sec-icon" aria-hidden="true">🗺</span>4. Rutas principales y puntos de recogida</h2>
-
-      <!-- 4.1 Norte -->
-      <h3 id="ruta-norte">4.1. Ruta Norte</h3>
-      <div class="info-box neutral">
-        <strong>Conexión:</strong> Puerto de la Cruz → La Orotava → Tacoronte → La Laguna → Santa Cruz (Intercambiador)
-      </div>
-      <div class="card-grid">
-        <div class="card">
-          <span class="tag">Paradas</span>
-          <h4>Puntos de recogida</h4>
-          <ul>
-            <li>Estación de Guaguas de Puerto de la Cruz</li>
-            <li>Hotel Botánico (Puerto de la Cruz)</li>
-            <li>Plaza del Adelantado (La Laguna)</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="tag">Frecuencia</span>
-          <h4>Viajes</h4>
-          <ul>
-            <li>3 viajes de ida por la mañana</li>
-            <li>3 viajes de regreso por la tarde-noche</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="tag">Flota</span>
-          <h4>Vehículos asignados</h4>
-          <ul>
-            <li>2 guaguas híbridas de 15 m</li>
-            <li>Capacidad: 55 plazas/vehículo</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 4.2 Sur -->
-      <h3 id="ruta-sur">4.2. Ruta Sur</h3>
-      <div class="info-box neutral">
-        <strong>Conexión:</strong> Costa Adeje → Los Cristianos → Aeropuerto Reina Sofía → Santa Cruz
-      </div>
-      <div class="card-grid">
-        <div class="card">
-          <span class="tag">Paradas</span>
-          <h4>Puntos de recogida</h4>
-          <ul>
-            <li>Terminal Sur — Aeropuerto Reina Sofía</li>
-            <li>Playa de las Américas</li>
-            <li>Hotel Riu Palace</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="tag">Frecuencia</span>
-          <h4>Viajes</h4>
-          <ul>
-            <li>2 a 3 viajes diarios de ida y vuelta</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="tag">Flota</span>
-          <h4>Vehículos asignados</h4>
-          <ul>
-            <li>2 guaguas híbridas</li>
-            <li>Capacidad: 55 plazas/vehículo</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 4.3 Metropolitana -->
-      <h3 id="ruta-metro">4.3. Ruta Metropolitana</h3>
-      <div class="info-box neutral">
-        <strong>Conexión:</strong> La Laguna → Taco → Santa Cruz
-      </div>
-      <div class="card-grid">
-        <div class="card">
-          <span class="tag">Paradas</span>
-          <h4>Puntos de recogida</h4>
-          <ul>
-            <li>Campus Universitario de La Laguna</li>
-            <li>Taco Centro</li>
-            <li>Intercambiador de Santa Cruz</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="tag">Frecuencia</span>
-          <h4>Cadencia</h4>
-          <ul>
-            <li>Cada 30 – 40 minutos</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="tag">Flota</span>
-          <h4>Vehículos asignados</h4>
-          <ul>
-            <li>2 guaguas eléctricas de 12 m</li>
-            <li>Capacidad aprox.: 40 plazas</li>
-            <li>Espacio adaptado para sillas de ruedas</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 4.4 Bajo demanda -->
-      <h3 id="bajo-demanda">4.4. Servicio bajo demanda (PMR y hoteles con menor ocupación)</h3>
-      <p>Además de las rutas principales, se habilitarán servicios bajo demanda mediante minibuses de 8 a 10 plazas destinados a:</p>
-      <ul>
-        <li>Traslados personalizados desde hoteles con menor ocupación.</li>
-        <li>Personas con movilidad reducida (PMR).</li>
-      </ul>
-
-      <p>Todos los vehículos contarán con:</p>
-      <ul>
-        <li>Rampas de acceso.</li>
-        <li>Sistemas de asistencia auditiva y visual.</li>
-      </ul>
-
-      <div class="info-box">
-        En determinadas rutas se incorporarán <strong>guías con dominio de inglés o alemán</strong> para facilitar información turística y recomendaciones de seguridad a visitantes internacionales.
-      </div>
-    </section>
-
-    <!-- ===== 5. FLOTA ===== -->
-    <section class="doc-section" id="flota" aria-labelledby="h-flota">
-      <h2 id="h-flota"><span class="sec-icon" aria-hidden="true">🌱</span>5. Flota y sostenibilidad</h2>
-
-      <p>La flota estará compuesta por:</p>
-      <ul>
-        <li><strong>Guaguas eléctricas</strong> para recorridos urbanos (cero emisiones directas y bajo nivel sonoro).</li>
-        <li><strong>Guaguas híbridas</strong> para trayectos interurbanos de mayor distancia.</li>
-        <li><strong>Minibuses adaptados</strong> para cubrir necesidades específicas de accesibilidad y personalización.</li>
-      </ul>
-
-      <p>La recarga y mantenimiento de los vehículos se realizará en puntos habilitados, priorizando infraestructuras compatibles con energías limpias.</p>
-
-      <p>Todas las paradas estarán claramente señalizadas, incluyendo información sobre:</p>
-      <ul>
-        <li>Horarios.</li>
-        <li>Normas ecológicas.</li>
-        <li>Accesibilidad universal.</li>
-      </ul>
-
-      <p>La identidad visual del servicio estará alineada con la imagen del Carnaval y reforzará los valores de sostenibilidad y responsabilidad social.</p>
-
-      <div class="info-box">
-        El proyecto se desarrollará en colaboración con el <strong>Ayuntamiento de Santa Cruz</strong>, el <strong>Cabildo de Tenerife</strong>, <strong>Compás</strong> y asociaciones hoteleras, consolidando una estrategia conjunta de movilidad eficiente y sostenible durante el evento.
-      </div>
-    </section>
-
-    <!-- ===== 6. BENEFICIOS ===== -->
-    <section class="doc-section" id="beneficios" aria-labelledby="h-beneficios">
-      <h2 id="h-beneficios"><span class="sec-icon" aria-hidden="true">⭐</span>6. Capacidad estimada y beneficios</h2>
-
-      <div class="kpi-row" aria-label="Indicadores clave">
-        <div class="kpi-badge">
-          <div class="kpi-val">2.500–3.000</div>
-          <div class="kpi-label">Pasajeros diarios estimados</div>
-        </div>
-        <div class="kpi-badge">
-          <div class="kpi-val">6</div>
-          <div class="kpi-label">Guaguas en flota principal</div>
-        </div>
-        <div class="kpi-badge">
-          <div class="kpi-val">≥95%</div>
-          <div class="kpi-label">Objetivo puntualidad</div>
-        </div>
-        <div class="kpi-badge">
-          <div class="kpi-val">≥70%</div>
-          <div class="kpi-label">Reducción CO₂ vs. coche privado</div>
-        </div>
-      </div>
-
-      <h3>Principales beneficios</h3>
-      <ul>
-        <li>Mejora de la experiencia turística.</li>
-        <li>Descongestión del tráfico urbano.</li>
-        <li>Reducción de emisiones contaminantes.</li>
-        <li>Garantía de accesibilidad universal.</li>
-      </ul>
-
-      <p>Asimismo, el servicio refuerza la imagen de Santa Cruz de Tenerife como un destino moderno, innovador y comprometido con la sostenibilidad, aportando valor añadido tanto a hoteles y operadores turísticos como a visitantes y residentes.</p>
-    </section>
-
-    <!-- ===== 7. ENCUESTA ===== -->
-    <section class="doc-section" id="encuesta" aria-labelledby="h-encuesta">
-      <h2 id="h-encuesta"><span class="sec-icon" aria-hidden="true">📋</span>7. Encuesta de satisfacción</h2>
-
-      <p>La encuesta de satisfacción es una herramienta fundamental para evaluar la calidad del servicio y detectar áreas de mejora. Se realizará al finalizar cada trayecto mediante:</p>
-      <ul>
-        <li>Formulario digital (QR en el vehículo o enlace en la confirmación de reserva).</li>
-        <li>Formulario en papel disponible en los vehículos.</li>
-      </ul>
-
-      <form id="survey-form" novalidate aria-label="Encuesta de satisfacción">
-
-        <div class="survey-question">
-          <label for="sq1">1. ¿Cómo valoraría la <strong>puntualidad</strong> del servicio?</label>
-          <div class="rating-group" role="group" aria-label="Valoración puntualidad">
-            <input type="radio" name="puntualidad" id="p5" value="5"><label for="p5">⭐⭐⭐⭐⭐ Muy buena</label>
-            <input type="radio" name="puntualidad" id="p4" value="4"><label for="p4">⭐⭐⭐⭐ Buena</label>
-            <input type="radio" name="puntualidad" id="p3" value="3"><label for="p3">⭐⭐⭐ Regular</label>
-            <input type="radio" name="puntualidad" id="p2" value="2"><label for="p2">⭐⭐ Mala</label>
-            <input type="radio" name="puntualidad" id="p1" value="1"><label for="p1">⭐ Muy mala</label>
-          </div>
-        </div>
-
-        <div class="survey-question">
-          <label>2. ¿Cómo valoraría la <strong>comodidad</strong> del vehículo?</label>
-          <div class="rating-group" role="group" aria-label="Valoración comodidad">
-            <input type="radio" name="comodidad" id="c5" value="5"><label for="c5">⭐⭐⭐⭐⭐ Muy buena</label>
-            <input type="radio" name="comodidad" id="c4" value="4"><label for="c4">⭐⭐⭐⭐ Buena</label>
-            <input type="radio" name="comodidad" id="c3" value="3"><label for="c3">⭐⭐⭐ Regular</label>
-            <input type="radio" name="comodidad" id="c2" value="2"><label for="c2">⭐⭐ Mala</label>
-            <input type="radio" name="comodidad" id="c1" value="1"><label for="c1">⭐ Muy mala</label>
-          </div>
-        </div>
-
-        <div class="survey-question">
-          <label>3. ¿Cómo valoraría la <strong>atención del personal</strong>?</label>
-          <div class="rating-group" role="group" aria-label="Valoración personal">
-            <input type="radio" name="personal" id="pe5" value="5"><label for="pe5">⭐⭐⭐⭐⭐ Muy buena</label>
-            <input type="radio" name="personal" id="pe4" value="4"><label for="pe4">⭐⭐⭐⭐ Buena</label>
-            <input type="radio" name="personal" id="pe3" value="3"><label for="pe3">⭐⭐⭐ Regular</label>
-            <input type="radio" name="personal" id="pe2" value="2"><label for="pe2">⭐⭐ Mala</label>
-            <input type="radio" name="personal" id="pe1" value="1"><label for="pe1">⭐ Muy mala</label>
-          </div>
-        </div>
-
-        <div class="survey-question">
-          <label>4. ¿Cómo valoraría la <strong>información sobre rutas y horarios</strong>?</label>
-          <div class="rating-group" role="group" aria-label="Valoración información">
-            <input type="radio" name="informacion" id="i5" value="5"><label for="i5">⭐⭐⭐⭐⭐ Muy buena</label>
-            <input type="radio" name="informacion" id="i4" value="4"><label for="i4">⭐⭐⭐⭐ Buena</label>
-            <input type="radio" name="informacion" id="i3" value="3"><label for="i3">⭐⭐⭐ Regular</label>
-            <input type="radio" name="informacion" id="i2" value="2"><label for="i2">⭐⭐ Mala</label>
-            <input type="radio" name="informacion" id="i1" value="1"><label for="i1">⭐ Muy mala</label>
-          </div>
-        </div>
-
-        <div class="survey-question">
-          <label>5. ¿Cómo valoraría la <strong>accesibilidad</strong> del servicio?</label>
-          <div class="rating-group" role="group" aria-label="Valoración accesibilidad">
-            <input type="radio" name="accesibilidad" id="a5" value="5"><label for="a5">⭐⭐⭐⭐⭐ Muy buena</label>
-            <input type="radio" name="accesibilidad" id="a4" value="4"><label for="a4">⭐⭐⭐⭐ Buena</label>
-            <input type="radio" name="accesibilidad" id="a3" value="3"><label for="a3">⭐⭐⭐ Regular</label>
-            <input type="radio" name="accesibilidad" id="a2" value="2"><label for="a2">⭐⭐ Mala</label>
-            <input type="radio" name="accesibilidad" id="a1" value="1"><label for="a1">⭐ Muy mala</label>
-          </div>
-        </div>
-
-        <div class="survey-question">
-          <label for="sq-repeat">6. ¿Volvería a utilizar este servicio?</label>
-          <div class="rating-group" role="group" aria-label="¿Repetiría?">
-            <input type="radio" name="repite" id="r1" value="si"><label for="r1">✅ Sí</label>
-            <input type="radio" name="repite" id="r2" value="no"><label for="r2">❌ No</label>
-            <input type="radio" name="repite" id="r3" value="talvez"><label for="r3">🤔 Tal vez</label>
-          </div>
-        </div>
-
-        <div class="survey-question">
-          <label for="sq-rec">7. ¿Recomendaría este servicio a otras personas?</label>
-          <div class="rating-group" role="group" aria-label="¿Recomendaría?">
-            <input type="radio" name="recomienda" id="rc1" value="si"><label for="rc1">✅ Sí</label>
-            <input type="radio" name="recomienda" id="rc2" value="no"><label for="rc2">❌ No</label>
-            <input type="radio" name="recomienda" id="rc3" value="talvez"><label for="rc3">🤔 Tal vez</label>
-          </div>
-        </div>
-
-        <div class="survey-question">
-          <label for="sq-global">8. Valoración global del servicio (1–10):</label>
-          <input type="range" id="sq-global" name="global" min="1" max="10" value="8"
-                 aria-valuemin="1" aria-valuemax="10"
-                 style="width:100%;margin:.4rem 0" />
-          <output for="sq-global" id="sq-global-out" style="font-weight:700;color:var(--color-primary)">8</output>
-          <script>
-            document.getElementById('sq-global').addEventListener('input', function(){
-              document.getElementById('sq-global-out').textContent = this.value;
-            });
-          </script>
-        </div>
-
-        <div class="survey-question">
-          <label for="sq-obs">9. Observaciones y sugerencias de mejora:</label>
-          <textarea id="sq-obs" name="observaciones" rows="3" placeholder="Escriba aquí sus comentarios…" style="width:100%;margin-top:.3rem;border:1px solid var(--color-border);border-radius:6px;padding:.45rem .7rem;font-family:inherit;font-size:.9rem;background:var(--color-bg);color:var(--color-text);resize:vertical"></textarea>
-        </div>
-
-        <p style="font-size:.78rem;color:var(--color-muted);margin:.5rem 0 1rem">
-          <strong>Nota de privacidad:</strong> Los datos recogidos serán tratados de forma confidencial únicamente para mejorar la calidad del servicio, de acuerdo con el RGPD/LOPDGDD.
-        </p>
-
-        <button type="submit" class="btn-primary">Enviar encuesta</button>
-      </form>
-    </section>
-
-    <!-- ===== 8. CARTA DE SERVICIOS ===== -->
-    <section class="doc-section" id="carta" aria-labelledby="h-carta">
-      <h2 id="h-carta"><span class="sec-icon" aria-hidden="true">📄</span>8. Carta de Servicios</h2>
-
-      <h3>Presentación</h3>
-      <p>Transporte Ecológico Compás es un servicio de transporte sostenible, accesible e inclusivo, creado especialmente para el Carnaval de Santa Cruz de Tenerife. Nuestro compromiso es ofrecer una experiencia de movilidad segura, cómoda y respetuosa con el medio ambiente, contribuyendo a un modelo de turismo más responsable.</p>
-
-      <h3>Nuestros compromisos con el usuario</h3>
-
-      <h4>1. Puntualidad y fiabilidad</h4>
-      <p>Nos comprometemos a cumplir los horarios establecidos con una desviación máxima de ±10 minutos respecto a la hora programada. En caso de retraso superior a este margen, informaremos a los usuarios a través de la aplicación móvil, la web y los sistemas de megafonía en los puntos de parada.</p>
-
-      <h4>2. Comodidad y seguridad</h4>
-      <p>Todos los vehículos de la flota:</p>
-      <ul>
-        <li>Están correctamente asegurados y disponen de las revisiones técnicas al día.</li>
-        <li>Cuentan con sistemas de climatización para garantizar una temperatura adecuada durante el trayecto.</li>
-        <li>Disponen de asientos en buen estado de conservación.</li>
-        <li>Están equipados con sistemas de información al viajero (pantallas o megafonía).</li>
-      </ul>
-
-      <h4>3. Accesibilidad universal</h4>
-      <p>El 100% de los vehículos de flota principal disponen de:</p>
-      <ul>
-        <li>Rampas de acceso para personas con movilidad reducida.</li>
-        <li>Espacios reservados y debidamente señalizados para sillas de ruedas.</li>
-        <li>Sistemas de asistencia auditiva y visual.</li>
-        <li>Información en formatos accesibles (audio, texto ampliado).</li>
-      </ul>
-
-      <h4>4. Atención al cliente</h4>
-      <p>Disponemos de un servicio de atención al cliente accesible por múltiples canales:</p>
-      <ul>
-        <li>Teléfono de atención: disponible durante las horas de operación del servicio.</li>
-        <li>Correo electrónico: respuesta en un plazo máximo de 48 horas en días hábiles.</li>
-        <li>Formulario web: disponible en nuestra página oficial.</li>
-        <li>WhatsApp: para consultas rápidas durante el horario de operación.</li>
-        <li>Atención presencial en los puntos de recogida principales.</li>
-      </ul>
-
-      <h4>5. Información clara y accesible</h4>
-      <p>Garantizamos que toda la información sobre horarios, rutas, precios y normas de uso estará disponible:</p>
-      <ul>
-        <li>En la aplicación móvil.</li>
-        <li>En la página web oficial.</li>
-        <li>En los puntos de parada (paneles informativos).</li>
-        <li>En los propios vehículos (pantallas o folletos).</li>
-        <li>En varios idiomas (español, inglés, alemán).</li>
-      </ul>
-
-      <h4>6. Sostenibilidad y respeto medioambiental</h4>
-      <p>Nos comprometemos a operar con una flota de vehículos eléctricos e híbridos, minimizando las emisiones contaminantes y contribuyendo a la reducción de la huella de carbono del evento.</p>
-
-      <h4>7. Personal cualificado y profesional</h4>
-      <p>Todo el personal del servicio (conductores, guías, personal de atención) ha recibido formación específica en:</p>
-      <ul>
-        <li>Conducción eficiente y segura.</li>
-        <li>Atención a personas con movilidad reducida.</li>
-        <li>Atención al cliente y gestión de incidencias.</li>
-        <li>Idiomas (inglés y/o alemán).</li>
-      </ul>
-
-      <h3>Indicadores de calidad y seguimiento</h3>
-      <p>El servicio medirá continuamente su calidad a través de los siguientes indicadores:</p>
-      <table class="doc-table" aria-label="Indicadores de calidad">
-        <thead>
-          <tr><th>Indicador</th><th>Objetivo</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Puntualidad (% viajes en margen)</td><td>≥ 95%</td></tr>
-          <tr><td>Satisfacción del usuario (media encuestas)</td><td>≥ 8/10</td></tr>
-          <tr><td>Incidencias por cada 1.000 viajeros</td><td>< 5</td></tr>
-          <tr><td>Solicitudes PMR atendidas satisfactoriamente</td><td>100%</td></tr>
-          <tr><td>Reducción de CO₂ vs. vehículo privado equivalente</td><td>≥ 70%</td></tr>
-        </tbody>
-      </table>
-      <p>Los resultados se publicarán en la memoria anual del servicio y en la página web oficial.</p>
-
-      <h3>Derechos de los usuarios</h3>
-      <p>Los usuarios del servicio tienen derecho a:</p>
-      <ul>
-        <li>Recibir información veraz y actualizada sobre el servicio.</li>
-        <li>Viajar en condiciones de seguridad, comodidad y respeto.</li>
-        <li>Presentar sugerencias y reclamaciones y recibir respuesta en tiempo y forma.</li>
-        <li>Acceder al servicio en condiciones de igualdad, sin discriminación de ningún tipo.</li>
-        <li>Conocer el estado de tramitación de sus reclamaciones.</li>
-      </ul>
-
-      <h3>Obligaciones de los usuarios</h3>
-      <p>Para garantizar la calidad del servicio y el bienestar de todos los viajeros, los usuarios deben:</p>
-      <ul>
-        <li>Respetar las normas de uso y comportamiento en el vehículo.</li>
-        <li>Presentar la confirmación de reserva cuando sea requerida.</li>
-        <li>No consumir alimentos ni bebidas alcohólicas en el interior del vehículo.</li>
-        <li>Respetar los espacios reservados para personas con movilidad reducida.</li>
-        <li>Colaborar con el personal del servicio en todo momento.</li>
-      </ul>
-    </section>
-
-    <!-- ===== 9. GARANTÍAS ===== -->
-    <section class="doc-section" id="garantias" aria-labelledby="h-garantias">
-      <h2 id="h-garantias"><span class="sec-icon" aria-hidden="true">🛡</span>9. Garantías del servicio</h2>
-
-      <h3>9.1. Garantía de puntualidad</h3>
-      <div class="info-box">
-        Si el servicio sufre un retraso superior a <strong>30 minutos</strong> por causas imputables al operador, el usuario tendrá derecho a:
-        <ul>
-          <li>Devolución del <strong>50% del importe</strong> abonado por el trayecto.</li>
-          <li>O, a su elección, un <strong>bono de transporte equivalente</strong> para uso en el mismo evento.</li>
-        </ul>
-      </div>
-
-      <h3>9.2. Garantía de accesibilidad</h3>
-      <div class="info-box">
-        Si un usuario con movilidad reducida no pudiera acceder al servicio contratado por fallo en los sistemas de accesibilidad del vehículo, el operador se compromete a:
-        <ul>
-          <li>Proporcionar un vehículo alternativo adaptado en un plazo máximo de <strong>30 minutos</strong>.</li>
-          <li>O reembolsar el <strong>100% del importe</strong> abonado.</li>
-        </ul>
-      </div>
-
-      <h3>9.3. Garantía de información</h3>
-      <p>Si la información proporcionada al usuario sobre horarios, rutas o condiciones del servicio resultara incorrecta y causara perjuicio al viajero, el operador ofrecerá solución alternativa de transporte sin coste adicional y tramitará la reclamación con carácter prioritario.</p>
-
-      <h3>9.4. Garantía de seguridad</h3>
-      <p>Todos los vehículos cuentan con seguros de responsabilidad civil y de viajeros obligatorios por ley, además de coberturas adicionales para garantizar la máxima protección en caso de incidente.</p>
-
-      <h3>9.5. Garantía de confidencialidad</h3>
-      <p>Los datos personales de los usuarios serán tratados de conformidad con el <strong>RGPD</strong> y la <strong>LOPDGDD</strong>, garantizando:</p>
-      <ul>
-        <li>Uso exclusivo para la gestión del servicio contratado.</li>
-        <li>No cesión a terceros sin consentimiento expreso.</li>
-        <li>Derecho de acceso, rectificación, supresión y portabilidad.</li>
-        <li>Plazo de conservación limitado al estrictamente necesario.</li>
-      </ul>
-    </section>
-
-    <!-- ===== 10. RECLAMACIONES ===== -->
-    <section class="doc-section" id="reclamaciones" aria-labelledby="h-reclamaciones">
-      <h2 id="h-reclamaciones"><span class="sec-icon" aria-hidden="true">📬</span>10. Reclamaciones y sugerencias</h2>
-
-      <h3 id="protocolo">10.1. Protocolo de gestión de reclamaciones</h3>
-      <p>El operador dispone de un protocolo formal para la gestión de reclamaciones y sugerencias, garantizando una respuesta eficaz y transparente.</p>
-
-      <h4>Canales de presentación</h4>
-      <ul>
-        <li>Formulario de reclamación en la página web oficial.</li>
-        <li>Correo electrónico habilitado para reclamaciones.</li>
-        <li>WhatsApp durante el horario de operación.</li>
-        <li>Atención presencial en los puntos de recogida principales.</li>
-        <li>Correo postal a la dirección del operador.</li>
-      </ul>
-
-      <h4>Plazos de respuesta</h4>
-      <table class="doc-table" aria-label="Plazos de respuesta">
-        <thead>
-          <tr><th>Acción</th><th>Plazo máximo</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Acuse de recibo</td><td>24 horas desde la presentación</td></tr>
-          <tr><td>Resolución estándar</td><td>10 días hábiles</td></tr>
-          <tr><td>Casos complejos (con notificación)</td><td>30 días naturales</td></tr>
-        </tbody>
-      </table>
-
-      <h4>Proceso de tramitación</h4>
-      <ol>
-        <li>Recepción y registro de la reclamación.</li>
-        <li>Asignación a responsable de resolución.</li>
-        <li>Análisis de la incidencia y recopilación de información.</li>
-        <li>Propuesta de resolución.</li>
-        <li>Comunicación al usuario.</li>
-        <li>Cierre y archivo.</li>
-        <li>Análisis estadístico para mejora continua.</li>
-      </ol>
-
-      <hr class="section-divider" />
-
-      <h3 id="hoja-reclamacion">10.2. Hoja de Reclamaciones / Sugerencias</h3>
-
-      <form id="claim-form" class="claim-form" novalidate aria-label="Hoja de reclamaciones o sugerencias">
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-          <div class="field">
-            <label for="cf-expediente">Nº de expediente</label>
-            <input type="text" id="cf-expediente" name="expediente" placeholder="Se asignará automáticamente" readonly style="background:#f0f0f0" />
-          </div>
-          <div class="field">
-            <label for="cf-fecha">Fecha</label>
-            <input type="text" id="cf-fecha" name="fecha" readonly style="background:#f0f0f0" />
-            <script>document.getElementById('cf-fecha').value = new Date().toLocaleDateString('es-ES');</script>
-          </div>
-        </div>
-
-        <div class="field">
-          <label>Tipo de comunicación</label>
-          <div class="rating-group" role="group" aria-label="Tipo de comunicación" style="margin-top:.3rem">
-            <input type="radio" name="tipo" id="tp1" value="reclamacion"><label for="tp1">📋 Reclamación</label>
-            <input type="radio" name="tipo" id="tp2" value="sugerencia"><label for="tp2">💡 Sugerencia</label>
-            <input type="radio" name="tipo" id="tp3" value="felicitacion"><label for="tp3">👏 Felicitación</label>
-            <input type="radio" name="tipo" id="tp4" value="consulta"><label for="tp4">❓ Consulta</label>
-          </div>
-        </div>
-
-        <h4 style="margin-top:1rem">Datos del reclamante / usuario</h4>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-          <div class="field">
-            <label for="cf-nombre">Nombre y apellidos <span aria-hidden="true">*</span></label>
-            <input type="text" id="cf-nombre" name="nombre" required autocomplete="name" />
-          </div>
-          <div class="field">
-            <label for="cf-dni">DNI / Pasaporte</label>
-            <input type="text" id="cf-dni" name="dni" autocomplete="off" />
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="cf-email">Correo electrónico <span aria-hidden="true">*</span></label>
-          <input type="email" id="cf-email" name="email" required autocomplete="email" />
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-          <div class="field">
-            <label for="cf-tel">Teléfono de contacto</label>
-            <input type="text" id="cf-tel" name="telefono" autocomplete="tel" />
-          </div>
-          <div class="field">
-            <label for="cf-idioma">Idioma preferido de respuesta</label>
-            <select id="cf-idioma" name="idioma">
-              <option value="es">Español</option>
-              <option value="en">English</option>
-              <option value="de">Deutsch</option>
-              <option value="other">Otro</option>
-            </select>
-          </div>
-        </div>
-
-        <h4 style="margin-top:1rem">Datos del servicio</h4>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-          <div class="field">
-            <label for="cf-fecha-svc">Fecha del servicio</label>
-            <input type="text" id="cf-fecha-svc" name="fecha_servicio" placeholder="DD/MM/AAAA" />
-          </div>
-          <div class="field">
-            <label for="cf-hora">Hora aproximada</label>
-            <input type="text" id="cf-hora" name="hora" placeholder="HH:MM" />
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-          <div class="field">
-            <label for="cf-ruta">Ruta utilizada</label>
-            <select id="cf-ruta" name="ruta">
-              <option value="">— Seleccionar —</option>
-              <option value="norte">Ruta Norte</option>
-              <option value="sur">Ruta Sur</option>
-              <option value="metro">Ruta Metropolitana</option>
-              <option value="demanda">Servicio bajo demanda</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="cf-vehiculo">Número de vehículo (si lo conoce)</label>
-            <input type="text" id="cf-vehiculo" name="vehiculo" />
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="cf-descripcion">Descripción de los hechos <span aria-hidden="true">*</span></label>
-          <textarea id="cf-descripcion" name="descripcion" rows="5" required placeholder="Describa detalladamente los hechos que motivan su reclamación o sugerencia…"></textarea>
-        </div>
-
-        <div class="field">
-          <label>Resolución solicitada</label>
-          <div class="rating-group" role="group" aria-label="Resolución solicitada" style="margin-top:.3rem">
-            <input type="radio" name="resolucion" id="rs1" value="disculpa"><label for="rs1">Disculpa formal</label>
-            <input type="radio" name="resolucion" id="rs2" value="compensacion"><label for="rs2">Compensación económica</label>
-            <input type="radio" name="resolucion" id="rs3" value="mejora"><label for="rs3">Mejora del servicio</label>
-            <input type="radio" name="resolucion" id="rs4" value="info"><label for="rs4">Información adicional</label>
-          </div>
-        </div>
-
-        <p class="form-note">
-          <strong>Protección de datos:</strong> Los datos personales facilitados serán tratados por Transporte Ecológico Compás con la finalidad de gestionar su reclamación/sugerencia, de acuerdo con el RGPD y la LOPDGDD. Puede ejercer sus derechos de acceso, rectificación, supresión y portabilidad dirigiéndose a nuestro correo de atención al cliente.
-        </p>
-
-        <button type="submit" class="btn-primary" style="margin-top:.5rem">Enviar reclamación / sugerencia</button>
-      </form>
-    </section>
-
-    <!-- ===== 11. PRESUPUESTO ===== -->
-    <section class="doc-section" id="presupuesto" aria-labelledby="h-presupuesto">
-      <h2 id="h-presupuesto"><span class="sec-icon" aria-hidden="true">💶</span>11. Presupuesto estimado</h2>
-
-      <h3>11.1. Costes de operación</h3>
-
-      <h4>Personal</h4>
-      <ul>
-        <li>Conductores (6 conductores × días de operación × coste/día): estimado según convenio colectivo de transporte.</li>
-        <li>Personal de atención al cliente (2 personas × días de operación).</li>
-        <li>Coordinador / responsable de operaciones (1 persona).</li>
-        <li>Guías bilingües (según demanda y rutas asignadas).</li>
-      </ul>
-
-      <h4>Vehículos</h4>
-      <ul>
-        <li>Alquiler / amortización de flota (6 guaguas + 2 minibuses).</li>
-        <li>Combustible / recarga eléctrica.</li>
-        <li>Mantenimiento y revisiones técnicas.</li>
-        <li>Seguro de vehículos y viajeros.</li>
-      </ul>
-
-      <h4>Infraestructura y comunicaciones</h4>
-      <ul>
-        <li>Señalización de paradas.</li>
-        <li>Material impreso (folletos, mapas, carteles).</li>
-        <li>Sistema de reservas y aplicación móvil (licencias / mantenimiento).</li>
-        <li>Centro de control operativo (comunicaciones, equipos).</li>
-      </ul>
-
-      <h4>Marketing y difusión</h4>
-      <ul>
-        <li>Publicidad en hoteles y aeropuertos.</li>
-        <li>Redes sociales y marketing digital.</li>
-        <li>Relaciones públicas y coordinación institucional.</li>
-      </ul>
-
-      <h3>11.2. Fuentes de ingresos</h3>
-      <ul>
-        <li>Precio por trayecto (tarifa por pasajero).</li>
-        <li>Bonos de múltiples viajes (descuento por volumen).</li>
-        <li>Acuerdos con hoteles y operadores turísticos (precio pactado por pasajero).</li>
-        <li>Subvenciones públicas (Ayuntamiento, Cabildo, fondos europeos de movilidad sostenible).</li>
-        <li>Patrocinios de empresas comprometidas con la sostenibilidad.</li>
-      </ul>
-
-      <h3>11.3. Punto de equilibrio</h3>
-      <div class="info-box accent">
-        El análisis financiero indica que, con una <strong>ocupación media del 70%</strong> de la capacidad disponible, el servicio alcanzaría el punto de equilibrio en los días de mayor afluencia. Se proyecta una rentabilidad positiva con la combinación de ingresos directos, acuerdos hoteleros y apoyo institucional.
-      </div>
-    </section>
-
-    <!-- ===== 12. MERCADO / DAFO / LEAN ===== -->
-    <section class="doc-section" id="mercado" aria-labelledby="h-mercado">
-      <h2 id="h-mercado"><span class="sec-icon" aria-hidden="true">📊</span>12. Análisis de mercado, DAFO y Lean Canvas</h2>
-
-      <h3>12.1. Análisis de mercado</h3>
-      <p>El Carnaval de Santa Cruz de Tenerife es uno de los eventos festivos más importantes de España y del mundo, con una afluencia de visitantes que supera los <strong>250.000 asistentes</strong> en los días principales. Esta concentración masiva genera una demanda de movilidad sostenible que el transporte público convencional no cubre de forma óptima durante el evento.</p>
-
-      <h4>Perfil del usuario objetivo</h4>
-      <ul>
-        <li>Turistas alojados en hoteles del norte (Puerto de la Cruz, La Orotava) y del sur (Costa Adeje, Los Cristianos, Playa de las Américas).</li>
-        <li>Viajeros con llegada por el aeropuerto (vuelos nacionales e internacionales).</li>
-        <li>Residentes de La Laguna y área metropolitana sin acceso a aparcamiento en el centro.</li>
-        <li>Personas con movilidad reducida que requieren transporte adaptado.</li>
-        <li>Visitantes internacionales (alemanes, británicos, nórdicos) que buscan alternativas organizadas.</li>
-      </ul>
-
-      <h3 id="dafo">12.2. Análisis DAFO</h3>
-      <div class="dafo-grid" role="region" aria-label="Análisis DAFO">
-        <div class="dafo-cell dafo-f">
-          <h4>💪 Fortalezas</h4>
-          <ul>
-            <li>Servicio especializado para un evento concreto y de alta demanda.</li>
-            <li>Flota ecológica (menor impacto ambiental, imagen positiva).</li>
-            <li>Accesibilidad universal como valor diferencial.</li>
-            <li>Coordinación con hoteles y puntos turísticos estratégicos.</li>
-            <li>Atención multilingüe (español, inglés, alemán).</li>
-          </ul>
-        </div>
-        <div class="dafo-cell dafo-d">
-          <h4>⚠️ Debilidades</h4>
-          <ul>
-            <li>Estacionalidad: servicio limitado al período del Carnaval.</li>
-            <li>Inversión inicial elevada (flota, tecnología, infraestructura).</li>
-            <li>Dependencia de la demanda turística (variable según temporada y condiciones externas).</li>
-            <li>Necesidad de coordinación con múltiples actores institucionales.</li>
-          </ul>
-        </div>
-        <div class="dafo-cell dafo-o">
-          <h4>🚀 Oportunidades</h4>
-          <ul>
-            <li>Creciente demanda de turismo sostenible y responsable.</li>
-            <li>Apoyo institucional y fondos europeos para movilidad verde.</li>
-            <li>Posibilidad de expandir el servicio a otros eventos (WOMAD, fiestas locales, etc.).</li>
-            <li>Alianzas estratégicas con cadenas hoteleras y operadores turísticos.</li>
-            <li>Tendencia a la restricción de vehículos privados en centros urbanos.</li>
-          </ul>
-        </div>
-        <div class="dafo-cell dafo-a">
-          <h4>🔺 Amenazas</h4>
-          <ul>
-            <li>Competencia de taxis, VTC y servicios de transporte informal.</li>
-            <li>Cambios en la normativa de transporte de viajeros.</li>
-            <li>Incidencias meteorológicas que puedan afectar al servicio.</li>
-            <li>Reducción de la afluencia turística por factores externos (crisis, pandemias, etc.).</li>
-          </ul>
-        </div>
-      </div>
-
-      <h3 id="lean">12.3. Lean Canvas</h3>
-      <table class="doc-table" aria-label="Lean Canvas">
-        <tbody>
-          <tr>
-            <td><strong>Problema</strong></td>
-            <td>
-              <ul>
-                <li>Congestión del tráfico urbano durante el Carnaval.</li>
-                <li>Falta de transporte adaptado para personas con movilidad reducida.</li>
-                <li>Ausencia de opciones de transporte organizado desde zonas turísticas del norte y sur.</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>Segmentos de clientes</strong></td>
-            <td>
-              <ul>
-                <li>Turistas alojados en hoteles (norte y sur).</li>
-                <li>Residentes de La Laguna y área metropolitana.</li>
-                <li>Personas con movilidad reducida.</li>
-                <li>Visitantes internacionales.</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>Propuesta de valor única</strong></td>
-            <td>Transporte ecológico, accesible y cómodo, coordinado con la oferta hotelera, que transforma el desplazamiento al Carnaval en parte de la experiencia turística.</td>
-          </tr>
-          <tr>
-            <td><strong>Solución</strong></td>
-            <td>
-              <ul>
-                <li>Servicio de guaguas eléctricas e híbridas con rutas fijas y frecuencia garantizada.</li>
-                <li>Sistema de reserva digital (app + web) integrado con hoteles.</li>
-                <li>Servicio bajo demanda para PMR y hoteles con menor ocupación.</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>Canales</strong></td>
-            <td>Aplicación móvil · Web oficial · Recepción de hoteles · Redes sociales · Publicidad en aeropuertos y hoteles</td>
-          </tr>
-          <tr>
-            <td><strong>Métricas clave</strong></td>
-            <td>Pasajeros/día · Tasa de ocupación · Satisfacción (NPS) · Reducción CO₂ · Incidencias por 1.000 viajeros</td>
-          </tr>
-          <tr>
-            <td><strong>Ventaja diferencial</strong></td>
-            <td>Única opción de transporte sostenible y accesible específicamente diseñada para el Carnaval, con integración real con la oferta hotelera y atención multilingüe.</td>
-          </tr>
-          <tr>
-            <td><strong>Estructura de costes</strong></td>
-            <td>Personal · Vehículos · Mantenimiento · Tecnología · Marketing</td>
-          </tr>
-          <tr>
-            <td><strong>Fuentes de ingresos</strong></td>
-            <td>Tarifa por pasajero · Bonos · Acuerdos hoteleros · Subvenciones · Patrocinios</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- ===== 13. PLAN OPERATIVO ===== -->
-    <section class="doc-section" id="plan-operativo" aria-labelledby="h-plan-operativo">
-      <h2 id="h-plan-operativo"><span class="sec-icon" aria-hidden="true">⚙️</span>13. Plan operativo</h2>
-
-      <h3>13.1. Fases del proyecto</h3>
-
-      <h4>Fase 1 — Planificación y preparación (3 meses antes del Carnaval)</h4>
-      <ul>
-        <li>Constitución del equipo de coordinación.</li>
-        <li>Negociación y firma de acuerdos con hoteles y operadores turísticos.</li>
-        <li>Selección y contratación de flota.</li>
-        <li>Desarrollo/adaptación del sistema de reservas digital.</li>
-        <li>Obtención de permisos y autorizaciones administrativas.</li>
-        <li>Diseño e impresión de material informativo.</li>
-        <li>Formación del personal.</li>
-      </ul>
-
-      <h4>Fase 2 — Operación durante el Carnaval</h4>
-      <ul>
-        <li>Apertura del sistema de reservas (30 días antes del evento).</li>
-        <li>Activación de rutas y servicios según el programa de actos.</li>
-        <li>Supervisión desde el centro de control operativo.</li>
-        <li>Comunicación en tiempo real con Policía Local y Protección Civil.</li>
-        <li>Encuestas de satisfacción en tiempo real.</li>
-      </ul>
-
-      <h4>Fase 3 — Evaluación y cierre</h4>
-      <ul>
-        <li>Análisis de datos de uso y satisfacción.</li>
-        <li>Informe de resultados para instituciones colaboradoras.</li>
-        <li>Propuestas de mejora para próximas ediciones.</li>
-        <li>Liquidación financiera.</li>
-      </ul>
-
-      <h3>13.2. Estructura organizativa</h3>
-      <table class="doc-table" aria-label="Estructura organizativa">
-        <thead>
-          <tr><th>Rol</th><th>Funciones principales</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Responsable de operaciones</td><td>Supervisión general · Coordinación institucional · Gestión de incidencias graves</td></tr>
-          <tr><td>Centro de control</td><td>Monitorización de rutas en tiempo real · Gestión de frecuencias · Comunicación con conductores</td></tr>
-          <tr><td>Conductores</td><td>Conducción segura · Atención básica al viajero</td></tr>
-          <tr><td>Guías / Auxiliares</td><td>Información · Orientación · Gestión de accesibilidad</td></tr>
-          <tr><td>Atención al cliente</td><td>Gestión de reservas · Incidencias · Reclamaciones</td></tr>
-        </tbody>
-      </table>
-
-      <h3>13.3. Protocolo de gestión de incidencias</h3>
-
-      <div class="info-box">
-        <strong>Nivel 1 — Incidencia leve</strong> (retraso &lt;15 min, avería menor)<br/>
-        Gestión autónoma por el conductor y comunicación al centro de control. Información inmediata a los usuarios afectados.
-      </div>
-      <div class="info-box accent">
-        <strong>Nivel 2 — Incidencia moderada</strong> (retraso &gt;15 min, avería con afectación al servicio)<br/>
-        Activación de vehículo de refuerzo. Comunicación al responsable de operaciones. Información a los usuarios y oferta de alternativas.
-      </div>
-      <div class="info-box" style="background:#fef3f2;border-left-color:#c0392b">
-        <strong>Nivel 3 — Incidencia grave</strong> (accidente, emergencia, fallo total del servicio)<br/>
-        Protocolo de emergencia inmediato. Coordinación con servicios de emergencia (112, Policía Local, Protección Civil). Comunicación al responsable de operaciones y a la dirección. Información transparente a los usuarios y medios si es necesario.
-      </div>
-    </section>
-
-    <!-- ===== 14. PLAN DE SOSTENIBILIDAD ===== -->
-    <section class="doc-section" id="sostenibilidad" aria-labelledby="h-sostenibilidad">
-      <h2 id="h-sostenibilidad"><span class="sec-icon" aria-hidden="true">♻️</span>14. Plan de sostenibilidad</h2>
-
-      <h3>14.1. Compromisos medioambientales</h3>
-      <ul>
-        <li>Uso exclusivo de flota eléctrica e híbrida, con objetivo de transición a <strong>100% eléctrica</strong> en el medio plazo.</li>
-        <li>Recarga de vehículos eléctricos con <strong>energía de fuentes renovables</strong> (acuerdo con proveedor de energía verde).</li>
-        <li>Reducción estimada de emisiones de CO₂: entre <strong>15 y 20 toneladas</strong> por edición del Carnaval respecto al uso equivalente del vehículo privado.</li>
-        <li>Materiales de señalización e información fabricados con materiales reciclables o reutilizables.</li>
-      </ul>
-
-      <h3>14.2. Compromisos sociales</h3>
-      <ul>
-        <li>Garantía de accesibilidad universal para todas las personas, independientemente de su capacidad física o condición de movilidad.</li>
-        <li>Atención multilingüe que favorece la inclusión de visitantes internacionales.</li>
-        <li>Generación de empleo local cualificado durante el período del Carnaval.</li>
-        <li>Colaboración activa con el tejido empresarial y las instituciones locales.</li>
-      </ul>
-
-      <h3>14.3. Compromisos de gobernanza</h3>
-      <ul>
-        <li>Transparencia en la gestión y publicación de resultados.</li>
-        <li>Cumplimiento de toda la normativa aplicable (transporte, accesibilidad, protección de datos).</li>
-        <li>Mecanismos activos de participación ciudadana (encuestas, sugerencias, reclamaciones).</li>
-        <li>Revisión y mejora continua del servicio basada en datos y feedback de los usuarios.</li>
-      </ul>
-
-      <h3>14.4. Indicadores de sostenibilidad (KPIs)</h3>
-      <div class="kpi-row" aria-label="KPIs de sostenibilidad">
-        <div class="kpi-badge">
-          <div class="kpi-val">≥15 T</div>
-          <div class="kpi-label">CO₂ evitado / edición</div>
-        </div>
-        <div class="kpi-badge">
-          <div class="kpi-val">≥50%</div>
-          <div class="kpi-label">Vehículos eléctricos (1ª ed.)</div>
-        </div>
-        <div class="kpi-badge">
-          <div class="kpi-val">100%</div>
-          <div class="kpi-label">Solicitudes PMR atendidas</div>
-        </div>
-        <div class="kpi-badge">
-          <div class="kpi-val">≥70</div>
-          <div class="kpi-label">NPS objetivo</div>
-        </div>
-        <div class="kpi-badge">
-          <div class="kpi-val">100%</div>
-          <div class="kpi-label">Material impreso reciclable</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 15. ALEMÁN ===== -->
-    <section class="doc-section" id="aleman" aria-labelledby="h-aleman" lang="de">
-      <h2 id="h-aleman"><span class="sec-icon" aria-hidden="true">🇩🇪</span>15. Ökologischer Transport Compás</h2>
-      <p lang="es" style="font-size:.85rem;color:var(--color-muted);margin-bottom:1rem">(Abschnitt für deutschsprachige Besucher / Sección para visitantes de habla alemana)</p>
-
-      <div class="lang-de">
-        <h3>Willkommen beim Ökologischen Transport Compás</h3>
-        <p>Sehr geehrte Besucherinnen und Besucher,</p>
-        <p>herzlich willkommen beim Ökologischen Transport Compás, dem nachhaltigen und barrierefreien Transportdienst für den Karneval von Santa Cruz de Tenerife.</p>
-      </div>
-
-      <h3>Unser Service bietet Ihnen</h3>
-      <ul>
-        <li>Komfortable und pünktliche Verbindungen zwischen Ihrem Hotel und dem Karnevalszentrum.</li>
-        <li>Vollständig barrierefreie Fahrzeuge mit Rampen und Hilfssystemen.</li>
-        <li>Mehrsprachige Begleitung (Spanisch, Englisch, Deutsch).</li>
-        <li>Umweltfreundliche Fahrzeuge (Elektro- und Hybridbusse).</li>
-      </ul>
-
-      <h3>Hauptrouten</h3>
-      <table class="doc-table" aria-label="Hauptrouten">
-        <thead>
-          <tr><th>Route</th><th>Verbindung</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Nord-Route</td><td>Puerto de la Cruz – La Orotava – Tacoronte – La Laguna – Santa Cruz</td></tr>
-          <tr><td>Süd-Route</td><td>Costa Adeje – Los Cristianos – Flughafen Reina Sofía – Santa Cruz</td></tr>
-          <tr><td>Stadtroute</td><td>La Laguna – Taco – Santa Cruz (alle 30–40 Minuten)</td></tr>
-        </tbody>
-      </table>
-
-      <h3>Reservierung</h3>
-      <ul>
-        <li>Über unsere mobile App.</li>
-        <li>Über unsere offizielle Webseite.</li>
-        <li>An der Rezeption Ihres Hotels.</li>
-      </ul>
-
-      <h3>Abfahrtszeiten</h3>
-      <table class="doc-table" aria-label="Abfahrtszeiten">
-        <thead>
-          <tr><th>Richtung</th><th>Uhrzeit</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Hinfahrt (zum Zentrum)</td><td>10:00 – 14:00 Uhr</td></tr>
-          <tr><td>Rückfahrt (zum Hotel)</td><td>17:00 – 23:30 Uhr</td></tr>
-        </tbody>
-      </table>
-
-      <h3>Barrierefreiheit</h3>
-      <p>Alle unsere Hauptfahrzeuge sind vollständig barrierefrei ausgestattet:</p>
-      <ul>
-        <li>Einstiegsrampen für Rollstuhlfahrer.</li>
-        <li>Reservierte und gekennzeichnete Rollstuhlplätze.</li>
-        <li>Akustische und visuelle Informationssysteme.</li>
-        <li>Persönliche Unterstützung durch geschultes Personal.</li>
-      </ul>
-
-      <h3>Sicherheit</h3>
-      <p>Ihre Sicherheit hat bei uns höchste Priorität:</p>
-      <ul>
-        <li>Alle Fahrer verfügen über gültige Fahrerlaubnisse und regelmäßige Schulungen.</li>
-        <li>Alle Fahrzeuge sind vollständig versichert.</li>
-        <li>Wir arbeiten in direkter Koordination mit der Lokalpolizei und dem Zivilschutz.</li>
-      </ul>
-
-      <h3>Nachhaltigkeit</h3>
-      <p>Wir setzen auf Elektro- und Hybridfahrzeuge und tragen so zur Reduzierung von CO₂-Emissionen und zur nachhaltigen Entwicklung des Tourismus auf Teneriffa bei.</p>
-
-      <h3>Kontakt / Beschwerden</h3>
-      <div class="lang-de">
-        <p>Wenn Sie Fragen, Anmerkungen oder Beschwerden haben, stehen wir Ihnen gerne zur Verfügung:</p>
-        <ul>
-          <li>E-Mail: <a href="mailto:atencion@transportecompas.es" style="color:#2940a0">atencion@transportecompas.es</a></li>
-          <li>WhatsApp: disponible durante el horario de operación</li>
-          <li>Webseite: www.transportecompas.es</li>
-        </ul>
-        <p>Wir danken Ihnen für Ihr Vertrauen.</p>
-      </div>
-    </section>
-
-    <!-- ===== 16. LIBRO DE SOSTENIBILIDAD ===== -->
-    <section class="doc-section" id="libro-sostenibilidad" aria-labelledby="h-libro">
-      <h2 id="h-libro"><span class="sec-icon" aria-hidden="true">📗</span>16. Memoria de Sostenibilidad</h2>
-      <p style="color:var(--color-muted);font-size:.88rem">Carnaval de Santa Cruz de Tenerife — Primera Edición</p>
-
-      <h3>Introducción</h3>
-      <p>Esta memoria recoge los compromisos, acciones y resultados de Transporte Ecológico Compás en materia de sostenibilidad medioambiental, social y de gobernanza, correspondientes a la primera edición del servicio durante el Carnaval de Santa Cruz de Tenerife.</p>
-      <p>La elaboración de esta memoria responde al compromiso de la empresa con la transparencia y la rendición de cuentas, así como con la mejora continua de su desempeño en sostenibilidad.</p>
-
-      <h3>Contexto y misión</h3>
-      <p>Transporte Ecológico Compás nace con la misión de ofrecer un servicio de transporte que sea, simultáneamente:</p>
-      <ul>
-        <li>Sostenible desde el punto de vista medioambiental.</li>
-        <li>Accesible e inclusivo para todas las personas.</li>
-        <li>Económicamente viable y socialmente beneficioso.</li>
-        <li>Un referente en la gestión responsable de la movilidad en eventos masivos.</li>
-      </ul>
-
-      <h3>Impacto medioambiental</h3>
-
-      <h4>Emisiones evitadas</h4>
-      <p>Gracias al uso de flota eléctrica e híbrida, se estima que el servicio ha contribuido a evitar la emisión de entre <strong>15 y 20 toneladas de CO₂ equivalente</strong> por edición, en comparación con el uso del vehículo privado para los mismos desplazamientos.</p>
-
-      <h4>Energía</h4>
-      <p>Los vehículos eléctricos se recargan preferentemente con energía procedente de fuentes renovables, en colaboración con proveedores de energía verde. Los vehículos híbridos optimizan el consumo de combustible mediante sistemas de recuperación de energía en frenado y conducción eficiente.</p>
-
-      <h4>Residuos y materiales</h4>
-      <ul>
-        <li>Todo el material impreso (folletos, carteles, señalización) se fabrica con papel reciclado o materiales reciclables.</li>
-        <li>Los vehículos disponen de papeleras para la correcta gestión de residuos durante el trayecto.</li>
-      </ul>
-
-      <h3>Impacto social</h3>
-
-      <h4>Accesibilidad</h4>
-      <ul>
-        <li>El 100% de la flota principal cuenta con sistemas de accesibilidad universal.</li>
-        <li>En la primera edición se atendieron el 100% de las solicitudes de servicio para personas con movilidad reducida.</li>
-        <li>Se incorporaron guías y personal bilingüe/trilingüe en las rutas de mayor afluencia de visitantes internacionales.</li>
-      </ul>
-
-      <h4>Empleo</h4>
-      <ul>
-        <li>El servicio genera empleo local directo durante el período del Carnaval.</li>
-        <li>Se prioriza la contratación de personas residentes en la isla.</li>
-        <li>Todo el personal recibe formación específica antes del inicio del servicio.</li>
-      </ul>
-
-      <h4>Satisfacción de usuarios</h4>
-      <ul>
-        <li>Se aplicó un sistema de encuestas de satisfacción en todos los trayectos.</li>
-        <li>Puntuación media obtenida: <em>(pendiente de resultados primera edición)</em>.</li>
-        <li>Principales áreas de mejora identificadas: <em>(pendiente de análisis post-evento)</em>.</li>
-      </ul>
-
-      <h3>Gobernanza</h3>
-
-      <h4>Coordinación institucional</h4>
-      <ul>
-        <li>El servicio operó en estrecha colaboración con el Ayuntamiento de Santa Cruz de Tenerife, el Cabildo de Tenerife y Compás.</li>
-        <li>Se establecieron protocolos de coordinación con Policía Local y Protección Civil.</li>
-        <li>Se mantuvieron reuniones periódicas con los hoteles y operadores turísticos colaboradores.</li>
-      </ul>
-
-      <h4>Transparencia y ética</h4>
-      <ul>
-        <li>Se garantizó en todo momento el cumplimiento de la normativa aplicable (transporte, accesibilidad, protección de datos).</li>
-        <li>Se publicaron los indicadores de calidad en la página web oficial del servicio.</li>
-        <li>Se tramitaron todas las reclamaciones y sugerencias recibidas dentro de los plazos establecidos.</li>
-      </ul>
-
-      <h3>Objetivos para la próxima edición</h3>
-      <ul>
-        <li>Incrementar la proporción de vehículos eléctricos en la flota hasta el <strong>75%</strong>.</li>
-        <li>Ampliar la cobertura de rutas incluyendo nuevos puntos de recogida en zonas rurales y periféricas.</li>
-        <li>Mejorar la integración del sistema de reservas con las plataformas de reserva hotelera.</li>
-        <li>Reducir el tiempo de respuesta a reclamaciones a un máximo de <strong>5 días hábiles</strong>.</li>
-        <li>Obtener certificación de sostenibilidad reconocida (ISO 14001 o equivalente).</li>
-      </ul>
-
-      <h3>Conclusiones</h3>
-      <div class="info-box">
-        Transporte Ecológico Compás demuestra que es posible ofrecer un servicio de transporte de calidad durante un evento masivo de forma <strong>sostenible, accesible y económicamente viable</strong>. La primera edición ha sentado las bases para consolidar este servicio como referente en movilidad responsable, con la vista puesta en su continuidad y expansión a otros eventos y destinos.
-      </div>
-    </section>
-
-  </main><!-- /main-content -->
-</div><!-- /layout -->
-
-<!-- ── Back to top ── -->
-<button id="back-to-top" aria-label="Volver al inicio" title="Volver al inicio">↑</button>
-
-<!-- ── Footer ── -->
-<footer id="site-footer" role="contentinfo">
-  <p>Transporte Ecológico Compás · Carnaval de Santa Cruz de Tenerife · Documento de presentación del proyecto</p>
-</footer>
-
-<script src="js/main.js"></script>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>Transporte Ecologico Compas S.A. | C. Pi y Margall, 23, Santa Cruz de Tenerife | Tel: 922 42 00 00 | info@transportescompas.com</p>
+    <p>Proyecto de transporte sostenible para el Carnaval de Santa Cruz de Tenerife</p>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
