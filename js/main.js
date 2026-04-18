@@ -11,6 +11,8 @@
 
   /* ---------- State ---------- */
   var loadedSections = {};
+  var PDF_A4_WIDTH = "210mm";
+  var PDF_STAGING_LEFT = "-9999px";
 
   /* ---------- Section meta ---------- */
   var sectionFiles = {
@@ -183,7 +185,8 @@
   function createBackToIndiceLink() {
     var backLink = document.createElement("a");
     backLink.href = "#indice";
-    backLink.textContent = "Volver al Indice";
+    backLink.textContent = "Volver al Índice";
+    backLink.setAttribute("aria-label", "Volver al Índice");
     backLink.style.position = "absolute";
     backLink.style.top = "8px";
     backLink.style.right = "8px";
@@ -202,7 +205,11 @@
     var tasks = [];
 
     if (document.fonts && document.fonts.ready) {
-      tasks.push(document.fonts.ready.catch(function () {}));
+      tasks.push(
+        document.fonts.ready.catch(function (err) {
+          console.warn("PDF fonts readiness warning:", err);
+        })
+      );
     }
 
     var images = root.querySelectorAll("img");
@@ -212,7 +219,9 @@
           new Promise(function (resolve) {
             function done() {
               if (typeof img.decode === "function") {
-                img.decode().catch(function () {}).then(resolve);
+                img.decode().catch(function (err) {
+                  console.warn("PDF image decode warning:", err);
+                }).then(resolve);
               } else {
                 resolve();
               }
@@ -275,8 +284,8 @@
       function onAllLoaded() {
         /* Build a combined element */
         var wrapper = document.createElement("div");
-        wrapper.style.width = "210mm";
-        wrapper.style.maxWidth = "210mm";
+        wrapper.style.width = PDF_A4_WIDTH;
+        wrapper.style.maxWidth = PDF_A4_WIDTH;
         wrapper.style.background = "#ffffff";
         wrapper.style.fontFamily = "Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif";
         wrapper.style.color = "#2c3040";
@@ -317,13 +326,12 @@
         var staging = document.createElement("div");
         staging.id = "pdf-staging";
         staging.style.position = "fixed";
-        staging.style.left = "-100000px";
+        staging.style.left = PDF_STAGING_LEFT;
         staging.style.top = "0";
-        staging.style.width = "210mm";
+        staging.style.width = PDF_A4_WIDTH;
         staging.style.background = "#ffffff";
+        staging.style.visibility = "hidden";
         staging.style.pointerEvents = "none";
-        staging.style.opacity = "0";
-        staging.style.zIndex = "-1";
 
         staging.appendChild(wrapper);
         document.body.appendChild(staging);
@@ -332,7 +340,10 @@
           .then(function () {
             return generatePdf(wrapper, "Transporte_Ecologico_Compas_Proyecto_Completo.pdf");
           })
-          .catch(function () {})
+          .catch(function (err) {
+            console.error("Error al generar PDF completo:", err);
+            alert("No se pudo generar el PDF completo. Intente de nuevo.");
+          })
           .finally(function () {
             if (staging.parentNode) {
               staging.parentNode.removeChild(staging);
