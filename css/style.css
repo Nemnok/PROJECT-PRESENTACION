@@ -322,6 +322,19 @@ body {
   margin: 1rem 0 1.5rem;
 }
 
+.export-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.export-menu summary {
+  list-style: none;
+}
+
+.export-menu summary::-webkit-details-marker {
+  display: none;
+}
+
 .btn-pdf {
   display: inline-flex;
   align-items: center;
@@ -338,6 +351,7 @@ body {
   transition: background 0.2s;
 }
 
+.export-menu[open] .btn-pdf,
 .btn-pdf:hover {
   background: var(--color-navy);
 }
@@ -350,6 +364,40 @@ body {
 .btn-pdf:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.export-menu-options {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  min-width: 8.5rem;
+  padding: 0.4rem;
+  z-index: 20;
+}
+
+.export-menu-section .export-menu-options {
+  min-width: 7rem;
+}
+
+.export-option {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: var(--color-gray-800);
+  padding: 0.45rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.export-option:hover,
+.export-option:focus-visible {
+  background: var(--color-gray-100);
 }
 
 .btn-pdf-section {
@@ -490,6 +538,7 @@ body {
 @media print {
   .tab-bar,
   .btn-pdf,
+  .export-menu,
   .btn-bar,
   .site-footer {
     display: none !important;

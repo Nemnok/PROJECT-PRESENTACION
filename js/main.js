@@ -7,7 +7,8 @@
   /* ---------- DOM refs ---------- */
   var tabBar = document.getElementById("tabBar");
   var contentArea = document.getElementById("contentArea");
-  var btnPdfCompleto = document.getElementById("btnPdfCompleto");
+  var exportMenuFull = document.getElementById("exportMenuFull");
+  var btnExportCompleto = document.getElementById("btnExportCompleto");
   var pdfExportStatus = document.getElementById("pdfExportStatus");
   var pdfExportMessage = document.getElementById("pdfExportMessage");
   var pdfProgressWrap = document.getElementById("pdfProgressWrap");
@@ -17,11 +18,10 @@
 
   /* ---------- State ---------- */
   var loadedSections = {};
-  var PDF_EXPORT_PREFIX = "[PDF-EXPORT]";
+  var EXPORT_PREFIX = "[EXPORT]";
 
   /* ---------- Section meta ---------- */
   var sectionFiles = {
-    "00": "sections/00-infografia.html",
     "01": "sections/01-introduccion.html",
     "02": "sections/02-concepto-proyecto.html",
     "03": "sections/03-operativa-servicio.html",
@@ -47,7 +47,6 @@
   };
 
   var sectionTitles = {
-    "00": "Infografia del Proyecto",
     "01": "1. Introducción",
     "02": "2. Concepto del Proyecto",
     "03": "3. Operativa del Servicio",
@@ -158,7 +157,7 @@
   function logPdfExportError(err) {
     if (!err) return;
     var detail = err.details || err.message || String(err);
-    console.error(PDF_EXPORT_PREFIX, detail, err);
+    console.error(EXPORT_PREFIX, detail, err);
   }
 
   function setPdfStatus(message, detail, showProgress, progressPercent) {
@@ -237,8 +236,8 @@
       if (anchor === "indice") {
         return { linkToDestination: "indice" };
       }
-      if (/^\d{1,2}$/.test(anchor)) {
-        var key = anchor.length === 1 ? "0" + anchor : anchor;
+      if (/^\d{2}$/.test(anchor)) {
+        var key = anchor;
         if (sectionFiles[key]) {
           return { linkToDestination: "sec-" + key };
         }
@@ -681,7 +680,7 @@
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
       list.push({
-        text: key + " - " + sectionTitles[key],
+        text: sectionTitles[key],
         linkToDestination: "sec-" + key,
         style: "tocItem"
       });
@@ -777,54 +776,593 @@
     });
   }
 
+  function ensureDocxLib() {
+    if (typeof window.docx === "undefined" || typeof window.docx.Document !== "function") {
+      throw createPdfExportError("docx init", "La libreria DOCX no se ha cargado correctamente.", null, null);
+    }
+    return window.docx;
+  }
+
+  function sanitizeFilePart(text) {
+    return String(text || "").replace(/[^a-zA-Z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  }
+
+  function downloadBlob(blob, filename) {
+    var blobUrl = URL.createObjectURL(blob);
+    var anchor = document.createElement("a");
+    anchor.href = blobUrl;
+    anchor.download = filename;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    setTimeout(function () {
+      URL.revokeObjectURL(blobUrl);
+    }, 1000);
+  }
+
+  function normalizeText(text) {
+    return String(text || "").replace(/\u00a0/g, " ").replace(/\r/g, "").trim();
+  }
+
+  function inlineRunsFromNode(node, marks) {
+    if (!node) return [];
+    var active = marks || {};
+
+    if (node.nodeType === 3) {
+      var value = node.nodeValue || "";
+      if (!value) return [];
+      return [{ text: value, bold: !!active.bold, italics: !!active.italics, link: active.link || null }];
+    }
+
+    if (node.nodeType !== 1) return [];
+    var tag = node.tagName.toUpperCase();
+    if (tag === "IMG") return [];
+    if (tag === "BR") return [{ text: "\n", bold: !!active.bold, italics: !!active.italics, link: active.link || null }];
+
+    var next = { bold: !!active.bold, italics: !!active.italics, link: active.link || null };
+    if (tag === "B" || tag === "STRONG") next.bold = true;
+    if (tag === "I" || tag === "EM") next.italics = true;
+    if (tag === "A") {
+      var href = normalizeText(node.getAttribute("href"));
+      if (/^(https?:|mailto:|tel:)/i.test(href)) {
+        next.link = href;
+      } else {
+        next.link = null;
+      }
+    }
+
+    var runs = [];
+    var children = node.childNodes;
+    for (var i = 0; i < children.length; i++) {
+      var childRuns = inlineRunsFromNode(children[i], next);
+      for (var j = 0; j < childRuns.length; j++) {
+        runs.push(childRuns[j]);
+      }
+    }
+    return runs;
+  }
+
+  function inlineRunsFromChildren(node) {
+    var out = [];
+    var children = node.childNodes || [];
+    for (var i = 0; i < children.length; i++) {
+      var runs = inlineRunsFromNode(children[i], {});
+      for (var j = 0; j < runs.length; j++) out.push(runs[j]);
+    }
+    return out;
+  }
+
+  function normalizeRuns(runs) {
+    var out = [];
+    for (var i = 0; i < runs.length; i++) {
+      var run = runs[i];
+      if (!run || typeof run.text !== "string") continue;
+      if (!run.text.length) continue;
+      out.push(run);
+    }
+    return out;
+  }
+
+  function textFromRuns(runs) {
+    var text = "";
+    for (var i = 0; i < runs.length; i++) {
+      text += runs[i].text;
+    }
+    return normalizeText(text);
+  }
+
+  function parseTableBlockForExport(tableNode) {
+    var rows = tableNode.querySelectorAll("tr");
+    if (!rows.length) return null;
+    var data = [];
+    for (var r = 0; r < rows.length; r++) {
+      var row = [];
+      var cells = rows[r].querySelectorAll("th, td");
+      for (var c = 0; c < cells.length; c++) {
+        row.push(normalizeText(cells[c].innerText || cells[c].textContent || ""));
+      }
+      if (row.length) data.push(row);
+    }
+    if (!data.length) return null;
+    return { type: "table", rows: data };
+  }
+
+  function parseBlocksForExport(nodes) {
+    var blocks = [];
+
+    function pushParagraphFromNode(node) {
+      var runs = normalizeRuns(inlineRunsFromChildren(node));
+      if (!runs.length) return;
+      blocks.push({ type: "paragraph", runs: runs });
+    }
+
+    function walk(nodeList) {
+      for (var i = 0; i < nodeList.length; i++) {
+        var node = nodeList[i];
+        if (!node) continue;
+
+        if (node.nodeType === 3) {
+          var value = normalizeText(node.nodeValue || "");
+          if (value) blocks.push({ type: "paragraph", runs: [{ text: value }] });
+          continue;
+        }
+        if (node.nodeType !== 1) continue;
+
+        var tag = node.tagName.toUpperCase();
+        if (tag === "IMG") continue;
+        if (tag === "TABLE") {
+          var table = parseTableBlockForExport(node);
+          if (table) blocks.push(table);
+          continue;
+        }
+        if (tag === "H1" || tag === "H2" || tag === "H3" || tag === "H4") {
+          var headingRuns = normalizeRuns(inlineRunsFromChildren(node));
+          if (headingRuns.length) {
+            blocks.push({ type: "heading", level: Number(tag.slice(1)), runs: headingRuns });
+          }
+          continue;
+        }
+        if (tag === "UL" || tag === "OL") {
+          var items = [];
+          var children = node.children;
+          for (var liIdx = 0; liIdx < children.length; liIdx++) {
+            var li = children[liIdx];
+            if (!li.tagName || li.tagName.toUpperCase() !== "LI") continue;
+            var itemRuns = normalizeRuns(inlineRunsFromChildren(li));
+            var itemText = textFromRuns(itemRuns);
+            if (itemText) {
+              items.push({ runs: itemRuns.length ? itemRuns : [{ text: itemText }] });
+            }
+          }
+          if (items.length) {
+            blocks.push({ type: "list", ordered: tag === "OL", items: items });
+          }
+          continue;
+        }
+        if (tag === "P" || tag === "A") {
+          pushParagraphFromNode(node);
+          continue;
+        }
+        if (tag === "DIV" || tag === "SECTION" || tag === "ARTICLE" || tag === "MAIN") {
+          walk(node.childNodes || []);
+          continue;
+        }
+
+        var genericRuns = normalizeRuns(inlineRunsFromChildren(node));
+        if (genericRuns.length) {
+          blocks.push({ type: "paragraph", runs: genericRuns });
+        } else {
+          walk(node.childNodes || []);
+        }
+      }
+    }
+
+    walk(nodes || []);
+    return blocks;
+  }
+
+  function convertSectionToExportModel(key, title, html) {
+    var parser = new DOMParser();
+    var doc;
+    try {
+      doc = parser.parseFromString(html, "text/html");
+    } catch (err) {
+      throw createPdfExportError("parse DOM", "No se pudo parsear el HTML de la seccion " + key, err, { section: key });
+    }
+    var blocks = parseBlocksForExport(doc.body.childNodes || []);
+    return {
+      key: key,
+      title: title,
+      html: html,
+      blocks: blocks
+    };
+  }
+
+  function exportModelTextLength(model) {
+    if (!model || !model.blocks) return 0;
+    var length = 0;
+    for (var i = 0; i < model.blocks.length; i++) {
+      var block = model.blocks[i];
+      if (block.type === "heading" || block.type === "paragraph") {
+        length += textFromRuns(block.runs || []).length;
+      } else if (block.type === "list") {
+        for (var j = 0; j < block.items.length; j++) {
+          length += textFromRuns(block.items[j].runs || []).length;
+        }
+      } else if (block.type === "table") {
+        for (var r = 0; r < block.rows.length; r++) {
+          for (var c = 0; c < block.rows[r].length; c++) {
+            length += normalizeText(block.rows[r][c]).length;
+          }
+        }
+      }
+    }
+    return length;
+  }
+
+  function validateFullExportModels(models) {
+    var keys = sortedSectionKeys();
+    if (keys.length !== 22) {
+      throw createPdfExportError("self-check", "Self-check fallido: se esperaban 22 secciones.", null, { expected: 22, actual: keys.length });
+    }
+    if (models.length !== keys.length) {
+      throw createPdfExportError("self-check", "Self-check fallido: cantidad de secciones cargadas no coincide.", null, { expected: keys.length, actual: models.length });
+    }
+    var tocEntries = 0;
+    for (var i = 0; i < models.length; i++) {
+      var model = models[i];
+      if (!model || model.key !== keys[i]) {
+        throw createPdfExportError("self-check", "Self-check fallido: orden de secciones incorrecto.", null, { expected: keys[i], actual: model ? model.key : null, index: i });
+      }
+      tocEntries++;
+      var textLength = exportModelTextLength(model);
+      if (textLength <= 0) {
+        throw createPdfExportError("self-check", "Self-check fallido: seccion sin contenido tras conversion.", null, { section: model.key, title: model.title });
+      }
+    }
+    if (tocEntries !== 22) {
+      throw createPdfExportError("self-check", "Self-check fallido: el indice no contiene 22 entradas.", null, { expected: 22, actual: tocEntries });
+    }
+  }
+
+  function escapeMarkdownText(text) {
+    return String(text || "")
+      .replace(/\\/g, "\\\\")
+      .replace(/`/g, "\\`")
+      .replace(/\*/g, "\\*")
+      .replace(/_/g, "\\_")
+      .replace(/\[/g, "\\[")
+      .replace(/\]/g, "\\]");
+  }
+
+  function escapeMarkdownTableCell(text) {
+    return String(text || "").replace(/\|/g, "\\|").replace(/\r?\n/g, "<br>").trim();
+  }
+
+  function runsToMarkdown(runs) {
+    var parts = [];
+    for (var i = 0; i < runs.length; i++) {
+      var run = runs[i];
+      var txt = escapeMarkdownText(run.text || "");
+      if (!txt) continue;
+      if (run.link) {
+        txt = "[" + txt + "](" + run.link + ")";
+      }
+      if (run.bold) txt = "**" + txt + "**";
+      if (run.italics) txt = "*" + txt + "*";
+      parts.push(txt);
+    }
+    return parts.join("").trim();
+  }
+
+  function tableToMarkdown(rows) {
+    if (!rows || !rows.length) return "";
+    var maxCols = 0;
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].length > maxCols) maxCols = rows[i].length;
+    }
+    if (!maxCols) return "";
+
+    function rowToLine(row) {
+      var cells = [];
+      for (var c = 0; c < maxCols; c++) {
+        cells.push(escapeMarkdownTableCell(row[c] || ""));
+      }
+      return "| " + cells.join(" | ") + " |";
+    }
+
+    var lines = [];
+    lines.push(rowToLine(rows[0]));
+    var sep = [];
+    for (var c2 = 0; c2 < maxCols; c2++) sep.push("---");
+    lines.push("| " + sep.join(" | ") + " |");
+    for (var r = 1; r < rows.length; r++) {
+      lines.push(rowToLine(rows[r]));
+    }
+    return lines.join("\n");
+  }
+
+  function blocksToMarkdown(blocks) {
+    var lines = [];
+    for (var i = 0; i < blocks.length; i++) {
+      var block = blocks[i];
+      if (block.type === "heading") {
+        var level = Math.max(1, Math.min(4, block.level || 2));
+        lines.push(Array(level + 1).join("#") + " " + runsToMarkdown(block.runs || []));
+        lines.push("");
+      } else if (block.type === "paragraph") {
+        var paragraph = runsToMarkdown(block.runs || []);
+        if (paragraph) {
+          lines.push(paragraph);
+          lines.push("");
+        }
+      } else if (block.type === "list") {
+        for (var j = 0; j < block.items.length; j++) {
+          var listText = runsToMarkdown(block.items[j].runs || []);
+          if (!listText) continue;
+          if (block.ordered) {
+            lines.push((j + 1) + ". " + listText);
+          } else {
+            lines.push("- " + listText);
+          }
+        }
+        lines.push("");
+      } else if (block.type === "table") {
+        var tableMd = tableToMarkdown(block.rows || []);
+        if (tableMd) {
+          lines.push(tableMd);
+          lines.push("");
+        }
+      }
+    }
+    return lines.join("\n").trim() + "\n";
+  }
+
+  function modelsToFullMarkdown(models) {
+    var md = [];
+    md.push("# Transporte Ecologico Compas");
+    md.push("");
+    md.push("## Indice");
+    md.push("");
+    for (var i = 0; i < models.length; i++) {
+      md.push("- " + models[i].title);
+    }
+    md.push("");
+
+    for (var j = 0; j < models.length; j++) {
+      md.push("## " + models[j].title);
+      md.push("");
+      md.push(blocksToMarkdown(models[j].blocks || []));
+    }
+    return md.join("\n").trim() + "\n";
+  }
+
+  function runsToDocxChildren(runs, docxLib) {
+    var children = [];
+    for (var i = 0; i < runs.length; i++) {
+      var run = runs[i];
+      var text = run.text || "";
+      if (!text) continue;
+      var textRun = new docxLib.TextRun({
+        text: text,
+        bold: !!run.bold,
+        italics: !!run.italics
+      });
+      if (run.link) {
+        children.push(new docxLib.ExternalHyperlink({
+          children: [textRun],
+          link: run.link
+        }));
+      } else {
+        children.push(textRun);
+      }
+    }
+    if (!children.length) children.push(new docxLib.TextRun(""));
+    return children;
+  }
+
+  function blocksToDocxNodes(blocks, docxLib) {
+    var nodes = [];
+    for (var i = 0; i < blocks.length; i++) {
+      var block = blocks[i];
+      if (block.type === "heading") {
+        var heading = docxLib.HeadingLevel.HEADING_2;
+        if (block.level === 1) heading = docxLib.HeadingLevel.HEADING_1;
+        if (block.level === 2) heading = docxLib.HeadingLevel.HEADING_2;
+        if (block.level === 3) heading = docxLib.HeadingLevel.HEADING_3;
+        if (block.level >= 4) heading = docxLib.HeadingLevel.HEADING_4;
+        nodes.push(new docxLib.Paragraph({
+          heading: heading,
+          spacing: { after: 160 },
+          children: runsToDocxChildren(block.runs || [], docxLib)
+        }));
+      } else if (block.type === "paragraph") {
+        nodes.push(new docxLib.Paragraph({
+          spacing: { after: 140 },
+          children: runsToDocxChildren(block.runs || [], docxLib)
+        }));
+      } else if (block.type === "list") {
+        for (var j = 0; j < block.items.length; j++) {
+          var paragraphOptions = {
+            spacing: { after: 100 },
+            children: runsToDocxChildren(block.items[j].runs || [], docxLib)
+          };
+          if (block.ordered) {
+            paragraphOptions.numbering = { reference: "ordered-list", level: 0 };
+          } else {
+            paragraphOptions.bullet = { level: 0 };
+          }
+          nodes.push(new docxLib.Paragraph(paragraphOptions));
+        }
+      } else if (block.type === "table") {
+        var tableRows = [];
+        for (var r = 0; r < block.rows.length; r++) {
+          var cells = [];
+          for (var c = 0; c < block.rows[r].length; c++) {
+            cells.push(new docxLib.TableCell({
+              children: [new docxLib.Paragraph({ children: [new docxLib.TextRun(block.rows[r][c] || "")] })]
+            }));
+          }
+          tableRows.push(new docxLib.TableRow({ children: cells }));
+        }
+        nodes.push(new docxLib.Table({
+          rows: tableRows,
+          width: { size: 100, type: docxLib.WidthType.PERCENTAGE }
+        }));
+        nodes.push(new docxLib.Paragraph({ text: "" }));
+      }
+    }
+    return nodes;
+  }
+
   async function generateSectionPdf(sectionKey) {
     await loadSectionAsync(sectionKey);
     var html = await fetchSectionHtml(sectionKey);
     var title = sectionTitles[sectionKey] || ("Seccion " + sectionKey);
-    var filename = "TEC_" + sectionKey + "_" + title.replace(/[^a-zA-Z0-9]/g, "_") + ".pdf";
+    var filename = "TEC_" + sectionKey + "_" + sanitizeFilePart(title) + ".pdf";
     var content = convertSectionHtml(sectionKey, title, html, { includeSectionHeader: false });
     var docDefinition = createSectionDocDefinition(content);
     await downloadPdf(docDefinition, filename);
   }
 
-  async function generateFullProjectPdf() {
+  async function generateSectionMd(sectionKey) {
+    await loadSectionAsync(sectionKey);
+    var html = await fetchSectionHtml(sectionKey);
+    var title = sectionTitles[sectionKey] || ("Seccion " + sectionKey);
+    var model = convertSectionToExportModel(sectionKey, title, html);
+    var md = "# " + title + "\n\n" + blocksToMarkdown(model.blocks || []);
+    downloadBlob(new Blob([md], { type: "text/markdown;charset=utf-8" }), "TEC_" + sectionKey + "_" + sanitizeFilePart(title) + ".md");
+  }
+
+  async function generateSectionDocx(sectionKey) {
+    await loadSectionAsync(sectionKey);
+    var html = await fetchSectionHtml(sectionKey);
+    var title = sectionTitles[sectionKey] || ("Seccion " + sectionKey);
+    var model = convertSectionToExportModel(sectionKey, title, html);
+    var docxLib = ensureDocxLib();
+    var children = [new docxLib.Paragraph({ heading: docxLib.HeadingLevel.HEADING_1, text: title })];
+    var content = blocksToDocxNodes(model.blocks || [], docxLib);
+    for (var i = 0; i < content.length; i++) children.push(content[i]);
+    var doc = new docxLib.Document({
+      numbering: {
+        config: [{
+          reference: "ordered-list",
+          levels: [{ level: 0, format: docxLib.LevelFormat.DECIMAL, text: "%1.", alignment: docxLib.AlignmentType.START }]
+        }]
+      },
+      sections: [{ children: children }]
+    });
+    var blob = await docxLib.Packer.toBlob(doc);
+    downloadBlob(blob, "TEC_" + sectionKey + "_" + sanitizeFilePart(title) + ".docx");
+  }
+
+  async function collectFullExportModels(updateProgress) {
     var keys = sortedSectionKeys();
     var totalSteps = keys.length * 2;
     var doneSteps = 0;
-
-    function updateProgress(label) {
-      var percent = totalSteps ? Math.round((doneSteps / totalSteps) * 100) : 100;
-      btnPdfCompleto.textContent = "Generando PDF... " + percent + "%";
-      setPdfStatus(label + " (" + percent + "%)", null, true, percent);
-    }
-
-    setPdfStatus("Preparando exportacion del PDF completo...", null, true, 0);
-    btnPdfCompleto.textContent = "Generando PDF... 0%";
-
-    var content = [];
-    content.push(makeCoverContent());
-    content.push(makeIndexContent());
+    var models = [];
 
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
       var title = sectionTitles[key] || ("Seccion " + key);
-
-      updateProgress("Cargando seccion " + key);
+      if (updateProgress) updateProgress("Cargando seccion " + key, doneSteps, totalSteps);
       var html = await fetchSectionHtml(key);
       doneSteps++;
-      updateProgress("Convirtiendo seccion " + key);
-
-      var sectionContent = convertSectionHtml(key, title, html, { includeSectionHeader: true });
-      for (var c = 0; c < sectionContent.length; c++) {
-        content.push(sectionContent[c]);
-      }
+      if (updateProgress) updateProgress("Convirtiendo seccion " + key, doneSteps, totalSteps);
+      models.push(convertSectionToExportModel(key, title, html));
       doneSteps++;
     }
 
+    validateFullExportModels(models);
+    if (updateProgress) updateProgress("Validando estructura de exportacion", totalSteps, totalSteps);
+    return models;
+  }
+
+  async function generateFullProjectPdf(models) {
+    var content = [];
+    content.push(makeCoverContent());
+    content.push(makeIndexContent());
+    for (var i = 0; i < models.length; i++) {
+      var sectionContent = convertSectionHtml(models[i].key, models[i].title, models[i].html, { includeSectionHeader: true });
+      for (var c = 0; c < sectionContent.length; c++) {
+        content.push(sectionContent[c]);
+      }
+    }
     var docDefinition = createFullDocDefinition(content);
     await downloadPdf(docDefinition, "Transporte_Ecologico_Compas_Proyecto_Completo.pdf");
+  }
 
-    setPdfStatus("PDF completo generado correctamente.", null, false, 100);
+  async function generateFullProjectMd(models) {
+    var md = modelsToFullMarkdown(models);
+    downloadBlob(new Blob([md], { type: "text/markdown;charset=utf-8" }), "Transporte_Ecologico_Compas_Proyecto_Completo.md");
+  }
+
+  async function generateFullProjectDocx(models) {
+    var docxLib = ensureDocxLib();
+    var children = [];
+    children.push(new docxLib.Paragraph({
+      text: "Transporte Ecologico Compas",
+      heading: docxLib.HeadingLevel.HEADING_1,
+      spacing: { after: 240 }
+    }));
+    children.push(new docxLib.Paragraph({
+      text: "Proyecto de transporte sostenible para el Carnaval de Santa Cruz de Tenerife",
+      spacing: { after: 320 }
+    }));
+    children.push(new docxLib.Paragraph({ text: "Indice", heading: docxLib.HeadingLevel.HEADING_1, spacing: { after: 180 } }));
+    for (var i = 0; i < models.length; i++) {
+      children.push(new docxLib.Paragraph({ text: models[i].title, spacing: { after: 80 } }));
+    }
+    children.push(new docxLib.Paragraph({ text: "", pageBreakBefore: true }));
+
+    for (var j = 0; j < models.length; j++) {
+      children.push(new docxLib.Paragraph({
+        text: models[j].title,
+        heading: docxLib.HeadingLevel.HEADING_1,
+        spacing: { before: 200, after: 180 }
+      }));
+      var nodes = blocksToDocxNodes(models[j].blocks || [], docxLib);
+      for (var n = 0; n < nodes.length; n++) children.push(nodes[n]);
+    }
+
+    var doc = new docxLib.Document({
+      numbering: {
+        config: [{
+          reference: "ordered-list",
+          levels: [{ level: 0, format: docxLib.LevelFormat.DECIMAL, text: "%1.", alignment: docxLib.AlignmentType.START }]
+        }]
+      },
+      sections: [{ children: children }]
+    });
+    var blob = await docxLib.Packer.toBlob(doc);
+    downloadBlob(blob, "Transporte_Ecologico_Compas_Proyecto_Completo.docx");
+  }
+
+  async function generateFullProjectExport(format) {
+    var formatLabel = String(format || "pdf").toUpperCase();
+    var models = [];
+    function updateProgress(label, doneSteps, totalSteps) {
+      var percent = totalSteps ? Math.round((doneSteps / totalSteps) * 100) : 100;
+      if (btnExportCompleto) {
+        btnExportCompleto.textContent = "Generando " + formatLabel + "... " + percent + "%";
+      }
+      setPdfStatus(label + " (" + percent + "%)", null, true, percent);
+    }
+
+    setPdfStatus("Preparando exportacion completa en " + formatLabel + "...", null, true, 0);
+    if (btnExportCompleto) {
+      btnExportCompleto.textContent = "Generando " + formatLabel + "... 0%";
+    }
+
+    models = await collectFullExportModels(updateProgress);
+    if (format === "docx") {
+      await generateFullProjectDocx(models);
+    } else if (format === "md") {
+      await generateFullProjectMd(models);
+    } else {
+      await generateFullProjectPdf(models);
+    }
+    setPdfStatus("Exportacion completa en " + formatLabel + " generada correctamente.", null, false, 100);
   }
 
   /* ---------- Tab switching ---------- */
@@ -899,52 +1437,64 @@
   window.addEventListener("hashchange", handleHash);
   window.addEventListener("popstate", handleHash);
 
-  /* ---------- PDF generation ---------- */
-
-  /* Section PDF buttons */
+  /* ---------- Export generation ---------- */
   contentArea.addEventListener("click", function (e) {
-    var btn = e.target.closest(".btn-pdf-section");
-    if (!btn) return;
-    var sectionKey = btn.getAttribute("data-section");
-    if (!sectionKey) return;
+    var option = e.target.closest(".export-option");
+    if (!option) return;
 
-    btn.disabled = true;
-    btn.textContent = "Generando PDF...";
+    var format = option.getAttribute("data-export-format");
+    var scope = option.getAttribute("data-export-scope");
+    var sectionKey = option.getAttribute("data-section");
+    var menu = option.closest("details");
+    if (menu) menu.open = false;
 
-    generateSectionPdf(sectionKey)
-      .then(function () {
-        btn.disabled = false;
-        btn.textContent = "Descargar PDF";
-      })
-      .catch(function (err) {
-        logPdfExportError(err);
-        var detail = err && err.details ? err.details : "phase=unknown | message=No se pudo generar el PDF de la seccion";
-        setPdfStatus("Error al generar PDF de la seccion " + sectionKey + ".", detail, false, 0);
-        alert("No se pudo generar el PDF de esta seccion. Puede copiar los detalles para soporte.");
-        btn.disabled = false;
-        btn.textContent = "Descargar PDF";
-      });
-  });
+    if (scope === "section") {
+      option.disabled = true;
+      var originalLabel = option.textContent;
+      option.textContent = "Generando...";
 
-  /* Full project PDF */
-  if (btnPdfCompleto) {
-    btnPdfCompleto.addEventListener("click", function () {
-      btnPdfCompleto.disabled = true;
-      btnPdfCompleto.textContent = "Preparando PDF completo...";
+      var sectionExportPromise;
+      if (format === "docx") {
+        sectionExportPromise = generateSectionDocx(sectionKey);
+      } else if (format === "md") {
+        sectionExportPromise = generateSectionMd(sectionKey);
+      } else {
+        sectionExportPromise = generateSectionPdf(sectionKey);
+      }
 
-      generateFullProjectPdf()
+      sectionExportPromise
         .catch(function (err) {
           logPdfExportError(err);
-          var detail = err && err.details ? err.details : "phase=unknown | message=No se pudo generar el PDF completo";
-          setPdfStatus("No se pudo generar el PDF completo.", detail, false, 0);
-          alert("No se pudo generar el PDF completo. Puede copiar los detalles para soporte.");
+          var detail = err && err.details ? err.details : "phase=unknown | message=No se pudo generar la exportacion de la seccion";
+          setPdfStatus("Error al exportar la seccion " + sectionKey + " en " + String(format || "").toUpperCase() + ".", detail, false, 0);
+          alert("No se pudo exportar esta seccion. Puede copiar los detalles para soporte.");
         })
         .finally(function () {
-          btnPdfCompleto.disabled = false;
-          btnPdfCompleto.textContent = "Descargar proyecto completo en PDF";
+          option.disabled = false;
+          option.textContent = originalLabel;
         });
-    });
-  }
+      return;
+    }
+
+    if (scope === "full") {
+      option.disabled = true;
+      if (exportMenuFull) exportMenuFull.open = false;
+
+      generateFullProjectExport(format)
+        .catch(function (err) {
+          logPdfExportError(err);
+          var detail = err && err.details ? err.details : "phase=unknown | message=No se pudo generar la exportacion completa";
+          setPdfStatus("No se pudo generar la exportacion completa en " + String(format || "").toUpperCase() + ".", detail, false, 0);
+          alert("No se pudo generar la exportacion completa. Puede copiar los detalles para soporte.");
+        })
+        .finally(function () {
+          option.disabled = false;
+          if (btnExportCompleto) {
+            btnExportCompleto.textContent = "Exportar completo";
+          }
+        });
+    }
+  });
 
   /* ---------- Init ---------- */
   clearPdfStatus();
