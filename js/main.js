@@ -77,6 +77,8 @@
     });
   }
 
+  var EXPECTED_SECTION_COUNT = 22;
+
   /* ---------- Helpers ---------- */
 
   /** Load section HTML into its .section-body container */
@@ -236,8 +238,8 @@
       if (anchor === "indice") {
         return { linkToDestination: "indice" };
       }
-      if (/^\d{2}$/.test(anchor)) {
-        var key = anchor;
+      if (/^\d{1,2}$/.test(anchor)) {
+        var key = anchor.length === 1 ? "0" + anchor : anchor;
         if (sectionFiles[key]) {
           return { linkToDestination: "sec-" + key };
         }
@@ -1002,8 +1004,8 @@
 
   function validateFullExportModels(models) {
     var keys = sortedSectionKeys();
-    if (keys.length !== 22) {
-      throw createPdfExportError("self-check", "Self-check fallido: se esperaban 22 secciones.", null, { expected: 22, actual: keys.length });
+    if (keys.length !== EXPECTED_SECTION_COUNT) {
+      throw createPdfExportError("self-check", "Self-check fallido: se esperaban " + EXPECTED_SECTION_COUNT + " secciones.", null, { expected: EXPECTED_SECTION_COUNT, actual: keys.length });
     }
     if (models.length !== keys.length) {
       throw createPdfExportError("self-check", "Self-check fallido: cantidad de secciones cargadas no coincide.", null, { expected: keys.length, actual: models.length });
@@ -1020,8 +1022,8 @@
         throw createPdfExportError("self-check", "Self-check fallido: seccion sin contenido tras conversion.", null, { section: model.key, title: model.title });
       }
     }
-    if (tocEntries !== 22) {
-      throw createPdfExportError("self-check", "Self-check fallido: el indice no contiene 22 entradas.", null, { expected: 22, actual: tocEntries });
+    if (tocEntries !== EXPECTED_SECTION_COUNT) {
+      throw createPdfExportError("self-check", "Self-check fallido: el indice no contiene " + EXPECTED_SECTION_COUNT + " entradas.", null, { expected: EXPECTED_SECTION_COUNT, actual: tocEntries });
     }
   }
 
@@ -1036,7 +1038,7 @@
   }
 
   function escapeMarkdownTableCell(text) {
-    return String(text || "").replace(/\|/g, "\\|").replace(/\r?\n/g, "<br>").trim();
+    return String(text || "").replace(/\\/g, "\\\\").replace(/\|/g, "\\|").replace(/\r?\n/g, "<br>").trim();
   }
 
   function runsToMarkdown(runs) {
