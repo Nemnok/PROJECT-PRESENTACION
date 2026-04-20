@@ -21,53 +21,61 @@
 
   /* ---------- Section meta ---------- */
   var sectionFiles = {
+    "00": "sections/00-infografia.html",
     "01": "sections/01-introduccion.html",
-    "02": "sections/02-marco-conceptual.html",
-    "03": "sections/03-descripcion-proyecto.html",
-    "04": "sections/04-estudio-mercado.html",
-    "05": "sections/05-analisis-entorno.html",
-    "06": "sections/06-analisis-estrategico.html",
-    "07": "sections/07-organizacion-empresarial.html",
-    "08": "sections/08-plan-operativo.html",
-    "09": "sections/09-flota-logistica.html",
-    "10": "sections/10-experiencia-usuario.html",
-    "11": "sections/11-carta-servicios.html",
-    "12": "sections/12-gestion-calidad.html",
-    "13": "sections/13-plan-sostenibilidad.html",
-    "14": "sections/14-plan-marketing.html",
-    "15": "sections/15-plan-economico.html",
-    "16": "sections/16-indicadores-kpi.html",
-    "17": "sections/17-riesgos-contingencia.html",
-    "18": "sections/18-libro-sostenibilidad.html",
-    "19": "sections/19-conclusiones.html",
-    "20": "sections/20-anexos.html"
+    "02": "sections/02-concepto-proyecto.html",
+    "03": "sections/03-operativa-servicio.html",
+    "04": "sections/04-calidad-servicio.html",
+    "05": "sections/05-carta-servicios.html",
+    "06": "sections/06-carta-negocios.html",
+    "07": "sections/07-garantias-servicio.html",
+    "08": "sections/08-reclamaciones-sugerencias.html",
+    "09": "sections/09-encuesta-satisfaccion.html",
+    "10": "sections/10-estudio-mercado.html",
+    "11": "sections/11-analisis-estrategico.html",
+    "12": "sections/12-normativa-cumplimiento.html",
+    "13": "sections/13-organizacion-empresa.html",
+    "14": "sections/14-plan-operativo-carnaval.html",
+    "15": "sections/15-plan-sostenibilidad.html",
+    "16": "sections/16-plan-economico-financiero.html",
+    "17": "sections/17-politica-precios.html",
+    "18": "sections/18-indicadores-kpi.html",
+    "19": "sections/19-riesgos-contingencia.html",
+    "20": "sections/20-accesibilidad-inclusion-linguistica.html",
+    "21": "sections/21-libro-sostenibilidad.html",
+    "22": "sections/22-conclusiones.html"
   };
 
   var sectionTitles = {
-    "01": "1. Introduccion",
-    "02": "2. Marco conceptual y contextual",
-    "03": "3. Descripcion del proyecto",
-    "04": "4. Estudio de mercado",
-    "05": "5. Analisis del entorno",
-    "06": "6. Analisis estrategico",
-    "07": "7. Organizacion empresarial",
-    "08": "8. Plan operativo del servicio",
-    "09": "9. Flota y logistica",
-    "10": "10. Experiencia del usuario",
-    "11": "11. Carta de servicios",
-    "12": "12. Gestion de calidad y satisfaccion",
-    "13": "13. Plan de sostenibilidad",
-    "14": "14. Plan de marketing y comunicacion",
-    "15": "15. Plan economico-financiero",
-    "16": "16. Indicadores de rendimiento (KPI)",
-    "17": "17. Riesgos y planes de contingencia",
-    "18": "18. Libro de sostenibilidad",
-    "19": "19. Conclusiones",
-    "20": "20. Anexos"
+    "00": "Infografia del Proyecto",
+    "01": "1. Introducción",
+    "02": "2. Concepto del Proyecto",
+    "03": "3. Operativa del Servicio",
+    "04": "4. Calidad del Servicio",
+    "05": "5. Carta de Servicios",
+    "06": "6. Carta de Negocios (versión simplificada)",
+    "07": "7. Garantías del Servicio",
+    "08": "8. Gestión de Reclamaciones y Sugerencias",
+    "09": "9. Encuesta de Satisfacción del Cliente",
+    "10": "10. Estudio de Mercado",
+    "11": "11. Análisis Estratégico",
+    "12": "12. Normativa y Cumplimiento Legal",
+    "13": "13. Organización de la Empresa",
+    "14": "14. Plan Operativo del Carnaval",
+    "15": "15. Plan de Sostenibilidad",
+    "16": "16. Plan Económico-Financiero",
+    "17": "17. Política de Precios",
+    "18": "18. Indicadores de Rendimiento (KPI)",
+    "19": "19. Riesgos y Planes de Contingencia",
+    "20": "20. Accesibilidad e Inclusión Lingüística",
+    "21": "21. Libro de Sostenibilidad",
+    "22": "22. Conclusiones"
   };
 
   function sortedSectionKeys() {
-    return Object.keys(sectionFiles).sort();
+    return Object.keys(sectionFiles).sort(function (a, b) {
+      return Number(a) - Number(b);
+    });
   }
 
   /* ---------- Helpers ---------- */
