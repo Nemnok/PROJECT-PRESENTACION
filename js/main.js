@@ -21,6 +21,7 @@
 
   /* ---------- Section meta ---------- */
   var sectionFiles = {
+    "00": "sections/00-infografia.html",
     "01": "sections/01-introduccion.html",
     "02": "sections/02-concepto-proyecto.html",
     "03": "sections/03-operativa-servicio.html",
@@ -46,6 +47,7 @@
   };
 
   var sectionTitles = {
+    "00": "Infografia del Proyecto",
     "01": "1. Introducción",
     "02": "2. Concepto del Proyecto",
     "03": "3. Operativa del Servicio",
