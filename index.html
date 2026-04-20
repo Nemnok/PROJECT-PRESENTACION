@@ -55,7 +55,14 @@
       <h2>Indice del Proyecto</h2>
       <p class="indice-intro">Transporte Ecologico Compas S.A. -- Proyecto de transporte sostenible para el Carnaval de Santa Cruz de Tenerife. Seleccione una seccion para consultar su contenido.</p>
       <div class="btn-bar">
-        <button class="btn-pdf" id="btnPdfCompleto" type="button">Descargar proyecto completo en PDF</button>
+        <details class="export-menu" id="exportMenuFull">
+          <summary class="btn-pdf" id="btnExportCompleto">Exportar completo</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="full" data-export-format="pdf" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="full" data-export-format="docx" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="full" data-export-format="md" role="menuitem">MD</button>
+          </div>
+        </details>
       </div>
       <div class="pdf-export-status" id="pdfExportStatus" aria-live="polite" hidden>
         <p class="pdf-export-message" id="pdfExportMessage"></p>
@@ -134,7 +141,7 @@
         <a href="#14" class="indice-card" data-goto="14">
           <span class="indice-num">14</span>
           <span class="indice-title">Plan Operativo del Carnaval</span>
-          <span class="indice-subs">14.1 Fechas y eventos -- 14.2 Horarios -- 14.3 Rutas y frecuencias -- 14.4 Flota -- 14.5 Centro de control -- 14.6 Personal -- 14.7 Recarga</span>
+          <span class="indice-subs">14.1 Fechas y eventos principales -- 14.2 Horarios de funcionamiento -- 14.3 Rutas y frecuencias -- 14.4 Flota de vehículos -- 14.5 Centro de control operativo -- 14.6 Personal y turnos -- 14.7 Logística de recarga</span>
         </a>
         <a href="#15" class="indice-card" data-goto="15">
           <span class="indice-num">15</span>
@@ -169,7 +176,7 @@
         <a href="#21" class="indice-card" data-goto="21">
           <span class="indice-num">21</span>
           <span class="indice-title">Libro de Sostenibilidad</span>
-          <span class="indice-subs">21.1 Introducción -- 21.2 Identidad y valores -- 21.3 Políticas -- 21.4 ODS -- 21.5 Estrategia ambiental</span>
+          <span class="indice-subs">21.1 Introducción -- 21.2 Identidad corporativa y valores -- 21.3 Política de sostenibilidad -- 21.4 ODS -- 21.5 Estrategia ambiental -- 21.6 Responsabilidad social -- 21.7 Sostenibilidad aplicada al Carnaval -- 21.8 Evaluación del impacto</span>
         </a>
         <a href="#22" class="indice-card" data-goto="22">
           <span class="indice-num">22</span>
@@ -181,91 +188,245 @@
 
     <!-- SECTION PANELS -->
     <section class="tab-panel" id="panel-01" role="tabpanel" aria-labelledby="tab-01">
-      <div class="section-header"><h2>1. Introducción</h2><button class="btn-pdf btn-pdf-section" data-section="01" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>1. Introducción</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="01" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="01" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="01" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/01-introduccion.html"></div>
     </section>
     <section class="tab-panel" id="panel-02" role="tabpanel" aria-labelledby="tab-02">
-      <div class="section-header"><h2>2. Concepto del Proyecto</h2><button class="btn-pdf btn-pdf-section" data-section="02" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>2. Concepto del Proyecto</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="02" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="02" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="02" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/02-concepto-proyecto.html"></div>
     </section>
     <section class="tab-panel" id="panel-03" role="tabpanel" aria-labelledby="tab-03">
-      <div class="section-header"><h2>3. Operativa del Servicio</h2><button class="btn-pdf btn-pdf-section" data-section="03" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>3. Operativa del Servicio</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="03" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="03" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="03" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/03-operativa-servicio.html"></div>
     </section>
     <section class="tab-panel" id="panel-04" role="tabpanel" aria-labelledby="tab-04">
-      <div class="section-header"><h2>4. Calidad del Servicio</h2><button class="btn-pdf btn-pdf-section" data-section="04" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>4. Calidad del Servicio</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="04" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="04" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="04" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/04-calidad-servicio.html"></div>
     </section>
     <section class="tab-panel" id="panel-05" role="tabpanel" aria-labelledby="tab-05">
-      <div class="section-header"><h2>5. Carta de Servicios</h2><button class="btn-pdf btn-pdf-section" data-section="05" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>5. Carta de Servicios</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="05" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="05" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="05" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/05-carta-servicios.html"></div>
     </section>
     <section class="tab-panel" id="panel-06" role="tabpanel" aria-labelledby="tab-06">
-      <div class="section-header"><h2>6. Carta de Negocios (versión simplificada)</h2><button class="btn-pdf btn-pdf-section" data-section="06" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>6. Carta de Negocios (versión simplificada)</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="06" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="06" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="06" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/06-carta-negocios.html"></div>
     </section>
     <section class="tab-panel" id="panel-07" role="tabpanel" aria-labelledby="tab-07">
-      <div class="section-header"><h2>7. Garantías del Servicio</h2><button class="btn-pdf btn-pdf-section" data-section="07" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>7. Garantías del Servicio</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="07" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="07" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="07" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/07-garantias-servicio.html"></div>
     </section>
     <section class="tab-panel" id="panel-08" role="tabpanel" aria-labelledby="tab-08">
-      <div class="section-header"><h2>8. Gestión de Reclamaciones y Sugerencias</h2><button class="btn-pdf btn-pdf-section" data-section="08" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>8. Gestión de Reclamaciones y Sugerencias</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="08" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="08" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="08" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/08-reclamaciones-sugerencias.html"></div>
     </section>
     <section class="tab-panel" id="panel-09" role="tabpanel" aria-labelledby="tab-09">
-      <div class="section-header"><h2>9. Encuesta de Satisfacción del Cliente</h2><button class="btn-pdf btn-pdf-section" data-section="09" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>9. Encuesta de Satisfacción del Cliente</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="09" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="09" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="09" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/09-encuesta-satisfaccion.html"></div>
     </section>
     <section class="tab-panel" id="panel-10" role="tabpanel" aria-labelledby="tab-10">
-      <div class="section-header"><h2>10. Estudio de Mercado</h2><button class="btn-pdf btn-pdf-section" data-section="10" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>10. Estudio de Mercado</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="10" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="10" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="10" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/10-estudio-mercado.html"></div>
     </section>
     <section class="tab-panel" id="panel-11" role="tabpanel" aria-labelledby="tab-11">
-      <div class="section-header"><h2>11. Análisis Estratégico</h2><button class="btn-pdf btn-pdf-section" data-section="11" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>11. Análisis Estratégico</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="11" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="11" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="11" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/11-analisis-estrategico.html"></div>
     </section>
     <section class="tab-panel" id="panel-12" role="tabpanel" aria-labelledby="tab-12">
-      <div class="section-header"><h2>12. Normativa y Cumplimiento Legal</h2><button class="btn-pdf btn-pdf-section" data-section="12" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>12. Normativa y Cumplimiento Legal</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="12" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="12" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="12" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/12-normativa-cumplimiento.html"></div>
     </section>
     <section class="tab-panel" id="panel-13" role="tabpanel" aria-labelledby="tab-13">
-      <div class="section-header"><h2>13. Organización de la Empresa</h2><button class="btn-pdf btn-pdf-section" data-section="13" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>13. Organización de la Empresa</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="13" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="13" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="13" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/13-organizacion-empresa.html"></div>
     </section>
     <section class="tab-panel" id="panel-14" role="tabpanel" aria-labelledby="tab-14">
-      <div class="section-header"><h2>14. Plan Operativo del Carnaval</h2><button class="btn-pdf btn-pdf-section" data-section="14" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>14. Plan Operativo del Carnaval</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="14" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="14" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="14" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/14-plan-operativo-carnaval.html"></div>
     </section>
     <section class="tab-panel" id="panel-15" role="tabpanel" aria-labelledby="tab-15">
-      <div class="section-header"><h2>15. Plan de Sostenibilidad</h2><button class="btn-pdf btn-pdf-section" data-section="15" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>15. Plan de Sostenibilidad</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="15" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="15" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="15" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/15-plan-sostenibilidad.html"></div>
     </section>
     <section class="tab-panel" id="panel-16" role="tabpanel" aria-labelledby="tab-16">
-      <div class="section-header"><h2>16. Plan Económico-Financiero</h2><button class="btn-pdf btn-pdf-section" data-section="16" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>16. Plan Económico-Financiero</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="16" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="16" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="16" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/16-plan-economico-financiero.html"></div>
     </section>
     <section class="tab-panel" id="panel-17" role="tabpanel" aria-labelledby="tab-17">
-      <div class="section-header"><h2>17. Política de Precios</h2><button class="btn-pdf btn-pdf-section" data-section="17" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>17. Política de Precios</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="17" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="17" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="17" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/17-politica-precios.html"></div>
     </section>
     <section class="tab-panel" id="panel-18" role="tabpanel" aria-labelledby="tab-18">
-      <div class="section-header"><h2>18. Indicadores de Rendimiento (KPI)</h2><button class="btn-pdf btn-pdf-section" data-section="18" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>18. Indicadores de Rendimiento (KPI)</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="18" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="18" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="18" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/18-indicadores-kpi.html"></div>
     </section>
     <section class="tab-panel" id="panel-19" role="tabpanel" aria-labelledby="tab-19">
-      <div class="section-header"><h2>19. Riesgos y Planes de Contingencia</h2><button class="btn-pdf btn-pdf-section" data-section="19" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>19. Riesgos y Planes de Contingencia</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="19" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="19" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="19" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/19-riesgos-contingencia.html"></div>
     </section>
     <section class="tab-panel" id="panel-20" role="tabpanel" aria-labelledby="tab-20">
-      <div class="section-header"><h2>20. Accesibilidad e Inclusión Lingüística</h2><button class="btn-pdf btn-pdf-section" data-section="20" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>20. Accesibilidad e Inclusión Lingüística</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="20" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="20" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="20" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/20-accesibilidad-inclusion-linguistica.html"></div>
     </section>
     <section class="tab-panel" id="panel-21" role="tabpanel" aria-labelledby="tab-21">
-      <div class="section-header"><h2>21. Libro de Sostenibilidad</h2><button class="btn-pdf btn-pdf-section" data-section="21" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>21. Libro de Sostenibilidad</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="21" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="21" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="21" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/21-libro-sostenibilidad.html"></div>
     </section>
     <section class="tab-panel" id="panel-22" role="tabpanel" aria-labelledby="tab-22">
-      <div class="section-header"><h2>22. Conclusiones</h2><button class="btn-pdf btn-pdf-section" data-section="22" type="button">Descargar PDF</button></div>
+      <div class="section-header"><h2>22. Conclusiones</h2><details class="export-menu export-menu-section">
+          <summary class="btn-pdf btn-pdf-section">Exportar sección</summary>
+          <div class="export-menu-options" role="menu">
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="pdf" data-section="22" role="menuitem">PDF</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="docx" data-section="22" role="menuitem">DOCX</button>
+            <button class="export-option" type="button" data-export-scope="section" data-export-format="md" data-section="22" role="menuitem">MD</button>
+          </div>
+        </details></div>
       <div class="section-body" data-src="sections/22-conclusiones.html"></div>
     </section>
 
@@ -279,6 +440,7 @@
 
   <script src="js/vendor/pdfmake.min.js"></script>
   <script src="js/vendor/vfs_fonts.js"></script>
+  <script src="js/vendor/docx.umd.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
